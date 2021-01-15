@@ -1,0 +1,379 @@
+.Container
+{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.SearchDiv
+{
+    width: 100%;
+    height: 100%; 
+    display: none;
+}
+
+.SearcDisplayDiv
+{
+    width: 100%;
+    height: 100%; 
+}
+
+.SelectionArea
+{
+    width: 80%;
+    height:90%;
+    margin:auto;
+    display: none;
+    overflow:visible;
+}
+
+.SelectionDisplayArea
+{
+    width: 90%;
+    height:95%;
+    margin:auto;
+    overflow:auto;
+}
+
+.Search
+{
+    width: 60%; 
+    height: 40px;
+    margin: 10% auto 1% auto;
+    position: relative;
+}
+
+.SearchInput
+{
+    width:100%;
+    height: 40px;
+    font-size: 15px;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    border: none;
+    outline: none;
+    position: absolute;
+}
+
+.SearchButton
+{
+    height: 43px;
+    width: 100px;
+    border: none;
+    outline: none;
+    margin-right: 20px;
+    background-color: blue;
+    position: absolute;
+    color: white;
+}
+
+.SearchButton:hover{
+    cursor: pointer;
+}
+
+.SearchResultDiv
+{
+    width: 60%;
+    height: 100%;
+    margin: 0 auto 0 auto;
+    overflow: auto;
+}
+
+.SearchResultDiv  ul{
+    list-style: none;
+    width: 100%;
+    height: 500px;
+    overflow-y: auto;
+    padding: 0px;
+} 
+
+.SearchResultDiv li{
+    width: 95%;
+    height: 150px;
+    margin: auto;
+}
+
+.SearchResultDiv li:hover .CustomerAction div{
+    cursor: pointer;
+    display: flex;
+}
+
+.CustomerContainer
+{
+    width: 100%;
+    height: 100%;
+    display: grid;
+    padding:5px;
+    grid-template-columns: 20% 60% 20%;
+}
+
+.CustomerAvatar
+{        
+    height: 90%;
+    border-right: 1px solid #A2A2A1FF;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.CustomerDetails
+{  
+    height: 90%;
+    width: 100%;      
+    background-color: white;
+}
+
+.CustomerAction
+{
+    height: 90%;
+    width: 100%;
+    background-color: white;
+    display: grid;
+    grid-template-rows: 50% 50%;
+}
+
+.CustomerAvatarImg {
+
+    height: 100px;
+    width: 100px;   
+}
+
+.OrderIcon
+{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+}
+
+.LayoutDiv
+{
+    top: 5%;
+    left: 5%;
+    height: 90%;
+    width: 90%;
+    background-color: green;
+    position: absolute;
+    z-index: 100;
+    opacity: 0.9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.CustomerDetails div{
+    padding: 5px;
+}
+
+.CustomerDetails Section{
+    margin: 5% 5px 5%; 
+}
+
+.ListItems
+{
+    width: 100%;
+    height: 100%;  
+}
+
+.ListItems ul{
+    margin: auto;
+    padding: 0px;
+    list-style: none;
+}
+
+.ListItems li{
+    transition: 3s;
+    margin-bottom: 10px;
+}
+
+.ListItems li:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+}
+
+
+.ListItems li:hover .CustomerDetailsInside{
+   display: block;
+}
+
+.ListItems li:hover .CustomerAction{
+    display: grid;
+ }
+
+.ItemContainer
+{
+    height: 60px;
+    margin: auto;
+    display: grid; 
+    color:white;
+    border-bottom: 1px solid whitesmoke;
+    grid-template-rows: repeat(2, auto);
+    background-color: gray;
+    overflow: hidden;
+    -webkit-transition: height 4s;
+    transition: height 4s;
+}
+
+.CustomerDetailsHolder
+{
+    margin: auto;
+    display: grid; 
+    width: 100%;
+    grid-template-columns: repeat(4, auto);
+}
+
+.CustomerName,
+.CustomerPhone,
+.CustomerPurchase,
+.TypeOfCustomer
+{
+    height: 100%;
+    width: auto;
+    margin: auto;
+}
+
+.CloseBtnDiv
+{
+    width: 20px;
+    height: 20px;
+    margin: 10px;
+}
+
+.CustomerAction div
+{
+    display: none;
+    align-items:center;
+    justify-content: center;
+    padding: 5px;
+}
+
+.Details
+{
+    margin:auto 0;
+}
+
+.CustomerDetailsInside
+{
+    height: 250px;
+    width: 80%;
+    display: grid;
+    border-radius: 25px;
+    grid-template-rows: 70% 30%;
+    margin: 5px auto;
+    background-color: lightgray;
+    display: none;
+    transform: 3s;
+}
+
+.DisplayImage
+{
+    position: absolute;
+    z-index: -1;
+    left:-100px;
+    bottom: 10px;    
+    height: 500px;
+}
+
+
+@media (max-width: 1000px)
+{
+    .Search
+    {
+        width: 80%; 
+        height: 40px;
+        margin: 10% auto 1% auto;
+    }
+
+    .SearchResultDiv
+    {
+        width: 80%;
+    }
+    
+}
+
+@media (min-width: 1001px) and (max-width:1150px)
+{
+    .Search
+    {
+        width: 80%; 
+        height: 40px;
+        margin: 10% auto 1% auto;
+    }
+
+    .SearchResultDiv
+    {
+        width: 80%;
+    }
+}
+
+@media (min-width: 780px) and (max-width:985px)
+{
+    .Search
+    {
+        width: 90%; 
+        height: 40px;
+        margin: 10% auto 1% auto;
+    }
+
+    .SearchResultDiv
+    {
+        width: 90%;
+    }
+
+    .CustomerContainer
+    {
+        grid-template-columns: 20% 70% 10%;
+    }
+}
+
+@media (min-width: 590px) and (max-width: 779px)
+{
+    .Search
+    {
+        width: 90%; 
+        height: 40px;
+        margin: 10% auto 1% auto;
+    }
+
+    .SearchResultDiv
+    {
+        width: 90%;
+    }
+
+    .CustomerAvatar
+    {
+        display: none;
+    }
+
+    .CustomerContainer
+    {
+        padding: 0px;
+        grid-template-columns: 90% 10%;
+    }
+}
+
+@media (max-width: 589px)
+{
+    .Search
+    {
+        width: 90%; 
+        height: 40px;
+        margin: 10% auto 1% auto;
+    }
+
+    .SearchResultDiv
+    {
+        width: 90%;
+    }
+
+    .CustomerAvatar
+    {
+        display: none;
+    }
+
+    .CustomerContainer
+    {
+        padding: 0px;
+        grid-template-columns: 90% 10%;
+    }
+}
+

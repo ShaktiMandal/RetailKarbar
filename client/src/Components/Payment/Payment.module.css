@@ -1,0 +1,243 @@
+.PaymentContainer
+{
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    display: grid;
+    opacity: 0.7;    
+    grid-template-columns: 50% 50%;
+}
+
+.PaymentContainer
+{
+    position: relative;
+    border-radius: 25px;
+}
+
+.ErrorDiv
+{
+    position: absolute;
+}
+
+.CloseBtnDivDuePaymentOrderContainer
+{
+    position: absolute;
+}
+
+.DuePaymentOrderContainer
+{
+    background-image: linear-gradient(#2b2bb3, white);
+    border-radius: 25px;
+}
+
+.DuePaymentOrderContainer ul
+{
+    list-style: none;
+    padding: 0px;
+}
+
+.DuePaymentOrderList
+{
+    width: 90%;
+    padding: 5px;
+    margin-bottom: 5px;
+    margin: auto;
+    display: grid;
+    font-weight: bold;
+    grid-template-columns: 50% 50%;
+}
+
+.DuePaymentOrderList div
+{
+    padding: 5px;
+    margin: auto;
+    color: white;
+    text-align: center;
+}
+
+.OrderHeader
+{
+    margin: 30px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    border-bottom: 1px solid rgb(0, 0, 0) ;
+}
+
+.OrderIcon
+{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    margin: auto;
+}
+
+
+/* Payment section style */
+
+.inputdiv
+{
+    position: relative;
+}
+
+.inputdiv input
+{
+    width: 100%;
+    margin-bottom: 15px;
+    padding:10px 0;
+    outline: none;
+    border: none;
+    background: transparent;
+    transition: 0.3s;
+    border-bottom: 1px solid black;
+}
+
+.inputdiv h5
+{
+    top: 0px;
+    left: 0px;
+    margin:0px;
+    padding: 0px; 
+    transition: 0.5s;
+    position: absolute;
+}
+
+.inputdiv input:focus ~ h5,
+.inputdiv input:valid ~ h5
+{
+   top: -15px;
+   color: green;
+}
+
+.inputdiv input:focus,
+.inputdiv input:active
+{
+    border-color: green;
+}
+
+.CashPaymentForm
+{
+    margin: auto;
+    background-color: whitesmoke;
+    height: 100%;
+    width: 50%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+}
+
+.CashPaymentForm h3{
+    margin: 0px;
+}
+
+.CashPaymentDiv{   
+    width: 80%;
+    position: absolute;
+}
+
+.TransactionDiv
+{
+    width: 100%;
+    text-align: center;
+}
+
+.TransactionDiv h3{
+
+    color: white;
+}
+
+.ErrorDiv
+{
+    top: 0px;
+    width: 100%;
+    z-index: 100;    
+    position: absolute;
+}
+
+.PaymentArea
+{
+    background-color: white;
+    
+    display: grid;
+    border-radius:25px;
+    grid-template-rows: 10% 70% 20%;
+}
+
+.PaymentHeader
+{
+    text-indent: 5%;
+    border-bottom: 2px solid white;
+    margin: 5px;
+    color: white;  
+    display: grid;
+    grid-template-columns: 50% 50%;
+    position: relative;
+    overflow: hidden;
+}
+
+.PaymentType
+{
+    display:flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 10px;
+}
+
+.PayAmount
+{
+    color:black;
+    padding-left: 10px;
+}
+
+.CloseBtnDiv
+{
+    padding-left: 2px;
+}
+
+.PaymentDetails
+{
+    height: 90%;
+    width: 90%;
+    margin: auto;
+}
+
+@media (max-width: 750px)
+{
+    .PaymentContainer
+    {       
+        display:block;
+    }
+
+    .PaymentDetails
+    {
+        height: 70%;
+        width: 70%;
+        margin: auto;
+    }
+
+    .DuePaymentOrderContainer
+    {
+        display: none;
+    }
+
+    .PaymentArea
+    {
+        height: inherit;
+    }
+}
+
+@media (max-width: 450px)
+{
+    .CashPaymentForm
+    {
+        width: 100%
+    }
+
+    .CashPaymentDiv{   
+        width: 100%;       
+    }
+}

@@ -1,0 +1,43 @@
+.liStyle
+{
+    list-style: none;
+    float: right;  
+    padding: 5px; 
+}
+
+.liStyle:hover{
+
+    cursor: pointer;
+}
+
+.anchorStyle
+{
+    color: white; 
+    font-size: larger;
+    font:bold;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: lightseagreen;
+    border:none;
+    outline: none;
+    padding: 5px 15px;
+    user-select: none;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);;
+}
+
+.anchorStyle:hover
+{
+    background-color: mediumseagreen;
+}
+.anchorStyle:active
+{
+    background-color: green;
+}
+
+
+@media (min-width: 500px)
+{    
+
+}

@@ -1,0 +1,484 @@
+
+.PopUp
+{
+    position: relative;
+    height: 80%;
+    background-color: red;
+}
+.SearchAndOrderContainer
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.SearchedProductList
+{
+    padding: 5px;
+    display: grid;
+    row-gap: 5px;;
+    grid-template-rows: 10% 90%;
+    opacity: 0.7;    
+    background-color: lightgreen;  
+    overflow: auto;
+}
+
+::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+}
+.OrderArea
+{
+    padding: 5px;
+    position: relative;
+}
+
+.OrderedProductList
+{
+    position: relative;
+    display: grid;
+    row-gap: 2px;
+    overflow: hidden;
+    opacity: 0.6;
+    background-color: red;
+}
+
+.SearchArea
+{
+    text-align: center;
+}
+
+.OrderHeader
+{ 
+    border-bottom: 2px solid white;
+    width: 90%;
+    margin: auto;
+    color: white;
+    padding: 5px;
+}
+
+.OrderDetails
+{   
+    justify-content: center;
+    overflow: auto;
+    height: 100%;
+}
+
+.PriceDetails
+{    
+    color: white;
+    display: flex;
+    margin: 10px;
+    justify-content: center;
+    background-color: seagreen;
+}
+
+.MobileViewContainer
+{
+    width: 100%;
+    height: 100%;
+    display: grid;
+    padding:5px;
+    grid-template-columns: 20% 60% 20%;
+}
+
+.ProductDetails
+{  
+    height: 90%;
+    background-color: transparent;
+    margin: 5px;
+    background-color: white;
+    padding: 10px;
+}
+
+.CustomerDetails div{
+    padding: 5px;
+}
+
+.CustomerDetails Section{
+    margin: 5% 5px 5%; 
+}
+
+.CustomerAction
+{
+    height: 90%;
+    width: 100%;
+    background-color: white;
+    display: grid;
+    grid-template-rows: 50% 50%;
+}
+
+.CustomerAction div
+{
+    display: none;
+    align-items:center;
+    justify-content: center;
+    padding: 5px;
+}
+
+.PriceDetails button{
+    width: 100%;
+    background: transparent;
+    border: none;
+    outline: none;
+    color:white;
+    font-size: 20px;
+}
+
+.PriceDetails button:hover {
+    cursor: pointer;
+    background-color: limegreen; 
+}
+
+.PriceDetails button span{
+    
+    opacity: 1.0;
+    transition: opacity 0.8s ease-in-out;
+    -moz-transition: opacity 0.8s ease-in-out;
+    -webkit-transition: opacity 0.8s ease-in-out;
+}
+
+.PriceDetails button:hover  span{
+
+    opacity: 0;
+    transition: opacity .8s ease-in-out;
+    -moz-transition: opacity .8s ease-in-out;
+    -webkit-transition: opacity .8s ease-in-out;
+}
+
+.PriceDetails button:hover h3{
+
+    opacity: 1;
+    transition: opacity .8s ease-in-out;
+    -moz-transition: opacity .8s ease-in-out;
+    -webkit-transition: opacity .8s ease-in-out;
+}
+
+.PriceDetails button h3{
+    margin: 0px;
+    opacity: 0;
+    transition: opacity .8s ease-in-out;
+    -moz-transition: opacity .8s ease-in-out;
+    -webkit-transition: opacity .8s ease-in-out;
+}
+
+.PriceDetails button:active{
+    background-color: green;
+}
+
+.PriceDetails div{
+    display:flex;
+    align-items: center;    
+}
+
+.SearchResultWrappingDiv
+{
+    width: 100%;
+}
+
+.PaymentOrderHeader
+{
+    margin: 0 100px 0 100px;
+    display: grid;
+    grid-template-columns: 25% 10% 30% 10%;
+    color: white;
+    font-weight: bold;
+    padding : 10px;
+    border-bottom: 1px solid rgb(0, 0, 0) ;
+}
+
+.listStyle
+{
+    width: 100%;
+    max-height: 400px;
+    overflow-y: auto;
+    padding:0px 100px 0 100px;
+    margin: 0px;
+    border-radius: 25px;
+    list-style: none;
+}
+
+.listStyle li
+{
+    margin: auto;    
+}
+
+.listStyle li
+{
+    border-bottom: 1px solid black;
+    background: transparent;
+    color:white;
+}
+
+.listStyle li:hover
+{
+    transform: scale(1);
+    /* box-shadow: 2px 2px 2px 2px grey; */
+}
+
+.UlOrderDetails
+{   
+    width: 80%;
+    list-style: none; 
+    padding: 0px; 
+}
+
+.liOrderDetails
+{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    border: none;
+    outline: none;
+    margin-bottom: 2px;
+}
+
+.liOrderDetails div
+{
+    width: 100%;
+}
+
+.OrderItemContainer
+{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.ItemContainer
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width:90%;
+    margin: auto;
+}
+
+.CloseBtnDiv
+{
+    top: 0px;
+    right: 5px;
+    position: absolute;
+    z-index: 100;
+}
+
+.SearchResultContainer
+{     
+    height: 100%;   
+    border-radius: 25px;
+    padding: 10px;
+    position: relative;
+}
+
+.DisplayImage
+{
+    position: absolute;
+    z-index: -1;
+    right: -100px;
+    bottom: 10px;
+    height: 400px;
+    width: 400px;
+}
+
+.MobileViewContainer
+{
+    width: 90%;
+    margin: auto;
+    height: 450px;
+    /* border-radius: 25px; */
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    /* background-image: linear-gradient(100deg, #0b0573 0%, #141480 35%, #29606b 100%); */
+    overflow: auto;
+}
+
+.ItemList
+{
+    width: 70%;
+    list-style: none;
+    margin: 0;
+    padding: 0px;
+}
+
+.DisplayProductArea
+{
+    width:90%;
+    margin: auto;
+    height: 500px;
+    border-radius: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(100deg, #0b0573 0%, #141480 35%, #29606b 100%);
+}
+
+.DisplayProductAreaWithoutBg
+{
+    width:90%;
+    margin: auto;    
+}
+
+.SearchArea{
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(12, 170, 12);
+    box-shadow: 5px 7px 5px grey;
+    opacity: 0.7;
+}
+
+.CheckoutArea
+{   
+    margin: 5px auto;
+    padding: 15px;
+    display: grid;
+    grid-template-columns: 80% 20%;
+    color: white;
+    text-align: right;
+}
+
+
+.CartImageStyle
+{
+    width: 40px;
+    height: 40px;
+    border-radius: 25px;
+    position: absolute;
+    z-index: -100;
+}
+
+.CartItemCountStyle
+{
+    position: absolute;
+    z-index: 100;
+}
+
+.CartItemStyle
+{
+    height: 40px;
+    width: 40px;
+    border-radius: 50%;
+    color: white;
+    z-index: 100;
+    position: relative;
+    border: 1px solid white;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.CartItemStyle :hover{
+    cursor: pointer;
+}
+
+.SearchInputStyle
+{
+    width: 90%;
+    height: 30px;
+    outline: none;
+    border: none;
+    border-radius: 25px;
+    padding: 10px;
+}
+
+.favItemBtn{
+    height: 40px;
+    width: 40px;
+    transition: transform 1s linear;
+    border-radius: 50%;
+    border: none;
+    outline: none;
+    font-size: 20px;
+}
+
+.favItemBtn:hover
+{
+    cursor: pointer; 
+    color: green;
+    font-size: 25px;
+    transition: 1s;
+}
+
+.favItemBtn:active{ 
+    background-color: green
+}
+
+.CheckoutButton
+{
+    background: transparent;
+    color: white;
+    height: 100%;
+    border: none;
+    outline: none;
+    font-size: 15px;
+}
+
+.CheckoutButton:hover
+{
+    cursor: pointer;
+}
+
+.DisplayProdMobView
+{
+    display: none;
+}
+
+@media (min-width: 1000px)
+{
+    .OrderHeader
+    { 
+        padding: 0px;
+    }
+}
+
+@media (max-width: 1064px)
+{
+    .DisplayProdMobView
+    {
+        display: block;
+    }
+    .DisplayDesktopView
+    {
+        display: none;
+    }
+}
+
+@media (max-width: 750px)
+{
+    .ItemList
+    {
+        width: 90%;
+        list-style: none;
+        margin: 0;
+        padding: 0px;
+    }
+}
+
+@media (max-width: 450px)
+{
+    .DisplayImage
+    {
+        display: none;
+    };
+
+    .ProductDetails
+    {  
+        height: 90%;
+        width: 100%;
+        background-color: transparent;
+        margin: 5px;
+        background-color: white;
+        padding: 10px;
+    }
+
+    .ItemList
+    {
+        width: 90%;
+        list-style: none;
+        margin: 0;
+        padding: 0px;
+    }
+}

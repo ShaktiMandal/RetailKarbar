@@ -1,0 +1,42 @@
+/* .buttonStyle
+{
+    width: 100%;
+    border: none;
+    outline: none;
+    height: 30px;
+    color: white;
+    background-color: lightseagreen;
+    text-align: center;
+    user-select: none;
+} */
+
+/* .buttonStyle:hover
+{
+    cursor: pointer;
+    background-color: seagreen;
+} */
+
+/* .buttonStyle:active
+{
+    cursor: pointer;
+    background-color: green;
+}
+
+
+.buttonStyle:hover
+{
+    cursor: pointer;
+    background-color: seagreen;
+} */
+
+.buttonStyle:active
+{
+    cursor: pointer;
+    background-color: green;
+}
+
+.buttonStyle:hover
+{
+    cursor: pointer;
+    background-color: seagreen;
+}

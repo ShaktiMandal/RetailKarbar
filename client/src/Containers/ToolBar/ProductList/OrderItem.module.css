@@ -1,0 +1,67 @@
+.OrderItemDiv
+{
+    display: grid;
+    grid-template-columns: 30% 30% 20% 20%;   
+   
+}
+
+.OrderItemDiv div{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.OrderItemDiv p{
+
+    width: 30%;
+    float: left;    
+}
+
+.OrderItemDiv input{
+    
+    width: 20%;
+    height: 15px;
+    text-align: center;
+    color: white;
+}
+
+.OrderItemDiv button
+{
+    border: none;
+    outline: none;
+    background: transparent;
+    width: 30px;
+    height: 30px;
+    align-content: center;
+}
+
+.OrderItemDiv button:hover{
+
+    background: lightgrey;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.EditButton, .DeleteButton
+{
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 20px;
+    display: inline-block;
+    user-select: none;
+    transition: transform .8s ease-in-out;
+}
+
+.EditButton:hover
+{
+    cursor: pointer;
+    color: seagreen;
+}
+
+.DeleteButton:hover{
+    cursor: pointer;
+    color: red;
+    transform: rotate(180deg);
+}

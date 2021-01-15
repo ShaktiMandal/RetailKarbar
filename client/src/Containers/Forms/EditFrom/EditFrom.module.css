@@ -1,0 +1,83 @@
+.FromContainer
+{
+    width:50%;
+    text-align: center;
+    padding: 10px;
+    opacity: 1.0;
+    background-color: white;    
+}
+
+.Selectiondiv select
+{
+    width: 100%;
+    height: 50px;
+    outline: none;
+    border: none;
+    z-index: 100;
+    background: transparent;
+    margin-bottom: 10px;
+    border-bottom: 1px solid black
+}
+
+.Selectiondiv h5{
+    
+    margin: 5px;
+    padding: 0px;
+    text-align: left;
+}
+
+.inputdiv
+{
+    position: relative;
+}
+
+.inputdiv input
+{
+    width: 100%;
+    margin-bottom: 15px;
+    padding:10px 0;
+    outline: none;
+    border: none;
+    background: transparent;
+    transition: 0.3s;
+    border-bottom: 1px solid black;
+}
+
+.inputdiv h5
+{
+    top: 0px;
+    left: 0px;
+    margin:0px;
+    padding: 0px; 
+    transition: 0.5s;
+    position: absolute;
+}
+
+.inputdiv input:focus ~ h5,
+.inputdiv input:valid ~ h5
+{
+   top: -15px;
+   color: green;
+}
+
+.inputdiv input:focus,
+.inputdiv input:active
+{
+    border-color: green;
+}
+
+@media (min-width: 700px)
+{
+    .FromContainer
+    {
+        width: 40%;
+    }
+}
+
+@media (min-width: 900px)
+{
+    .FromContainer
+    {
+        width: 30%;
+    }
+}

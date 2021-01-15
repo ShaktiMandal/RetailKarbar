@@ -1,0 +1,123 @@
+.ProductAddContainer
+{
+    height: 90%;
+    width: 90%;
+    margin: auto;
+    display: grid;
+    border-radius: 2%;
+    grid-template-rows: repeat(2, 100%);
+}
+
+.RightContainer
+{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: white;
+    opacity: 0.7;
+}
+
+.LeftContainer
+{
+    display: none;
+}
+
+.AddContainer
+{
+    position: absolute;
+    width: 90%;
+}
+
+.CloseBtnDiv
+{
+    top: 0px;
+    position: absolute;
+    z-index: 100;
+    width: 100%;
+}
+
+.ErrorDiv
+{
+    position: relative
+}
+
+.AddProductFrom
+{
+    padding: 10px;
+}
+
+
+.inputdiv
+{
+    position: relative;
+}
+
+
+.logInform h2{
+    margin: 0px;
+    padding: 25px 0;
+    user-select: none;
+}
+
+.inputdiv input
+{
+    width: 100%;
+    margin-bottom: 15px;
+    padding:10px 0;
+    outline: none;
+    border: none;
+    background: transparent;
+    transition: 0.3s;
+    border-bottom: 1px solid black;
+}
+
+.inputdiv h5
+{
+    top: 0px;
+    left: 0px;
+    margin:0px;
+    padding: 0px; 
+    transition: 0.5s;
+    position: absolute;
+}
+
+.inputdiv input:focus ~ h5,
+.inputdiv input:valid ~ h5
+{
+   top: -15px;
+   color: green;
+}
+
+.inputdiv input:focus,
+.inputdiv input:active
+{
+    border-color: green;
+}
+
+@media (min-width: 800px){
+
+    .ProductAddContainer
+    {    
+        display: grid;
+        overflow: hidden;
+        grid-template-columns: repeat(2, 50%);
+    }
+
+    .LeftContainer
+    {
+        background: white;
+        opacity: 0.6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        background-image: linear-gradient(white, #0000d4);
+    }
+
+    .AddContainer
+    {
+        width: 70%;
+    }
+}

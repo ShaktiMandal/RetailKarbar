@@ -1,0 +1,22 @@
+.RedirectContainer
+{
+    width: 100%;
+    padding: 5px;
+}
+
+.RedirectContainer div{
+    margin: auto 5%
+}
+.RedirectText
+{
+    margin: auto 0
+}
+
+.RedirectContainer img{
+    width: 30px;
+    height: 30px;
+}
+
+.RedirectContainer img:hover{
+    cursor: pointer;
+}

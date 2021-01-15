@@ -1,0 +1,307 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-title {
+  font-size: 1.5em;
+}
+
+.BackgroundDiv
+{
+  overflow: auto;
+  background-color: #0F0F62;
+  opacity: 0.9;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.LayoutDiv
+{
+  height: 100vh;
+  display: grid;
+  grid-template-rows: 15% 85%;
+}
+
+.Topbar
+{
+  display: grid; 
+  grid-template-columns: 10%  70% 20%;
+  background-color: #0F0F62;
+}
+
+.TopbarLeft{
+  display:grid;
+  grid-template-columns: repeat(2, 1fr);   
+  column-gap: 5px; 
+}
+
+.TopbarLeft div{
+  margin: auto;
+  padding: 10px;
+}
+
+.TopbarMiddle
+{
+  display: grid;
+  grid-template-columns: 10% 90%;
+}
+
+.TopbarMiddle div
+{
+  margin: auto;
+}
+
+.TopbarMiddle img :hover
+{
+  cursor: pointer;
+}
+
+.Logo :hover
+{
+  cursor: pointer;
+}
+
+.TopbarRight
+{
+   margin: auto 5%;
+}
+
+.ContentArea
+{  
+  display: grid;
+  grid-template-columns: 10% 80% 10%;
+  overflow: hidden;
+}
+
+.ContentAreaOpened
+{  
+  overflow: hidden;
+}
+
+.MainContent
+{
+  height: 100%;
+  white-space:nowrap;
+  width: auto;
+} 
+
+.TopbarMiddle input{
+
+  width: 90%;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid white;
+  height: 30px;
+  background: transparent;
+  color: white;
+}
+
+.TopbarMiddle input::placeholder{
+  color: whitesmoke;
+}
+
+.LandingDiv
+{
+  width: 90%;
+  height: 105%;
+  margin:  -50px auto 0;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  box-shadow: 20px 5px 20px 0px;
+}
+
+.AuthenticatedArea
+{
+  display: grid;
+  grid-template-rows: 20% 70% 10%;
+}
+
+.TopBar button{
+    float: right;
+    margin-right: 5%;
+    margin-top: 2%;
+    width: 100px;
+    height: 30px;
+    border-radius: 30PX;
+    outline: none;
+    border: none;
+    background: transparent;
+    color: white;
+    box-shadow: 0px 8px 15px rgba(0,0, 0.4);
+}
+
+
+.CartImageStyle
+{
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    opacity: 6;
+    z-index: -100;
+}
+
+.CartItemStyle
+{
+    height: 40px;
+    width: 40px;
+    z-index: 100;
+    position: relative;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.CartItemStyle :hover{
+    cursor: pointer;
+}
+
+.CartItemCountStyle
+{
+    position: absolute;
+    z-index: 100;
+    color: white;
+    font-size: 15px;
+    font-weight: bolder;
+    margin-top: -30px;
+}
+
+.DisplayImage
+{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.Slider
+{
+  width: 400px;
+  height: 400px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.Slides
+{
+  display: flex;
+  height: 400px;
+  width: 500%;
+
+}
+
+.slides input{
+  display: none;
+}
+
+.FirstSlide{
+  width: 20%;
+  transition: 2s;
+}
+
+.FirstSlide img{
+  width: 300px;
+  height: 300px;
+}
+
+.NavigaionManual{
+  position: absolute;
+  width: 800px;
+  margin-top: -40px;
+  display: flex;
+  justify-content: center;
+}
+
+.ManualBtn
+{
+   border: 2px solid red;
+   padding: 5px;
+   border-radius: 10px;
+   cursor: pointer;
+   transition: 1s;
+}
+
+.ManualBtn:not(:last-child)
+{
+  margin-right: 40px;
+}
+
+.ManualBtn:hover
+{
+  background: yellow;
+}
+
+#radio1:checked ~ .first{
+  margin-left: 0px;  
+}
+
+#radio2:checked ~ .first{
+  margin-left: -20%;  
+}
+
+#radio3:checked ~ .first{
+  margin-left: -40%;  
+}
+
+.TextSearch
+{
+  width: 60%;
+}
+
+
+@media(min-width: 450px)
+{
+  .ContentAreaOpened
+  {  
+    display: grid;
+    grid-template-columns: 10% 80% 10%;
+    overflow: hidden;
+  }
+
+}
+
+@media (max-width: 450px)
+{
+  .TextSearch
+  {
+    width: 90%;
+  }
+
+  .Topbar
+  {    
+    grid-template-columns: 10%  50% 20%;
+  }
+}
+
+@media (max-width: 650px)
+{
+  .TopbarMiddle
+  {
+    display: block;
+    margin: auto 0;
+    padding-left: 15px;
+  }
+  
+  .Logo
+  {
+    display: none;
+  }
+}

@@ -1,0 +1,52 @@
+.TextDiv
+{
+    height: inherit;
+    width: inherit;
+    text-align: center;
+    margin: auto;
+    position: relative;
+}
+
+.SearchText{
+    animation: textAnimation 3s steps(20);
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: center;
+    color: white;
+    margin: auto;
+    width: 20ch;
+    border-right: 4px solid white;
+}
+
+.SearchText::before
+{
+    content: '\01F589';
+    height: 100%;
+    width: 100%;
+}
+
+.SearchText::after
+{
+    content: '\01F589';
+    height: 100%;
+    width: 100%;
+    animation: pencil 5s linear infinity;
+}
+
+.SearchImg
+{
+    width: 20px;
+    height: 20px;
+    position: relative;
+}
+
+@keyframes textAnimation
+{
+    0%{
+        width: 0ch
+    }
+    100%
+    {
+        width: 20ch
+    }
+}

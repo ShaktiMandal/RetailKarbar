@@ -1,0 +1,75 @@
+.itemDiv
+{
+    width: 100%;
+    display: grid; 
+    grid-template-columns: 25% 10% 30% 20% 5% 5%;
+    column-gap: 2px;
+}
+
+.itemDiv div{
+
+    display: flex;
+    align-items: flex-start;
+    justify-content: right;
+}
+
+.itemDiv button{
+
+    border: none;
+    background: transparent;
+    outline: none;
+    height: 30px;
+    width: 30px;
+}
+
+.itemDiv button:hover{
+
+    background: lightgrey;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.item
+{
+    text-align: center;  
+}
+
+.itemDescription
+{   
+    text-align: left;
+    user-select: none;
+}
+
+.itemAction
+{
+    display: grid;
+    grid-template-rows: repeat(2, 50%);
+    align-items: center;
+}
+
+.itemAction div{
+    margin: 0 auto;
+    top: 50%;
+    left:50%;
+}
+
+.favItemBtn{
+    transform: rotate(0deg);
+    transition: transform 1s linear;
+    border-radius: 50%;
+    background-color: lightseagreen; 
+}
+
+.favItemBtn:hover,
+.addBtn:hover
+{
+    cursor: pointer; 
+    color: red;
+    background-color: seagreen;
+    transform: rotateY(180deg);
+    transition: transform 1s linear;
+}
+
+.favItemBtn:active{ 
+    background-color: green
+}

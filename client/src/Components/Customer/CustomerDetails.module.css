@@ -1,0 +1,183 @@
+.CustomerAndPayment
+{
+    display: grid;
+    height: 90%;
+    margin: 10px;
+    opacity: 0.7;
+    background-image: linear-gradient(white, #0000d4);
+    grid-template-rows: repeat(2, 100%);
+}
+
+ .CustomerArea{
+     position: relative;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.PaymentArea
+{
+    background-color: white;
+    display: grid;    
+    grid-template-rows: 15% 65% 25%;
+}
+
+.CustomerFrom
+{
+    position: relative;
+    width: 50%;
+    height: 70%; 
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatarImage
+{
+    top: 0px;
+    left: 0px;   
+    width: 60px;
+    height: 60px;    
+}
+
+.inputdiv
+{
+    position: relative;
+}
+
+.inputdiv input
+{
+    width: 100%;
+    margin-bottom: 15px;
+    padding:10px 0;
+    outline: none;
+    border: none;
+    background: transparent;
+    transition: 0.3s;
+    border-bottom: 1px solid black;
+}
+
+.inputdiv h5
+{
+    top: 0px;
+    left: 0px;
+    margin:0px;
+    padding: 0px; 
+    transition: 0.5s;
+    position: absolute;
+    text-align: center;
+}
+
+.inputdiv input:focus ~ h5,
+.inputdiv input:valid ~ h5
+{
+   top: -15px;
+   color: green;
+}
+
+.inputdiv input:focus,
+.inputdiv input:active
+{
+    border-color: green;
+}
+
+
+
+.logInBtn
+{
+    margin: 10px 0;
+}
+
+
+.FromEelement{
+
+    width:80%;
+    position: absolute;
+}
+
+.PaymentHeader
+{
+    text-indent: 5%;
+    border-bottom: 2px solid white;
+    margin: 10px;
+    color: black;  
+    display: grid;
+    grid-template-columns: 50% 50%;
+    position: relative;
+    overflow: hidden;
+}
+
+.PaymentOption
+{
+    color: white;
+    margin: 10px;
+    display: grid;
+    grid-template-columns: 30% 70%;
+}
+
+.OptionSelection
+{
+    display:grid;
+    grid-template-rows: repeat(3, 20%);
+}
+
+.PaymentDetails
+{
+    margin: 5% 5px;    
+}
+
+.PaymentType{
+    display: flex;
+    text-align: center;
+    align-items: end;
+    justify-content: flex-end;                            
+}
+.PaymentType input{
+    margin: 10px 10px;
+}
+
+.PaymentFooter
+{    
+    display: flex;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+
+.CloseBtnDiv
+{
+    top: 0px;
+    left: 10px;
+    position: absolute;
+    z-index: 100;
+}
+
+.ErrorDiv
+{
+    top: 3px;
+    left: 0px;
+    width: 100%;
+    position: absolute;
+    z-index: 100;
+}
+
+@media (min-width: 900px)
+{
+    .CustomerAndPayment
+    {
+        display: grid;
+        border-radius: 25px;
+        grid-template-columns: repeat(2, 50%);
+    }
+
+    .PaymentArea
+    {
+        border-radius: 25px;
+    }
+
+    .PaymentType input{
+        margin: 5px 10px;
+    }
+}

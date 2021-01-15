@@ -1,0 +1,15 @@
+.Line1, .Line2, .Line3, .Line4
+{
+    width: 35px;
+    height: 5px;
+    margin-bottom: 2px;
+    background: whitesmoke;
+
+}
+
+.hamburgerIcon:hover
+{
+    cursor: pointer;
+}
+
+

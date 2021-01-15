@@ -1,0 +1,17 @@
+.LinkStyle
+{
+    height: auto;
+    width: 100%;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.LinkStyle:focus
+{
+    color: limegreen;
+}
+
+.LinkStyle:active
+{
+    color: green;
+}

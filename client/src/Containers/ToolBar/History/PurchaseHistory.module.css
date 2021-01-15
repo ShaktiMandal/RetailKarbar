@@ -1,0 +1,28 @@
+
+.PurchaseHistoryDiv
+{
+    width: 80%;
+    height: 90%;
+}
+.UlOrderDetails
+{   
+    width: 100%;
+    list-style: none; 
+    padding: 0px; 
+}
+
+.liOrderDetails
+{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    border: none;
+    outline: none;
+    margin-bottom: 2px;
+}
+
+.liOrderDetails div
+{
+    width: 100%;
+}

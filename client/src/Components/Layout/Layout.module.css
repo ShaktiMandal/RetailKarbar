@@ -1,0 +1,26 @@
+.mainContainer
+{
+    height: 100%;
+    width: 100%;
+}
+
+.BackgroundImage
+{
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    bottom: 0; 
+    margin: auto; 
+    min-width: 50%;
+    min-height: 50%;
+}
+
+.containerDiv
+{
+    height: 100vh;
+    margin: auto 0;
+    padding: 0px;
+    display: grid;
+    grid-template-rows: 10% 90%;
+}

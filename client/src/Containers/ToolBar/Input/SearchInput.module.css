@@ -1,0 +1,25 @@
+
+
+.AnotherSearchInput::placeholder
+{  
+    color: white; 
+    margin-left: 10px;
+    font-size: 20px;
+}
+
+.AnotherSearchInput:focus::-webkit-input-placeholder
+{  
+   color: transparent;
+}
+
+.AnotherSearchInput
+{    
+    height:30px;
+    border-width: 0px;
+    border-bottom: 1px solid green;
+    background: transparent;
+    outline: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

@@ -1,0 +1,39 @@
+.MessageContainer
+{
+    width: 80%;
+    height: 150px;
+    background-color: white;
+    display: grid;
+    grid-template-rows:70% 30%;
+    border: 1px solid white;
+}
+
+.TextMessage
+{
+    margin: auto;
+}
+
+.ActionDiv
+{
+    margin: auto;
+}
+
+.ActionDiv input{
+    margin: 5px;
+}
+
+@media (min-width: 700px)
+{
+    .MessageContainer
+    {
+        width: 80%;
+    }
+}
+
+@media (min-width: 1000px)
+{
+    .MessageContainer
+    {
+        width: 60%;
+    }
+}

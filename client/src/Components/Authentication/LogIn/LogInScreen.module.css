@@ -1,0 +1,238 @@
+.Container
+{
+    margin:auto;
+    width: 70%;
+    height: 80%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    overflow: hidden;
+}
+
+.logInContainer
+{
+    width: 90%;
+    height: 105%;
+    margin:  -50px auto 0;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    box-shadow: 20px 5px 20px 0px;
+}
+
+.LeftDiv
+{
+   height: 100%;   
+   margin: auto 0;
+   border-right: 2px solid lightseagreen;
+   overflow: hidden;
+}
+
+.AuthenticatedArea
+{
+  display: grid;
+  grid-template-rows: 20% 70% 10%;
+}
+
+.rightDiv
+{
+     height: 100%;
+     margin: auto 0;
+     background: white;
+     position: relative;
+     display: flex;
+     align-items: center;
+     text-align: center;
+     justify-content: center;
+} 
+
+.logInform
+{
+    width: 350px;
+    height: 400px;
+    display: grid;
+    grid-template-rows: 20% 20% 20% 10% 10%;
+    margin: auto;
+    text-align: center;
+    color: white;
+    padding: 10px;
+    background-color: #7d0633;
+    box-shadow: 0px 8px 20px rgba(0,0,0, 0.8);
+    border-radius: 30px;
+}
+
+.SignUp {
+    float: right;
+    margin-right: 5%;
+    margin-top: 2%;
+    width: 100px;
+    height: 30px;
+    border-radius: 30PX;
+    outline: none;
+    border: none;
+    background: transparent;
+    color: white;
+    box-shadow: 0px 8px 15px rgba(0,0, 0.4);
+}
+
+.avatarImage
+{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+}
+
+.inputdiv
+{
+    position: relative;
+}
+
+
+.logInform h2{
+    margin: 0px;
+    padding: 25px 0;
+    user-select: none;
+}
+
+.inputdiv input
+{
+    width: 80%;    
+    margin-bottom: 15px;
+    padding:10px 0;
+    outline: none;
+    border: none;
+    background: transparent;
+    transition: 0.3s;
+    border-bottom: 1px solid white;
+}
+
+.inputdiv h5
+{
+    top: 0px;
+    left: 0px;
+    margin:0px 30px;
+    padding: 0px; 
+    transition: 0.5s;
+    position: absolute;
+}
+
+.inputdiv input:focus ~ h5,
+.inputdiv input:valid ~ h5
+{
+   top: -15px;
+   color: white;
+}
+
+.inputdiv input:focus,
+.inputdiv input:active
+{
+    border-color: white;
+}
+
+.anchore
+{
+    height: auto;
+    width: 100%;
+    padding: 10px 0;
+}
+
+.logInBtn input
+{
+    width: 80%;
+    border-radius: 30px;
+    border: none;
+    outline: none;
+    height: 35px;
+    color: white;
+    font-size: 15px;
+    text-align: center;
+    user-select: none;
+    margin: 30px;
+    background-color: #7d0633;
+    box-shadow: 0px 4px 10px rgba(0,0,0, 0.9);
+}
+
+.logInBtn input:hover
+{
+    cursor: pointer;
+}
+
+.HyperLinkItem
+{
+    display: grid;
+    grid-template-columns: 50% 50%;
+    padding: 10px
+}
+
+.SignUpLink{
+    border-right: 1px white solid;
+}
+
+.HyperLinkItem a{
+    height: auto;
+    width: 100%;
+    padding: 5px;
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+}
+
+.HyperLinkItem a :hover
+{
+    cursor: pointer;
+}
+
+
+.ErrorDiv
+{
+    top:0px;
+    left: 0px;
+    width: 100%;
+    z-index: 100;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance:textfield;
+  }
+
+@media (max-width: 755px)
+{
+    .LeftDiv
+    {
+        display: none;
+    }
+
+    .Container
+    {
+        display: flex;       
+    }
+
+    .rightDiv
+    {
+        width: 100%;
+    }
+
+    .logInContainer
+    {
+        width: 90%;
+        height: 105%;
+        margin:  auto;  
+        display: block;
+        box-shadow: 20px 5px 20px 0px;
+    }
+
+    .DisplayImage
+    {
+        display: none;
+    }
+
+    .logInform
+    {       
+        max-width: 60%; 
+        width: 80%;        
+    }
+}

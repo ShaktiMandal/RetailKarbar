@@ -1,0 +1,32 @@
+.navStyle
+{
+    background-color: whitesmoke;
+    border: 0px;
+    padding: 0px;
+    background: transparent;
+    vertical-align: middle;
+}
+
+.right{
+    width: auto;
+    height: auto;
+    float: right;
+    top: 0px;
+    margin: 0px;
+    padding: 0px;
+  
+}
+
+.right ul{
+    margin: 0px;
+    padding: 0px;
+}
+
+.left{
+    width: auto;
+    height: auto;
+    float: left;
+    top: 0px;
+    margin: 0px;
+    padding: 0px;
+}

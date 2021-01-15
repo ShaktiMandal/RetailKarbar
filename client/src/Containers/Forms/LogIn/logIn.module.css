@@ -1,0 +1,204 @@
+.Container
+{
+    margin:auto;
+    width: 70%;
+    height: 80%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    overflow: hidden;
+}
+
+
+.logInContainer
+{
+    width:50%;
+    height: 100%;
+    margin: auto 0px;
+    display: flex;
+    overflow: hidden;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+}
+
+.LeftDiv
+{
+   height: 100%;   
+   margin: auto 0;
+   border-right: 2px solid lightseagreen;
+   overflow: hidden;
+
+}
+
+.rightDiv
+{
+     height: 100%;
+     margin: auto 0;
+     background: white;
+     position: relative;
+     display: flex;
+     align-items: center;
+     text-align: center;
+     justify-content: center;
+} 
+
+.leftImage
+{
+    width:100%;
+    height: 100%;
+    margin: auto 0px;
+    display: block;
+}
+
+.logInform
+{
+    top: 10%;
+    width: 100%;
+    margin: auto 0;
+}
+
+.avatarImage
+{
+    width: 50px;
+    height: 50px;    
+}
+
+.inputdiv
+{
+    position: relative;
+}
+
+
+.logInform h2{
+    margin: 0px;
+    padding: 25px 0;
+    user-select: none;
+}
+
+.inputdiv input
+{
+    width: 100%;
+    margin-bottom: 15px;
+    padding:10px 0;
+    outline: none;
+    border: none;
+    background: transparent;
+    transition: 0.3s;
+    border-bottom: 1px solid black;
+}
+
+.inputdiv h5
+{
+    top: 0px;
+    left: 0px;
+    margin:0px;
+    padding: 0px; 
+    transition: 0.5s;
+    position: absolute;
+}
+
+.inputdiv input:focus ~ h5,
+.inputdiv input:active ~ h5
+{
+   top: -15px;
+   color: green;
+}
+
+/* .inputdiv input:not([value]) ~ h5{
+    top: -15px;
+    color: green;
+ } */
+
+.inputdiv input:focus,
+.inputdiv input:active
+{
+    border-color: green;
+}
+
+.anchore
+{
+    height: auto;
+    width: 100%;
+    padding: 10px 0;
+}
+
+.logInBtn
+{
+    margin: 10px 0;
+}
+
+.closeDiv
+{
+    width: 30px;
+    height: 30px;
+    right:0px;
+    background-color: red;
+}
+
+.ErrorDiv
+{
+    top:0px;
+    left: 0px;
+    width: 100%;
+    position: absolute;
+    z-index: 100;
+}
+
+.CloseBtnDiv
+{
+    top: 0px;
+    right: 0px;
+    position: absolute;
+    z-index: 100;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance:textfield;
+  }
+
+@media (max-width: 870px)
+{
+    .LeftDiv
+    {
+        display: none;
+    }
+
+    .Container
+    {
+        display: flex;       
+    }
+
+    .rightDiv
+    {
+        width: 100%;
+    }
+
+    .logInContainer
+    {
+        width: 100%;
+        height: 100%;
+        display:flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .logInform
+    {        
+        width: 60%;        
+    }
+}
+
+@media (max-width: 365px)
+{
+    .logInform
+    {        
+        width: 80%;        
+    }
+}

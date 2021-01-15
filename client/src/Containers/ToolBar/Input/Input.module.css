@@ -1,0 +1,24 @@
+/* .InputStyle
+{
+    width: 100%;
+    height: 100%;
+    border: none;
+    left: 0px;
+    top: 0px;
+    outline: none; 
+    background:none;
+    font-family: sans-serif;
+    color: blue;
+    position: absolute;
+    margin-left:15px;
+} */
+
+/* .InputStyle ~ input::placeholder
+{
+    display: none;
+}
+
+.InputStyle:focus ~ input::placeholder
+{
+    display: block;
+} */

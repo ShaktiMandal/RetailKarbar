@@ -1,0 +1,103 @@
+import * as actionTypes from '../Actions/ActionTypes';
+
+const initialState = {
+    UserData:{
+        UserId : "",
+        Passcode: "",
+    },
+    IsUserLoggedIn: false,
+    LogInErrors: [],
+    IsUserAuthenticated: false,
+    SelectedNavigationPath : ""
+}
+
+const AuthReducer = (state=initialState, action) =>{
+
+    const {type, payload} = action;
+    switch (type)
+    {
+        case actionTypes.USER_LOGIN:
+            {               
+                return{
+                    ...state,
+                    IsUserLoggedIn: true,
+                    LogInErrors: ""
+                };                
+            }
+        case actionTypes.LOGIN_ERROR:
+            {
+                return{
+                    ...state,
+                    IsUserLoggedIn: false,
+                    LogInErrors: payload.ErrorMsg
+                };
+            }
+        case actionTypes.LOGIN_FAILED:
+            {
+                return{
+
+                };
+            }
+        case actionTypes.AUTHENTICATION_SUCCESS:
+            {
+                return {
+                    ...state,
+                    IsUserAuthenticated: true
+                };
+            }
+        case actionTypes.AUTHENTICATION_FAILED:
+            {
+                localStorage.removeItem('token');
+                localStorage.removeItem('exparitionTime');
+
+                return {
+                    ...state,
+                    IsUserAuthenticated: false
+                };
+            }
+        case actionTypes.LOGIN_WINDOW_CLOSED: 
+            {
+                var {UserId, Passcode} = payload;
+                return{
+                    ...state,
+                    UserData: {UserId, Passcode},
+                    IsUserLoggedIn: false,
+                    LogInErrors: []
+                };
+            }
+        case actionTypes.USER_LOGOUT: 
+            {       
+                return{
+                    ...state,
+                    UserData:{
+                        UserId : "",
+                        Passcode: "",
+                    },              
+                    IsUserLoggedIn: false,
+                    IsUserAuthenticated: false,
+                    LogInErrors: []
+                };
+            }
+        case actionTypes.NAVIGATIONITEM: 
+            { 
+                debugger;     
+                return{
+                    ...state,   
+                    SelectedNavigationPath: payload.NavigationPath
+                };
+            }
+        case actionTypes.ONLOADPAGE: 
+        {
+            debugger;
+            return {
+                ...state, 
+                ErrorMsg: payload.ErrorMsg
+            }
+        }
+        default:
+            debugger;
+            return state;
+    }
+};
+
+export default AuthReducer;

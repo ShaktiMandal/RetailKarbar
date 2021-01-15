@@ -1,0 +1,21 @@
+
+
+.CloseBtnDiv {
+    margin-right: 5px;
+  }
+  
+  .closebtn {
+    font-size: 30px;
+    user-select: none;
+    float: right;
+  }
+  
+  .closebtn:hover {
+    cursor: pointer;
+    color: limegreen;
+  }
+
+  .closebtn:active {
+    cursor: pointer;
+    color: green;
+  }

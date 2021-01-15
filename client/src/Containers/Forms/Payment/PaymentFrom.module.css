@@ -1,0 +1,89 @@
+.inputdiv
+{
+    position: relative;
+}
+
+.inputdiv input
+{
+    width: 100%;
+    margin-bottom: 15px;
+    padding:10px 0;
+    outline: none;
+    border: none;
+    background: transparent;
+    transition: 0.3s;
+    border-bottom: 1px solid black;
+}
+
+.inputdiv h5
+{
+    top: 0px;
+    left: 0px;
+    margin:0px;
+    padding: 0px; 
+    transition: 0.5s;
+    position: absolute;
+}
+
+.inputdiv input:focus ~ h5,
+.inputdiv input:valid ~ h5
+{
+   top: -15px;
+   color: green;
+}
+
+.inputdiv input:focus,
+.inputdiv input:active
+{
+    border-color: green;
+}
+
+.CashPaymentForm
+{
+    margin: auto;
+    height: 100%;
+    width: 80%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+}
+
+.CashPaymentForm h3{
+    margin: 0px;
+    color: white
+}
+
+.CashPaymentDiv{   
+    width: 80%;
+    position: absolute;
+}
+
+.TransactionDiv
+{
+    width: 100%;
+    text-align: center;
+}
+
+.TransactionDiv h3{
+
+    color: black;
+}
+
+.ErrorDiv
+{
+    top: 0px;
+    width: 100%;
+    z-index: 100;    
+    position: absolute;
+}
+
+@media (max-width: 750px)
+{
+
+    .CashPaymentDiv
+    {
+        width: 100%;
+    }
+}

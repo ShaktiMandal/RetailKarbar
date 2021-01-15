@@ -1,0 +1,234 @@
+.ProductContainer
+{
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-rows: 70% 100%;
+}
+
+.WholesalerContainer
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    opacity: 0.7;
+    background-color: green;
+    position: relative;
+}
+
+.OrderSearchArea
+{
+    margin: auto;
+    height: 100%;
+    width: 100%;
+    display: grid;
+    grid-template-rows: 30% 70%;
+    background-color: red;
+    opacity: 0.6;  
+}
+
+.OrderSearchCriteria
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0.6;
+    background-color: red;
+}
+
+.ItemBasket
+{
+    float: right;
+    height: 80px;
+    width: 80px;
+    border: 1px solid white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+    overflow: hidden;
+}
+
+.DisplayOrderList
+{
+    opacity: 0.6;
+    display: grid;
+    grid-template-rows: 20% 80%;
+    border-left: 1px solid white;
+    background-color: red;
+}
+
+.AddProductFrom
+{
+    width: 80%;
+    padding: 15px;
+    position: relative;
+    background-color: white;
+}
+
+.ErrorDiv
+{
+    left: 0px;
+    z-index:100;
+    width: 100%;
+    position: absolute;
+}
+
+.inputdiv
+{
+    position: relative;
+}
+
+.logInform h2{
+    margin: 0px;
+    padding: 25px 0;
+    user-select: none;
+}
+
+.inputdiv input
+{
+    width: 100%;
+    margin-bottom: 15px;
+    padding:10px 0;
+    outline: none;
+    border: none;
+    background: transparent;
+    transition: 0.3s;
+    border-bottom: 1px solid black;
+}
+
+.inputdiv h5
+{
+    top: 0px;
+    left: 0px;
+    margin:0px;
+    padding: 0px; 
+    transition: 0.5s;
+    position: absolute;
+}
+
+.inputdiv input:focus ~ h5,
+.inputdiv input:valid ~ h5
+{
+   top: -15px;
+   color: green;
+}
+
+.inputdiv input:focus,
+.inputdiv input:active
+{
+    border-color: green;
+}
+
+.WholesalerSelecion h5
+{
+    margin: 0px;
+    text-align: left;
+}
+
+.WholesalerSelecion select{
+    margin: 10px 0;
+    width: 100%;
+    height: 30px;
+    border: 0px;
+    border-bottom: 1px solid black;
+    outline: none;
+    appearance: none;
+    background: transparent;
+}
+.SearchCriteriaFrom
+{
+    width: 80%;
+    height: 100%;
+    padding: 15px;
+    display: grid;
+    grid-template-rows: 20% 80%;
+}
+
+.SearchArea
+{
+    margin: 10px;
+    display: grid;
+    overflow: hidden;
+    align-content: flex-end;
+    grid-template-columns: 80% 20%;
+    border-bottom: 1px solid white;
+}
+
+.SearchCriteria
+{   
+    display: flex;
+    height: inherit;
+    align-items: flex-end;
+}
+
+.SearchInput
+{
+  font-size: 30px;
+}
+
+.SearchCriteria input::placeholder
+{
+    color: black;
+}
+
+.liOrderDetails
+{
+    display: flex;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    border: none;
+    outline: none;
+    margin-bottom: 2px;
+}
+
+.liOrderDetails div
+{
+    border-radius: 25px;
+    box-shadow: 2px lightslategray;
+    width: 100%;
+}
+
+.OrderList ul{
+    width: 90%;
+    margin: auto;
+    padding: 10px;
+}
+
+.OrderList li
+{
+    transition: 3s;
+}
+
+.OrderList li:hover
+{
+    cursor: pointer;
+    transform: scale(1.1);
+} 
+
+.CloseBtnDiv
+{
+    top: 0px;
+    left: 10px;
+    position: absolute
+}
+
+@media (min-width:750px)
+{
+    .ProductContainer
+    {
+        height: 90%;
+        width: 90%;
+        margin: auto;
+        display: grid;
+        grid-template-columns: 30% 70%;
+        grid-template-rows: 100% 100%;        
+    }
+
+    .SearchInput
+    {
+        font-size: 50px;
+    }
+}
