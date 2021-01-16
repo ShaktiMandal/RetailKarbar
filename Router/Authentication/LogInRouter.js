@@ -4,7 +4,6 @@ const cors   = require("cors");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
 const jwt    = require("jsonwebtoken");
-const key    = require('../../Config/Config');
 const LogInUser = require('../../Model/AuthenticationModel/UserModel');
 
 router.post('/LogIn', (req, res, next)=>{

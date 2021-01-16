@@ -9,7 +9,6 @@ const Product      = require('./Router/Product/ProductRouter');
 const Customer     = require('./Router/Customers/CustomerRouter');
 const Dealer     = require('./Router/Customers/DealerRoute');
 const PageLoad   = require('./Router/Authentication/LoadingRouter');
-const Config = require("./Config/Config");
 const session = require('express-session');
 const Passport = require('passport');
 const passport = require("passport");
