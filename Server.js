@@ -76,7 +76,7 @@ App.use('/Authentication/RegisterUser', Registration);
 App.use('/Product' , Product);
 App.use('/Customer' , Customer);
 App.use('/Dealer' , Dealer);
-console.log("Print the process", process.env.MONGO_URI);
+
 App.listen(port, async function ConnectDB(){
     return await mongoose.connect(process.env.MONGO_URI).then(result =>{
         console.log("Db connection successful");        
