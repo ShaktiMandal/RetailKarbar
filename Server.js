@@ -55,6 +55,7 @@ App.use('*', function Authentication(req,res,next){
     }
     else
     {
+        console.log('User session', req.user);
         res.setHeader("Is-UserloggedIn","false");       
         if(!req.params[0].includes('/Authentication'))
         {
