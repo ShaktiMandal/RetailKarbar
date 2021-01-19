@@ -48,16 +48,14 @@ App.use('*', function Authentication(req,res,next){
   
     res.header("Access-Control-Expose-Headers", "Is-UserloggedIn");    
     if(req.isAuthenticated())
-    {        
+    {   
         res.setHeader("Is-UserloggedIn","true");
-        console.log('User session', req.user);
         next();
     }
     else
     {
-        console.log('User session', req.user);
         res.setHeader("Is-UserloggedIn","false");       
-        if(!req.params[0].includes('/Authentication'))
+        if(!req.params[0].includes('Authentication'))
         {
             return res.status(401).send({
                 Success: false
@@ -69,14 +67,13 @@ App.use('*', function Authentication(req,res,next){
     }
 });
 
-App.use('/', PageLoad);
 App.use('/Authentication/User', LogIn);
 App.use('/Authentication/PasswordReset', PasswordReset);
 App.use('/Authentication/RegisterUser', Registration);
 App.use('/Product' , Product);
 App.use('/Customer' , Customer);
 App.use('/Dealer' , Dealer);
-console.log("this is env list", process.env);
+
 App.listen(port, async function ConnectDB(){
     return await mongoose.connect(process.env.MONGO_URI).then(result =>{
         console.log("Db connection successful");        
