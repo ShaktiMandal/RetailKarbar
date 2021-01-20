@@ -62,9 +62,9 @@ App.use('*', function Authentication(req,res,next){
             // });
             res.redirect('/');
         }   
-        else{
-            next();
-        }   
+        // else{
+        //     next();
+        // }   
     }
 });
 
