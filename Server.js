@@ -57,9 +57,10 @@ App.use('*', function Authentication(req,res,next){
         res.setHeader("Is-UserloggedIn","false");       
         if(!req.params[0].includes('Authentication'))
         {
-            return res.status(401).send({
-                Success: false
-            });
+            // return res.status(401).send({
+            //     Success: false
+            // });
+            res.redirect('/');
         }   
         else{
             next();
