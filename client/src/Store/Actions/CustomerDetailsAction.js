@@ -22,7 +22,7 @@ export const AddYourCustomer = (customerDetails) => async (dispatch) => {
     const response = await fetch("http://localhost:5000/Customer/AddCustomer", requestData);
     const responseData = await response.json();
 
-    debugger;
+       
     if(responseData.Success)
     {
         if(responseData.error.length === 0)
@@ -64,7 +64,7 @@ export const AddYourCustomer = (customerDetails) => async (dispatch) => {
 }
 
 export const AddYourDealer = (dealerDetails, orderDetails) => async (dispatch) => {
-    debugger;
+       
     let requestData = {
         method : 'POST',
         credentials: 'include',
@@ -112,7 +112,7 @@ export const AddYourDealer = (dealerDetails, orderDetails) => async (dispatch) =
 
 export const MakeYourPayment = (paymentDetails, customerDetails, orderDetails, totalAmount) => async (dispatch) => {
 
-    debugger;
+       
     let requestData = {};
     if(paymentDetails.PaymentType === "Cash")
     {
@@ -203,7 +203,7 @@ export const PaymentValidationError = (errors) => (dispatch) => {
 
 export const ClearError = (isError, customerData) => (dispatch) =>{
 
-    debugger;
+       
    isError ?  dispatch({
         type: ActionTypes.CLEARERROR,
         payload: {
@@ -263,7 +263,7 @@ export const ResetTransactionDetails = () => async (dispatch) => {
 
 export const PrintYourReceipt = (customerDetails, paymentDetails, orderDetails) => async dispatch => {
 
-    debugger;
+       
     const {CustomerName, PhoneNumber} = customerDetails;
     const {GivenAmount, ChangeAmount} = paymentDetails;
     const {OrderId, CustomerOrders} = orderDetails;

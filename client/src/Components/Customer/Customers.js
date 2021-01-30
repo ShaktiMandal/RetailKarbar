@@ -110,7 +110,7 @@ class Customers extends Component
     }
 
     OnOrderSearch = (event) => {
-        debugger;
+           
         event.preventDefault();
         if(this.state.FilteredOrderItems.length === 0)
         {
@@ -129,7 +129,7 @@ class Customers extends Component
         };
         let givenAmount =  this.state.GivenAmount;
         let isAmountPaid = false;
-        debugger;
+           
         this.props.listOfOrders.map( item => {
             
             if( item.DueAmount === 0.00 
@@ -189,7 +189,7 @@ class Customers extends Component
        var selectedIndex = event.target.id.split('-')[1];
        var isChecked = event.target.checked;
        var SelectedItem = this.props.listOfOrders[Number(selectedIndex)];
-       debugger;
+          
        if(this.state.SelectedPayableItem.length > 0)
        {
             isItemAlreadySelected = this.state.SelectedPayableItem.findIndex(item => item.OrderId === SelectedItem.OrderId) !== -1;
@@ -319,7 +319,7 @@ class Customers extends Component
 
     render()
     { 
-        debugger;
+           
       
         let CustomerResultArea = 
         <CustomerResult        

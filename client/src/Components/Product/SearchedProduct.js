@@ -69,7 +69,7 @@ class SearchedProduct extends Component {
 
     OnAddFavourite = (event, index) =>{
         event.preventDefault();
-        debugger;
+           
         if(index != -1)
         {
             let selectedItem =  this.props.productList[index]
@@ -111,13 +111,13 @@ class SearchedProduct extends Component {
     }
 
     OnPlaceOrder = (event) => {
-        debugger;
+           
         this.setState({IsUserAskToPlaceOrder: true});        
     }
 
     OnSearch = (event) =>
     {
-        debugger;
+           
         event.preventDefault();
         this.setState({IsUserAskToPlaceOrder: false}); 
         this.setState({IsCartItemToBeDisplayed: false})
@@ -128,7 +128,7 @@ class SearchedProduct extends Component {
 
     CreateOrderElement()
     {
-        debugger;
+           
         if(this.props.orderList.length > 0)
         {         
             return ( <div className={classes.OrderDetails}>

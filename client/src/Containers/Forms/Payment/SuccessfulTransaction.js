@@ -4,7 +4,7 @@ import Button  from '../../ToolBar/Button/button';
 import classes from './PaymentFrom.module.css';
 
 const SuccessTransaction = (props) =>{
-    debugger;
+       
     return(
         <Aux>
             <div className={classes.TransactionDiv}>

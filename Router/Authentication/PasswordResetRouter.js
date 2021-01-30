@@ -11,7 +11,7 @@ router.post('/ResetPassword', function(req, res, next){
         .then( user => {
             if(user)
             {
-                debugger;
+                   
                 let updatedUser = new resetUser({
                     UserId: req.body.UserId,
                     Passcode: req.body.Passcode,

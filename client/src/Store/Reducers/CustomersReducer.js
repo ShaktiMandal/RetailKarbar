@@ -17,7 +17,7 @@ let initialState = {
 const CustomerReducer = (state = initialState, action) => {
 
     let {type, payload} = action;
-    debugger;
+       
     switch(type)
     {
 
@@ -108,7 +108,7 @@ const CustomerReducer = (state = initialState, action) => {
                 }
             case ActionTypes.LOADING:
                 {    
-                    debugger;        
+                               
                         return {
                             ...state,
                             IsShowLoading : payload.DisplayLoading,

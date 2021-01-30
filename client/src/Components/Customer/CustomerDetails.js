@@ -49,7 +49,7 @@ class CustomerDetails extends Component {
 
     componentWillUnmount()
     {
-        debugger;
+           
         this.props.ResetTransactionDetails();       
         this.props.ResetPaymentDetails();
         Validator.ClearErrors();
@@ -116,7 +116,7 @@ class CustomerDetails extends Component {
 
         let paymentDetails = this.props.paymentDetails;
 
-        debugger;
+           
         switch(event.target.id)
         {            
             case "givenCash":
@@ -161,7 +161,7 @@ class CustomerDetails extends Component {
     }
 
     OnCreateCustomer = (event) => {
-        debugger;
+           
         event.preventDefault();  
         Validator.ClearErrors();  
         Validator.CustomerValidation(this.props.customerDetails, this.props.customerOrders);
@@ -170,7 +170,7 @@ class CustomerDetails extends Component {
     }
 
     OnCreateDealer = (event) => {
-        debugger;
+           
         event.preventDefault();
         Validator.ClearErrors();  
         Validator.DealerValidation(this.props.dealerDetails, this.props.customerOrders);
@@ -203,7 +203,7 @@ class CustomerDetails extends Component {
     }
 
     OnPrintRecipt= (event) => {
-        debugger;
+           
         event.preventDefault();
         var printElement = document.getElementById("ReceiptId");
         const orderHTML = '<html><head><title></title></head><body>' + printElement + '</body></html>'
@@ -218,7 +218,7 @@ class CustomerDetails extends Component {
     }
 
     OnPayment = (event) =>{
-        debugger;
+           
         event.preventDefault();
         Validator.ClearErrors(); 
         let customerDetails;
@@ -263,7 +263,7 @@ class CustomerDetails extends Component {
     }
 
     OnReturnHome = (event) =>{
-        debugger;
+           
         event.preventDefault();
         this.setState({Success: false});
         this.props.ResetTransactionDetails();
@@ -271,7 +271,7 @@ class CustomerDetails extends Component {
     }
 
     OnCloseClick = (event) =>{      
-        debugger;  
+             
         this.props.history.push('/Product/Search');
     }
 
@@ -294,7 +294,7 @@ class CustomerDetails extends Component {
         OrderDetails    = {this.props.customerOrders}
         /> : null;
                                                          
-        debugger;
+           
         var ErrorElement = this.props.customerError.length > 0 ?  
         <div className={classes.ErrorDiv}>
             <ErrorBox 

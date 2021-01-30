@@ -148,7 +148,7 @@ export const GetOrderDetails = (customerId) => async dispatch =>{
                                         )
     
                                         .join('&');
-     debugger;
+        
     dispatch({
         type: LOADING,
         payload: {
@@ -157,7 +157,7 @@ export const GetOrderDetails = (customerId) => async dispatch =>{
         });
     const response = await fetch("http://localhost:5000/Customer/GetCustomerOrders?" + query, request);
     const responseData = await response.json();
-    debugger;
+       
     dispatch({
         type: LOADING,
         payload: {
@@ -190,7 +190,7 @@ export const GetOrderDetails = (customerId) => async dispatch =>{
 
 export const GetDueOrders = (orderList, index) => (dispatch) => {
 
-    debugger;
+       
     dispatch({
         type: GOTORDERDETAILS,
         payload: {
@@ -239,7 +239,7 @@ export const GetOutOfStockProducts = () => async (dispatch) => {
 
 export const OnFilterOrderItems = (listOfOrders, searchItem) =>  (dispatch) => {
 
-    debugger;    
+           
     var filteredLits = listOfOrders.filter(item => {            
         if(item.OrderId.includes(searchItem))
         {

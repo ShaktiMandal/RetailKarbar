@@ -8,6 +8,7 @@ const initialState = {
     IsUserLoggedIn: false,
     LogInErrors: [],
     IsUserAuthenticated: false,
+    IsInvalidRoute: false,
     SelectedNavigationPath : ""
 }
 
@@ -75,12 +76,12 @@ const AuthReducer = (state=initialState, action) =>{
                     },              
                     IsUserLoggedIn: false,
                     IsUserAuthenticated: false,
+                    IsInvalidUrl: payload.IsInvalidUrl,
                     LogInErrors: []
                 };
             }
         case actionTypes.NAVIGATIONITEM: 
-            { 
-                debugger;     
+            {    
                 return{
                     ...state,   
                     SelectedNavigationPath: payload.NavigationPath
@@ -88,14 +89,12 @@ const AuthReducer = (state=initialState, action) =>{
             }
         case actionTypes.ONLOADPAGE: 
         {
-            debugger;
             return {
                 ...state, 
                 ErrorMsg: payload.ErrorMsg
             }
         }
-        default:
-            debugger;
+        default:         
             return state;
     }
 };

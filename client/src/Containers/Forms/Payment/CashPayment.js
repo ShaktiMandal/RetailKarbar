@@ -7,7 +7,7 @@ import ErrorBox from '../../ToolBar/Error/Error';
 
 const CashForm = (props) =>{
 
-    debugger;
+       
     let ErrorElement =  props.ErrorMsg.length > 0 ?               
     <div className={classes.ErrorDiv}>
        <ErrorBox ErrorMsg={props.ErrorMsg}

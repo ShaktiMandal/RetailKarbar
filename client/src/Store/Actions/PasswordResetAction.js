@@ -60,7 +60,7 @@ export const UserPasswordReset = (data) => async dispatch => {
 
 export const PasswordResetError = (errors) =>  async dispatch => {
 
-    debugger;
+       
     
     return dispatch({
         type: PASSWORD_RESET_ERROR,

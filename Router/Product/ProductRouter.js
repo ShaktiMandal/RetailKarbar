@@ -163,7 +163,7 @@ router.post('/AddToFavourite', (req, res, next) =>{
                 .then( result => {                    
                     if(result)
                     {
-                        debugger;
+                           
                         console.log("out of stocks", result);
                         res.status(200).send({
                             Success: true

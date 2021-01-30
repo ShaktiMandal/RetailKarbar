@@ -30,7 +30,7 @@ const Validator = (function(){
 
     const OnValidateResetPassword = (data) =>{
            
-        debugger;
+           
         ClearErrors();
 
         if(data.UserId === "" 
@@ -63,7 +63,7 @@ const Validator = (function(){
     const ProductValidation = function(data)
     {
         ClearErrors();  
-        debugger;
+           
         const {ProductName, Price, Stock, Manufacturer, ExpairyDate} = data;
 
         if(ProductName === "" 
@@ -87,7 +87,7 @@ const Validator = (function(){
 
     const CustomerValidation = function(customerDetails, orderDetails)
     {
-        debugger;
+           
         this.ClearErrors();
         const {OrderId} = orderDetails;
         const {CustomerName, PhoneNumber } = customerDetails;
@@ -119,7 +119,7 @@ const Validator = (function(){
 
     const DealerValidation = function(dealerDetails, orderDetails)
     {
-        debugger;
+           
         this.ClearErrors();
         const {OrderId} = orderDetails;
         const {CompanyName, DealerName, PhoneNumber } = dealerDetails;
@@ -160,7 +160,7 @@ const Validator = (function(){
 
     const PaymentDetailsValidation = function(transactionDetails, paymentDetails, orderDetails){
 
-        debugger;
+           
         this.ClearErrors();
         if(transactionDetails.CustomerId.length === 0)
         {
@@ -184,7 +184,7 @@ const Validator = (function(){
 
     const DuePaymentValidation = function(transactionDetails){
 
-        debugger;
+           
         this.ClearErrors();
         if(transactionDetails.DueOrders.length === 0)
         {

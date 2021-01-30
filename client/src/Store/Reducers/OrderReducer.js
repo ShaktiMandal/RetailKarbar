@@ -44,7 +44,7 @@ const OrderReducer = (state=InitialState, action) =>{
             }
         case DISPLAYORDERITEM:
             {
-                debugger;
+                   
                 return{
                     ...state,
                     IsCartItemDispayed: true
@@ -52,7 +52,7 @@ const OrderReducer = (state=InitialState, action) =>{
             }
         case CLEARORDERLIST:
             {
-                debugger;
+                   
                 return{
                     ...state,
                     OrderItems: [],

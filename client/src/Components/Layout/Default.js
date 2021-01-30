@@ -3,7 +3,7 @@ import classes from './default.module.css'
 
 const Default = (props) => {
 
-    debugger;
+       
     console.log("Default view called");
     return (
         <React.Fragment>

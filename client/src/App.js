@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import {Route, Switch} from 'react-router-dom';
 import Layout from './Components/Layout/Layout';
 import LogIn from './Components/Authentication/LogIn/LogInAuth';
+import NotFound from './Components/Authentication/LogIn/NotFound';
 import Register from './Components/Authentication/Register/RegisterAuth';
 import ResetPassword from './Components/Authentication/Password/PasswordAuth';
 import Home from './Components/Product/Product';
@@ -40,6 +41,7 @@ import SideBar from './Containers/ToolBar/SideBar/SideBar';
 import Navbar from './Containers/ToolBar/Navbar/Navbar';
 import CartImage from '../src/Assests/Logo/shopping-cart-white.png';
 import LogoImg from '../src/Assests/Logo/MyLogo.png';
+import { resolve } from 'path';
 
 
 class App extends Component {
@@ -55,7 +57,10 @@ class App extends Component {
   componentDidMount()
   {
     debugger;
-    this.props.OnLoadPage();   
+    console.log("current location", this.props.history);   
+    this.props.OnLoadPage().then(()=> {
+      // this.props.history.push(window.location.pathname);
+    });
   }
 
   OnLogIn = (event) => {
@@ -80,7 +85,7 @@ class App extends Component {
     event.preventDefault();
     console.log(event.target.value);
     var routePath = this.props.location.pathname;
-    debugger;
+       
     switch(routePath)
     {
       case '/Product/Search':
@@ -97,14 +102,14 @@ class App extends Component {
   }
 
   OnShowCartItem = (event) => {
-    debugger;
+       
     this.props.ClearProductList();
     this.props.ShowYourCartItem();
     this.props.history.push('/Customer/Cart'); 
   }
 
   OnRedirect = (path) =>{
-    debugger;    
+           
     switch(path)
     {
       case '/Product/OrderProduct' :
@@ -158,7 +163,7 @@ class App extends Component {
 
   OnReturnHome = (event) =>
   {
-    debugger;
+       
     event.preventDefault();
     this.props.history.push("/");
   }
@@ -177,6 +182,7 @@ class App extends Component {
       placeHolderText = "Enter Customer Name"
     }
 
+    debugger;
     let isSearchRoute = (this.props.location.pathname === "/Product/Search" 
                      || this.props.location.pathname === '/Customer/Customers');
                     
@@ -214,7 +220,7 @@ class App extends Component {
                 <div>
                   <Button
                     OnClick = { this.props.isUserLoggedIn ? this.OnLogOut : this.OnLogIn}
-                    Value= { this.props.isUserLoggedIn ? "Log Out" : null }
+                    Value= { this.props.isUserLoggedIn ? "Log Out" : ""}
                     ButtonType= "button"
                     ButtonStyle ={{   
                       float: 'right',
@@ -246,22 +252,25 @@ class App extends Component {
               </div>  
 
               <div className={classes.MainContent}>                
-                  {                    
+                  {            
                     this.props.isUserLoggedIn ?               
-                    <switch>  
+                    <Switch>  
                       <Route path="/Home"   exact component={Home}/>
                       <Route path="/Product/Search" exact component={Search}/>
                       <Route path="/Customer/CustomerDetails" exact component={CustomerDetails}/>
                       <Route path="/Product/AddProduct" exact component={AddProduct}/>
                       <Route path="/Customer/Customers" exact component={Customers}/>
                       <Route path="/Customer/Cart" exatc component ={CartOrders}/>
-                      <Route path="/Product/Products" exact component={Products}/>                        
-                    </switch> : 
-                    <switch>  
+                      <Route path="/Product/Products" exact component={Products}/>  
+                      <Route path="/" component={NotFound} />                      
+                    </Switch> : 
+                    <Switch>  
+                        <Route path = '/' exact component={LogIn}/>
                         <Route path="/Authentication/Register" exact component={Register} />
                         <Route path="/Authentication/Password" exact component={ResetPassword}/>
-                        <Route path = '/' exact component={LogIn}/>
-                    </switch>                     
+                        <Route path="/" component={NotFound} />                       
+                          
+                    </Switch>                     
                   }
               </div>
             </div>   
@@ -276,6 +285,7 @@ class App extends Component {
 const mapStateToProps = (state) => {
   return {
       isUserLoggedIn : state.AuthReducer.IsUserLoggedIn,
+      isInvalidUrl : state.AuthReducer.IsInvalidUrl,
       totalProductCount: state.OrderReducer.NoOfProducts
   }
 }
@@ -301,7 +311,8 @@ App.propTypes = {
   ClearProductList: PropTypes.func.isRequired,
   ClearOrderList  : PropTypes.func.isRequired,
   isUserLoggedIn: PropTypes.bool.isRequired,
-  selectedNavigationPath : PropTypes.bool.isRequired
+  isInvalidUrl: PropTypes.bool,
+  selectedNavigationPath : PropTypes.bool
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(App));

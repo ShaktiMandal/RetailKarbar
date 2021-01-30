@@ -17,7 +17,7 @@ export const UpdateDuePayment = (paymentDetails) => async(dispatch) =>{
     const response =  await fetch("http://localhost:5000/Customer/UpdateDuePayment", requestData);
     const responseData = await response.json();
 
-    debugger;
+       
     if(responseData.Success)
     {
         ResetPaymentDetails();
@@ -50,7 +50,7 @@ export const ResetPaymentDetails =  () => async disptach =>{
 
 export const AddPaymentValidation =  (error) => async disptach => {
 
-    debugger;
+       
     disptach({
         type: ActionTypes.VALIDATION_ERROR,
         payload: {

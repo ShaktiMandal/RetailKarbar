@@ -36,7 +36,7 @@ const ProductReducer = (state = initialState, action) =>{
             }
         case ActionTypes.FETCH_PRODUCTS:
             {
-                debugger;
+                   
                 return {
                     ...state,
                     IsProductSearched: true,
@@ -46,7 +46,7 @@ const ProductReducer = (state = initialState, action) =>{
             }
         case ActionTypes.ADD_FAVOURITE_DONE:
             {
-                debugger;
+                   
                 return {
                     ...state,
                     IsFavouriteAdded: payload.Success
@@ -77,7 +77,7 @@ const ProductReducer = (state = initialState, action) =>{
             }
         case ActionTypes.LOADING:
             {    
-                debugger;        
+                           
                     return {
                         ...state,
                         IsShowLoading : payload.DisplayLoading,
@@ -88,7 +88,7 @@ const ProductReducer = (state = initialState, action) =>{
 
             case ActionTypes.UNAUTHORIZED:
             {    
-                debugger;        
+                           
                     return {
                         ...state,
                         IsUserUnAuthorized: true,

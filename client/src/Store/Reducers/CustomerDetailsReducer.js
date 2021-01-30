@@ -70,7 +70,7 @@ const CustomerDetailsReducer = (state = initialState, action) =>{
             }
         case ActionTypes.EXISTINGCUSTOMER:
             {
-                debugger;
+                   
                 return{
                     ...state,
                     CustomerDetails: {
@@ -86,7 +86,7 @@ const CustomerDetailsReducer = (state = initialState, action) =>{
             }        
         case ActionTypes.CLEARERROR:
             {         
-                debugger;       
+                          
                 return{
                     ...state,
                     CustomerDetails : {
@@ -112,7 +112,7 @@ const CustomerDetailsReducer = (state = initialState, action) =>{
             }
         case ActionTypes.CLEARMSG:
             {
-                debugger;
+                   
                 return {
                     ...state,
                     CustomerDetails : {
@@ -145,7 +145,7 @@ const CustomerDetailsReducer = (state = initialState, action) =>{
             }
         case ActionTypes.RESETTRANSACTIONDETAILS:
             {
-                debugger;
+                   
                return {                
                 ...state,
                 CustomerDetails : {
@@ -173,7 +173,7 @@ const CustomerDetailsReducer = (state = initialState, action) =>{
             }
         case ActionTypes.ADDDEALER:
         {
-            debugger;
+               
             return {
             
                 ...state,
@@ -191,7 +191,7 @@ const CustomerDetailsReducer = (state = initialState, action) =>{
         }
         case ActionTypes.ADDDEALERFAILED:
         {
-            debugger;
+               
             return {
             
                 ...state,                   
@@ -202,7 +202,7 @@ const CustomerDetailsReducer = (state = initialState, action) =>{
         }
         case ActionTypes.EXISTINGDEALER:
             {
-                debugger;
+                   
                 return{
                     ...state,
                     DealerDetails: {

@@ -22,7 +22,7 @@ class Products extends Component
 
     componentDidMount()
     {
-        debugger;        
+                   
     }
 
     OnAddWholesaler = (event) =>{

@@ -17,7 +17,7 @@ const RegisterReducer = (state = initialState, action) =>{
     {
         case actionTypes.USER_REGISTER:
             {       
-                debugger;        
+                           
                 return{
                     ...state,                                    
                     UserData: payload,

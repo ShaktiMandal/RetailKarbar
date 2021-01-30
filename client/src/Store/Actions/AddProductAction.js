@@ -78,7 +78,7 @@ export const WindowClosed = () => async (dispatch) =>{
 
 export const ClearError = (isError, customerData) => (dispatch) =>{
 
-    debugger;
+       
    isError ?  dispatch({
         type: ADDPRODUCT_CLEARERROR           
     })

@@ -2,7 +2,7 @@ import React from 'react';
 import classes from './Receipt.module.css'
 
 const Receipt = (props) => {    
-    debugger;
+       
     return (
         <React.Fragment>
             <div id={props.id} ref={props.reference} className ={classes.PrintContainer}>

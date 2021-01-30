@@ -13,7 +13,7 @@ import CloseButton from "../../Containers/ToolBar/FormCloseButton/FormCloseButto
 
 const PaymentDetails = (props) => {
 
-    debugger;
+       
     let totalDebitAmount = 0.00;
     var PaymentType = props.IsPaymentSuccessful ? SuccessTransaction 
         : props.PaymentType === "Cash"
@@ -39,7 +39,7 @@ const PaymentDetails = (props) => {
                                 {
                                     return;
                                 }
-                                debugger;
+                                   
                                 totalDebitAmount = totalDebitAmount + item.DueAmount;                               
                                 return(
                                     <li className={classes.DuePaymentOrderList}>

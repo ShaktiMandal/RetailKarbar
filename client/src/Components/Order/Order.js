@@ -51,7 +51,7 @@ const CustomerOrderList = (props) => {
                         <ul className={classes.OrderListUl}>
                         {                           
                             props.listOfOrders.map( (item, index) => {
-                                debugger;
+                                   
                                 return(
                                     <li id= {"Id-" + index} className={classes.OrderListItem}>
                                         <div className = {classes.OrderListItemContainer}>                                    

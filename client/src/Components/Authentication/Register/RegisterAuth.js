@@ -35,7 +35,7 @@ class RegisterAuth extends Component{
 
     OnRegisterUser = (event) =>{
 
-        debugger;
+           
         event.preventDefault();
         var data = this.props.registerDetails;        
         Validator.FromValidation(data);
@@ -81,7 +81,7 @@ class RegisterAuth extends Component{
 
     render()
     {
-        debugger;
+           
         if(this.props.isRegisterCompleted)
         {
             this.props.history.replace('/Authentication/LogIn');

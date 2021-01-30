@@ -1,6 +1,6 @@
 
 export const GetCurrentDate = () =>{
-        debugger;
+           
 
         let formatedDate;
         let day = new Date().getDate();

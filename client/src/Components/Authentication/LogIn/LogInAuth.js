@@ -32,7 +32,7 @@ class LogInAuth extends Component {
     }
     
     OnUserLogIn = event =>{
-        debugger;
+           
         event.preventDefault();
         const {UserId, Passcode} = this.props.userCredential;
         Validator.UserIdValidation({UserId, Passcode});
@@ -79,6 +79,7 @@ class LogInAuth extends Component {
 
     render()
     {    
+        console.log("Hey, I am inside my home");
         if(this.props.isUserAuthenticated)
         {
             return (<Redirect exact to='/Home'/>)

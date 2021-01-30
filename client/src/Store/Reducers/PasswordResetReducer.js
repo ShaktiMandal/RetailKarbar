@@ -13,7 +13,7 @@ const initialState = {
 
 const PasswordResetReducer = (state = initialState, action) =>{
 
-    debugger;
+       
     const {type, payload} = action;
     switch (type)
     {        

@@ -11,7 +11,7 @@ import AnimatedText from '../../Containers/ToolBar/SearchText/SearchText';
 
 const CustomerResult = (props) => {
     
-    debugger;
+       
     if(props.IsShowLoading === true)
     {
         return( <Loading LoadingMessage="Fetching cutomers..."/> );

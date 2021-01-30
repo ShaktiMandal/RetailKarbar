@@ -4,7 +4,7 @@ import classes from './RedirectItem.module.css';
 
 
 const RedirectItem = (props) => {
-    debugger;
+       
     return(                
         <div className={classes.RedirectContainer}>
             <div className={classes.RedirectIcon} onClick ={()=> props.OnClick(props.RedirectedTo)}>

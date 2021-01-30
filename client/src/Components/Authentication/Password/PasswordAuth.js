@@ -76,7 +76,7 @@ class ResetPassword extends Component{
 
     render()
     {
-        debugger;
+           
         if(this.props.isPasswordReSet)
         {
             this.props.history.replace('/Authentication/LogIn');

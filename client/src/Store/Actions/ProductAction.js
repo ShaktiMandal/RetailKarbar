@@ -19,7 +19,7 @@ export const ChooseAddProduct = (props) => (dispatch) =>
 }
 
 export const FetchProductDetails = (requestDetails) => async (dispatch) => {
-    debugger;
+       
     let response;
     try{
         let fetchRequest = {
@@ -71,7 +71,7 @@ export const FetchProductDetails = (requestDetails) => async (dispatch) => {
                 DisplayLoading : false
             }
         }); 
-        debugger;
+           
         if(response.status === 401)
         {
             dispatch({

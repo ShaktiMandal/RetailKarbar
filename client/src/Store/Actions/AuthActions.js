@@ -13,7 +13,7 @@ import {
 import fetch from 'node-fetch';
 
 export const UserLogIn = (data) => async dispatch => {
-    debugger;
+    
     try{
         var {UserId, Passcode} = data; 
         var headerOptions = {
@@ -139,7 +139,7 @@ export const UserLogOut = () => async dispatch => {
 }
 
 export const NavigationMenuSelection = (navigationPath) => dispatch => {
-    debugger;
+       
     switch(navigationPath)
     {
         case "/Product/OrderProduct" :
@@ -187,7 +187,7 @@ export const NavigationMenuSelection = (navigationPath) => dispatch => {
 
 export const OnLoadPage = () => async dispatch => {
 
-    debugger;
+    
     var request = {
 
         method: 'GET',
@@ -198,23 +198,25 @@ export const OnLoadPage = () => async dispatch => {
             'Authorization': null
            }        
     }
-
+    
     const responseData = await fetch('http://localhost:5000/', request);
     const response = await responseData.json();
-    debugger; 
+        
     var HeaderItems = {};
-    var headers = responseData.headers.entries();
     for(var pair of responseData.headers)
     {
         console.log("Printing Header", pair);
         HeaderItems[pair[0]] = pair[1]; 
     }
-    debugger;
+       
     if(HeaderItems['is-userloggedin'] !== undefined 
        && HeaderItems['is-userloggedin'] === "true")
     {        
         dispatch({
-            type:AUTHENTICATION_SUCCESS           
+            type:AUTHENTICATION_SUCCESS, 
+            payload :{
+                IsInvalidUrl : response.IsInvalidUrl
+            }         
         })
 
         dispatch({
@@ -223,7 +225,10 @@ export const OnLoadPage = () => async dispatch => {
     }
     else{
         dispatch({
-            type: USER_LOGOUT
+            type: USER_LOGOUT,
+            payload :{
+                IsInvalidUrl : response.IsInvalidUrl
+            } 
         })
     }
 }

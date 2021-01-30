@@ -20,7 +20,7 @@ class AddProduct extends Component{
 
     componentDidMount()
     {
-        debugger;
+           
         this.props.FetchProductDetails("");
     }
 
@@ -45,7 +45,7 @@ class AddProduct extends Component{
 
     OnValueChange = (event) =>{
 
-        debugger;
+           
         event.preventDefault();
           
 
@@ -66,7 +66,7 @@ class AddProduct extends Component{
                     {
                         if(item.ProductName === event.target.value)
                         {
-                            debugger;
+                               
                         data.Price = item.Price;
                         data.Stock = item.Stock;
                         data.ExpairyDate = item.ExpairyDate.slice(0, item.ExpairyDate.indexOf("T"));
@@ -118,7 +118,7 @@ class AddProduct extends Component{
 
      OnSelect(event){
 
-        debugger;
+           
         let data = event;
     }
 

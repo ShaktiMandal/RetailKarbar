@@ -49,22 +49,17 @@ App.use('*', function Authentication(req,res,next){
     res.header("Access-Control-Expose-Headers", "Is-UserloggedIn");    
     if(req.isAuthenticated())
     {   
+        console.log("this user is authorized");
+        console.log("thid is param request", req.params);
         res.setHeader("Is-UserloggedIn","true");
         next();
     }
     else
     {
+        console.log("this user is unauthorized");
+        console.log("thid is param request", req.params);
         res.setHeader("Is-UserloggedIn","false");       
-        if(!req.params[0].includes('Authentication'))
-        {
-            // return res.status(401).send({
-            //     Success: false
-            // });
-            res.redirect('/');
-        }   
-        // else{
-        //     next();
-        // }   
+        next();
     }
 });
 
@@ -74,6 +69,11 @@ App.use('/Authentication/RegisterUser', Registration);
 App.use('/Product' , Product);
 App.use('/Customer' , Customer);
 App.use('/Dealer' , Dealer);
+App.use('/', (req, res) => {
+    res.status(200).send({
+        IsAnInvalidUrl: true
+    })
+});
 
 App.listen(port, async function ConnectDB(){
     return await mongoose.connect(process.env.MONGO_URI).then(result =>{

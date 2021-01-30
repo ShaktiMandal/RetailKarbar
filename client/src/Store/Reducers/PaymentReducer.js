@@ -25,7 +25,7 @@ const PaymentReducer = (state = initialState, action ) => {
     {
         case ActionTypes.PAYMENT_SUCCESSFULLY:
             {
-                debugger;
+                   
                 return{
                     ...state,
                     Success: payload.Success,
@@ -59,7 +59,7 @@ const PaymentReducer = (state = initialState, action ) => {
         }
         case ActionTypes.VALIDATION_ERROR:
             {
-                debugger;
+                   
                 return {
                     ...state,
                     ErrorOnPayment: payload.Error

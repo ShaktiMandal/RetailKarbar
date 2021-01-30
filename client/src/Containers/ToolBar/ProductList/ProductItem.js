@@ -5,7 +5,7 @@ import classes from './ProductItem.module.css'
 const ProductItem = (props) => {
 
     let expDate = GetFormatedExpDate(props.ExpairyDate);
-    debugger;
+       
 
 
     return(
@@ -48,7 +48,7 @@ const ProductItem = (props) => {
 
 function GetFormatedExpDate(expDate)
 {
-    debugger;
+       
     let dateLength = expDate.indexOf("T");
     let dateAlone = expDate.slice(0, dateLength);
     
