@@ -22,7 +22,12 @@ const port =  process.env.PORT || 5000;
 
 App.use(bodyParser.urlencoded({extended: false}));
 App.use(bodyParser.json());
-App.use(express.static(path.join(__dirname, 'public')));
+if (process.env.NODE_ENV === "production") {
+    App.use(express.static("client/build"));
+  }
+  else {
+    App.use(express.static(path.join(__dirname, '/client/public')));
+  }
 App.use(Cors({
     origin: true,
     credentials: true
@@ -70,9 +75,7 @@ App.use('/Product' , Product);
 App.use('/Customer' , Customer);
 App.use('/Dealer' , Dealer);
 App.use('/', (req, res) => {
-    res.status(200).send({
-        IsAnInvalidUrl: true
-    })
+   res.status(200).send({InvalidUrl: true});
 });
 
 App.listen(port, async function ConnectDB(){

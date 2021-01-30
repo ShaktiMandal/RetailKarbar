@@ -25,8 +25,8 @@
     "start": "node Server.js",
     "server": "nodemon Server.js",
     "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client \"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "dev": "concurrently \"npm run server\" \"npm run client \"",   
+    "heroku-postbuild": "cd client && npm install && npm run build"
   },
   "author": "Shakti Mandal",
   "license": "ISC"
