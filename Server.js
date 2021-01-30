@@ -75,7 +75,7 @@ App.use('/Product' , Product);
 App.use('/Customer' , Customer);
 App.use('/Dealer' , Dealer);
 App.use('/', (req, res) => {
-   res.status(200).send({InvalidUrl: true});
+   res.status(200).sendFile(path.join(__dirname, './client/build/index.html'));
 });
 
 App.listen(port, async function ConnectDB(){
