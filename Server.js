@@ -19,7 +19,7 @@ require('dotenv').config();
 const App   = express();
 const port =  process.env.PORT || 5000;
 
-
+App.enable("trust proxy");
 App.use(bodyParser.urlencoded({extended: false}));
 App.use(bodyParser.json());
 if (process.env.NODE_ENV === "production") {
@@ -36,7 +36,7 @@ App.use(session({
     name:"application_session",
     resave: false,
     saveUninitialized: false,
-    secret: '12eghdjfksdjf34r32423ekasjdnkasjd',
+    secret: '12eghdjfksdjf34r32423ekasjdnkasjd',    
     store: new MongoStore({
         mongooseConnection: mongoose.connection
     }),
