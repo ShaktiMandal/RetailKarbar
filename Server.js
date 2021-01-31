@@ -40,6 +40,7 @@ App.use(session({
     store: new MongoStore({
         mongooseConnection: mongoose.connection
     }),
+    proxy: true,
     cookie: {
         httpOnly: false,
         maxAge: 1000 * 500,
