@@ -19,7 +19,7 @@ require('dotenv').config();
 const App   = express();
 const port =  process.env.PORT || 5000;
 
-App.enable("trust proxy", true);
+App.enable("trust proxy");
 App.use(bodyParser.urlencoded({extended: false}));
 App.use(bodyParser.json());
 if (process.env.NODE_ENV === "production") {
