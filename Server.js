@@ -19,7 +19,7 @@ require('dotenv').config();
 const App   = express();
 const port =  process.env.PORT || 5000;
 
-App.enable("trust proxy");
+App.enable("trust proxy", true);
 App.use(bodyParser.urlencoded({extended: false}));
 App.use(bodyParser.json());
 if (process.env.NODE_ENV === "production") {
@@ -36,15 +36,16 @@ App.use(session({
     name:"application_session",
     resave: false,
     saveUninitialized: false,
-    secret: '12eghdjfksdjf34r32423ekasjdnkasjd',    
+    secret: '12eghdjfksdjf34r32423ekasjdnkasjd',  
+    proxy: true,
     store: new MongoStore({
         mongooseConnection: mongoose.connection
     }),
-    proxy: true,
     cookie: {
-        httpOnly: false,
+        httpOnly: true,
+        secure: true,
         maxAge: 1000 * 500,
-        secure : process.env.NODE_ENV  === 'production'
+       // secure : process.env.NODE_ENV  === 'production'
     }
 }));
 App.use(passport.initialize());
@@ -76,6 +77,7 @@ App.use('/Product' , Product);
 App.use('/Customer' , Customer);
 App.use('/Dealer' , Dealer);
 App.use('/', (req, res) => {
+    console.log("Print Session Id", req.sessionID);
    res.status(200).sendFile(path.join(__dirname, './client/build/index.html'));
 });
 
