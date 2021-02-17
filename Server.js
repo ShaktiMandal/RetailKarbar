@@ -14,16 +14,17 @@ const Passport = require('passport');
 const passport = require("passport");
 const MongoStore = require('connect-mongo')(session);
 const Cors = require('cors');
+const { SlowBuffer } = require("buffer");
 require('dotenv').config();
 
 const App   = express();
 const port =  process.env.PORT || 5000;
-
-App.enable("trust proxy");
+console.log("Is this from production", process.env.NODE_ENV);
 App.use(bodyParser.urlencoded({extended: false}));
 App.use(bodyParser.json());
 if (process.env.NODE_ENV === "production") {
     App.use(express.static("client/build"));
+    App.enable("trust proxy", 1);
   }
   else {
     App.use(express.static(path.join(__dirname, '/client/public')));
@@ -43,9 +44,10 @@ App.use(session({
     }),
     cookie: {
         httpOnly: true,
-        secure: true,
-        maxAge: 1000 * 500,
-       // secure : process.env.NODE_ENV  === 'production'
+        sameSite: "none",
+        secure: process.env.NODE_ENV  === 'production',
+        maxAge: 1000 * 500
+        
     }
 }));
 App.use(passport.initialize());
@@ -56,6 +58,7 @@ App.use('*', function Authentication(req,res,next){
     res.header("Access-Control-Expose-Headers", "Is-UserloggedIn");    
     if(req.isAuthenticated())
     {   
+        console.log("Print Session Id", req.sessionID);
         console.log("this user is authorized");
         console.log("thid is param request", req.params);
         res.setHeader("Is-UserloggedIn","true");
@@ -63,6 +66,7 @@ App.use('*', function Authentication(req,res,next){
     }
     else
     {
+       // console.log("Print Session Id", req.sessionID);
         console.log("this user is unauthorized");
         console.log("thid is param request", req.params);
         res.setHeader("Is-UserloggedIn","false");       
@@ -78,7 +82,14 @@ App.use('/Customer' , Customer);
 App.use('/Dealer' , Dealer);
 App.use('/', (req, res) => {
     console.log("Print Session Id", req.sessionID);
-   res.status(200).sendFile(path.join(__dirname, './client/build/index.html'));
+    if (process.env.NODE_ENV === "production")
+    {
+        res.status(200).sendFile(path.join(__dirname, './client/build/index.html'));
+    }
+    else
+    {
+        res.status(200).sendFile(path.join(__dirname, './client/public/index.html'));
+    }
 });
 
 App.listen(port, async function ConnectDB(){
