@@ -46,10 +46,10 @@
 
 .logInform
 {
-    width: 350px;
+    width: 90%;
     height: 400px;
     display: grid;
-    grid-template-rows: 20% 20% 20% 10% 10%;
+    grid-template-rows: 10% 20% 20% 20% 10%;
     margin: auto;
     text-align: center;
     color: white;
@@ -94,8 +94,7 @@
 
 .inputdiv input
 {
-    width: 80%;    
-    margin-bottom: 15px;
+    width: 80%;
     padding:10px 0;
     outline: none;
     border: none;
@@ -108,7 +107,7 @@
 {
     top: 0px;
     left: 0px;
-    margin:0px 30px;
+    margin:0px 10%;
     padding: 0px; 
     transition: 0.5s;
     position: absolute;
@@ -225,14 +224,47 @@ input[type=number] {
         box-shadow: 20px 5px 20px 0px;
     }
 
-    .DisplayImage
-    {
-        display: none;
+    .logInform
+    {  
+        width: 60%;        
+    }
+}
+
+@media (max-width: 650px)
+{
+    .logInform
+    {  
+        width: 80%;        
+    }
+}
+
+@media (max-width: 400px)
+{
+    .logInform
+    {  
+        width: 90%;        
     }
 
+    .logInform div
+    {
+        width: 90%;
+    }
+
+    .HyperLinkItem
+    {
+        display: block;      
+        padding: 10px
+    }
+
+    .SignUpLink{
+        border-right:none;
+    }
+}
+
+@media (min-width: 800px)
+{
     .logInform
-    {       
-        max-width: 60%; 
-        width: 80%;        
+    {  
+        width: 70%;        
     }
 }

@@ -116,9 +116,8 @@ class CustomerDetails extends Component {
 
         let paymentDetails = this.props.paymentDetails;
 
-           
         switch(event.target.id)
-        {            
+        {  
             case "givenCash":
             {
                 this.props.paymentDetails.GivenAmount = event.target.value;
@@ -129,12 +128,7 @@ class CustomerDetails extends Component {
                 }
                 
                 break; 
-            }
-            // case "changeAmount":
-            // {
-            //     paymentDetails.ChangeAmount = event.target.value;
-            //     break;
-            // }
+            }          
             case "cardNumber":
             {
                 paymentDetails.CardNumber = event.target.value;
@@ -270,8 +264,8 @@ class CustomerDetails extends Component {
         this.props.history.push('/Customer/Customers');
     }
 
-    OnCloseClick = (event) =>{      
-             
+    OnCloseClick = (event) =>{ 
+        this.props.ResetTransactionDetails();
         this.props.history.push('/Product/Search');
     }
 
@@ -282,6 +276,7 @@ class CustomerDetails extends Component {
 
     render()
     {
+    
         var PaymentType = this.props.isPaymentSuccessful ? SuccessTransaction 
                                                          : this.props.paymentDetails.PaymentType === "Cash"
                                                          ? CashFrom : CardFrom;
@@ -308,8 +303,7 @@ class CustomerDetails extends Component {
         </div> : null;
        
         return (
-            <Aux>
-                {ReceiptElement}
+            <Aux>    
                 <div className={classes.CustomerAndPayment}>
                     <div className={classes.CustomerArea}>   
                         <div className={classes.CloseBtnDiv}>
@@ -426,6 +420,7 @@ class CustomerDetails extends Component {
                        </div>
                        <div className={classes.PaymentDetails}>
                            <PaymentType
+                           OnReturnHome={this.OnCloseClick}
                            TransactionImage={TransactionImage}
                            OnValueChange ={ this.OnPaymentValueChange}
                            GivenCash ={this.props.paymentDetails.GivenAmount}
@@ -438,8 +433,7 @@ class CustomerDetails extends Component {
                            CVVNumber = {this.props.paymentDetails.CVVNumber} 
                            ExpairyDate = {this.props.paymentDetails.ExpairyDate}
                            OnPayment ={ this.OnPayment}
-                           OnClick = {this.OnMainMenu}
-                           OnReturnHome = {this.OnReturnHome}
+                           OnClick = {this.OnMainMenu}                        
                            Caption = "Main Menu"
                            Message = "Transaction Successful"
                            ButtonType = "button"

@@ -56,7 +56,18 @@ class Customers extends Component
 
     OnReturnOrder = (index) =>
     {
-      
+        this.props.ResetPaymentDetails();
+        this.props.ResetOrderHistory();   
+
+        this.setState({
+            IsCustomerSelectionDisplay: true,
+            ChosenOption: "",
+            TotalDueAmtToPay: 0.00,
+            FilteredOrderItems : [],
+            SelectedPayableItem: []
+        });
+
+        this.props.history.push('/Customer/Customers');
     }
 
     OnCloseErrorPanel = (event) =>{
@@ -250,6 +261,7 @@ class Customers extends Component
                     OnPaymentValueChange = {this.OnPaymentValueChange}
                     OnPayment = {this.OnPayment}
                     OnMainMenu = {this.OnMainMenu}
+                    OnReturnHome = {this.OnReturnOrder}
                     OnDueOrderDetails = {this.OnDueOrderDetails}
                     CloseErrorPanel = {this.OnCloseErrorPanel}
                     OnCloseClick    = {this.OnCloseClick}
@@ -289,20 +301,15 @@ class Customers extends Component
         {            
             case "givenCash":
             {
-                console.log("Type of given amount", typeof(event.target.value));
+                var givenCash = event.target.value.length > 0 ? parseInt(event.target.value) : 0;
                 this.setState({
-                    GivenAmount: parseInt(event.target.value),
+                    GivenAmount: givenCash,
                     ChangeAmount: this.props.listOfOrders.reduce((accumulator, currentvalue) => {
                         return accumulator + currentvalue.DueAmount
-                    }, 0.00).toFixed(2) - parseInt(event.target.value)
+                    }, 0.00).toFixed(2) - givenCash
                 })               
                 break; 
-            }
-            case "changeAmount":
-            {
-                this.setState({ChangeAmount:  parseInt(event.target.id)});
-                break;
-            }
+            }            
             default:
                 break;
         }

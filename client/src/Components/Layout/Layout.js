@@ -36,11 +36,7 @@ class Layout extends Component {
     OnClickContainer = (event) =>{
         console.log("Container clicked");
     }
-
-    componentDidMount()
-    {
-        alert("Component did mount");
-    }
+    
     render()
     {
         console.log("Hamburger clicked", this.state.isSideBarDisplay );

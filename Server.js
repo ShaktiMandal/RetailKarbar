@@ -42,12 +42,11 @@ App.use(session({
     store: new MongoStore({
         mongooseConnection: mongoose.connection
     }),
+    
     cookie: {
         httpOnly: true,
-        sameSite: "none",
-        secure: process.env.NODE_ENV  === 'production',
-        maxAge: 1000 * 500
-        
+        sameSite: "strict",        
+        maxAge: 120000       
     }
 }));
 App.use(passport.initialize());
@@ -66,7 +65,6 @@ App.use('*', function Authentication(req,res,next){
     }
     else
     {
-       // console.log("Print Session Id", req.sessionID);
         console.log("this user is unauthorized");
         console.log("thid is param request", req.params);
         res.setHeader("Is-UserloggedIn","false");       

@@ -1,5 +1,5 @@
 import React from 'react';
-import classes from './ResetPassword.module.css';
+import classes from '../LogIn/LogInScreen.module.css';
 import AvatarImage from '../../../Assests/Logo/Avatar.png';
 import Input from "../../../Containers/ToolBar/Input/Input";
 
