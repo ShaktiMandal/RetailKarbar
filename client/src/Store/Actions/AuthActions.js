@@ -15,6 +15,9 @@ import fetch from 'node-fetch';
 export const UserLogIn = (data) => async dispatch => {
     
     try{
+        
+        var serverPort = process.env.PORT;
+        console.log("Currently port is", serverPort);
         var {UserId, Passcode} = data; 
         var headerOptions = {
 
