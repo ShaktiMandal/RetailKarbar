@@ -17,7 +17,7 @@ export const UserLogIn = (data) => async dispatch => {
     try{
         
         var serverPort = process.env.PORT;
-        console.log("Currently port is", serverPort);
+        console.log("Currently port is", process.env);
         var {UserId, Passcode} = data; 
         var headerOptions = {
 

@@ -20,6 +20,7 @@ require('dotenv').config();
 const App   = express();
 const port =  process.env.PORT || 5000;
 console.log("Is this from production", process.env.NODE_ENV);
+console.log("Is this from Port", process.env.PORT);
 App.use(bodyParser.urlencoded({extended: false}));
 App.use(bodyParser.json());
 if (process.env.NODE_ENV === "production") {
