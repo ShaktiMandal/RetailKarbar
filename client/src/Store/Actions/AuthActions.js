@@ -16,6 +16,7 @@ export const UserLogIn = (data) => async dispatch => {
     
     try{
         
+        var response ;
         var serverPort = process.env.PORT;
         console.log("Currently port is", process.env);
         var {UserId, Passcode} = data; 
@@ -31,7 +32,15 @@ export const UserLogIn = (data) => async dispatch => {
             body: JSON.stringify({ UserId:UserId, Passcode: Passcode })
         }
         
-        var response = await fetch('http://localhost:5000/Authentication/User/LogIn', headerOptions);
+        if(process.env.NODE_ENV === 'production')
+        {
+            response = await fetch('/Authentication/User', headerOptions);
+        }
+        else
+        {
+            response = await fetch('http://localhost:5000/Authentication/User/LogIn', headerOptions);
+        }
+        
         if(response === undefined)
         {
             dispatch({
