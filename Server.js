@@ -25,9 +25,11 @@ App.use(bodyParser.json());
 if (process.env.NODE_ENV === "production") {
     App.use(express.static("client/build"));
     App.enable("trust proxy", 1);
+    console.log("I am running in production");
   }
   else {
     App.use(express.static(path.join(__dirname, '/client/public')));
+    console.log("I am running in development");
   }
 App.use(Cors({
     origin: true,
