@@ -34,7 +34,7 @@ export const UserLogIn = (data) => async dispatch => {
         
         if(process.env.NODE_ENV === 'production')
         {
-            response = await fetch('/Authentication/User', headerOptions);
+            response = await fetch('/Authentication/User/LogIn', headerOptions);
         }
         else
         {
