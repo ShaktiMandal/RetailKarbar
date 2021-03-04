@@ -32,7 +32,7 @@ export const GetCustomerDetails = (customer) =>async  (dispatch)=> {
     };
 
     console.log("Selected customer", customer);
-
+    debugger;
     let searchParams = {
         'Customer': customer
     }
@@ -49,9 +49,10 @@ export const GetCustomerDetails = (customer) =>async  (dispatch)=> {
         }
     });
 
+    debugger;
     if(process.env.NODE_ENV === 'production')
     {
-        response = await fetch("Customer/GetCustomers?" + query, request);
+        response = await fetch("/Customer/GetCustomers?" + query, request);
     }
     else{
         response = await fetch("http://localhost:5000/Customer/GetCustomers?" + query, request);
@@ -174,7 +175,7 @@ export const GetOrderDetails = (customerId) => async dispatch =>{
 
         if(process.env.NODE_ENV === 'production')
         {
-            response = await fetch('Customer/GetCustomerOrders?' + query, request);
+            response = await fetch('/Customer/GetCustomerOrders?' + query, request);
         }
         else
         {
