@@ -16,9 +16,7 @@ export const UserLogIn = (data) => async dispatch => {
     
     try{
         
-        var response ;
-        var serverPort = process.env.PORT;
-        console.log("Currently port is", process.env);
+        var response ;  
         var {UserId, Passcode} = data; 
         var headerOptions = {
 
@@ -123,6 +121,7 @@ export const LogInWindowClose = () => dispatch => {
 
 export const UserLogOut = () => async dispatch => {
 
+    var response;
     var headerOptions = {
 
         method: 'POST',
@@ -134,7 +133,15 @@ export const UserLogOut = () => async dispatch => {
            }
     }
 
-    var response = await fetch('http://localhost:5000/Authentication/User/LogOut', headerOptions);
+    if(process.env.NODE_ENV === 'production')
+    {
+        response = await fetch('/Authentication/User/LogOut', headerOptions);
+    }
+    else
+    {
+        response = await fetch('http://localhost:5000/Authentication/User/LogOut', headerOptions);
+    }
+    
     var responseData = await response.json();
 
     if(responseData.Success)
@@ -199,7 +206,7 @@ export const NavigationMenuSelection = (navigationPath) => dispatch => {
 
 export const OnLoadPage = () => async dispatch => {
 
-    
+    var responseData;
     var request = {
 
         method: 'GET',
@@ -211,7 +218,15 @@ export const OnLoadPage = () => async dispatch => {
            }        
     }
     
-    const responseData = await fetch('http://localhost:5000/', request);
+    if(process.env.NODE_ENV === 'production')
+    {
+        responseData  = await fetch('/', request);
+    }
+    else
+    {
+        responseData = await fetch('http://localhost:5000/', request);
+    }
+    
     const response = await responseData.json();
         
     var HeaderItems = {};

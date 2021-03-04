@@ -3,6 +3,7 @@ import fetch from 'node-fetch';
 
 export const UpdateDuePayment = (paymentDetails) => async(dispatch) =>{
 
+    var response;
     let requestData = {
         method: 'PUT',
         credentials: 'include',
@@ -14,7 +15,14 @@ export const UpdateDuePayment = (paymentDetails) => async(dispatch) =>{
         body: JSON.stringify(paymentDetails)
     }
 
-    const response =  await fetch("http://localhost:5000/Customer/UpdateDuePayment", requestData);
+    if(process.env.NODE_ENV === 'production')
+    {
+        response = await fetch('Customer/UpdateDuePayment', requestData);
+    }
+    else
+    {
+        response = await fetch("http://localhost:5000/Customer/UpdateDuePayment", requestData);
+    }
     const responseData = await response.json();
 
        

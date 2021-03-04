@@ -272,7 +272,7 @@
   .ContentAreaOpened
   {  
     display: grid;
-    grid-template-columns: 10% 80% 10%;
+    grid-template-columns: 10% 90%;
     overflow: hidden;
   }
 
@@ -288,6 +288,13 @@
   .Topbar
   {    
     grid-template-columns: 10%  50% 20%;
+  }
+
+  .LayoutDiv
+  {
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 15% 75% 10%;
   }
 }
 

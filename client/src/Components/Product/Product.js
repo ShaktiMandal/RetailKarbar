@@ -14,19 +14,13 @@ class Product extends Component {
     OnAddProduct = (event) =>{
         event.preventDefault();
         this.props.ChooseAddProduct();
-        if(this.props.isAuthenticatedUser)
-        {
-            this.props.history.push('/Product/AddProduct');
-        }
+        this.props.history.push('/Product/AddProduct');
     }
 
     OnOrder = (event) =>{
         event.preventDefault();
         this.props.ChooseAddProduct();
-        if(this.props.isAuthenticatedUser)
-        {
-            this.props.history.push('/Product/Search');
-        }
+        this.props.history.push('/Product/Search');
     }
 
     render()

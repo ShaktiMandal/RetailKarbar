@@ -10,6 +10,7 @@ export const UserPasswordReset = (data) => async dispatch => {
 
     try{
 
+            var response;
             var {UserId, NewPasscode, ConfPasscode} = data;
             const options = 
             {
@@ -26,7 +27,15 @@ export const UserPasswordReset = (data) => async dispatch => {
                 })
             }
 
-            var response = await fetch('http://localhost:5000/Authentication/PasswordReset/ResetPassword', options);
+            if(process.env.NODE_ENV === 'production')
+            {
+                response = await fetch('/PasswordReset/ResetPassword', options);
+            }
+            else
+            {
+                response = await fetch('http://localhost:5000/Authentication/PasswordReset/ResetPassword', options);
+            }
+          
             var responseData = await response.json();
 
             if(responseData.Success)

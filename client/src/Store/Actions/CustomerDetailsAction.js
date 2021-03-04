@@ -3,6 +3,7 @@ import fetch from 'node-fetch';
 
 export const AddYourCustomer = (customerDetails) => async (dispatch) => {
     
+    var response;
     var requestData = {
         method:'POST',   
         credentials: 'include',     
@@ -19,7 +20,15 @@ export const AddYourCustomer = (customerDetails) => async (dispatch) => {
         })
     }
     
-    const response = await fetch("http://localhost:5000/Customer/AddCustomer", requestData);
+    if(process.env.NODE_ENV === 'production')
+    {
+        response = await fetch('/Customer/AddCustomer', requestData);
+    }
+    else
+    {
+        response = await fetch("http://localhost:5000/Customer/AddCustomer", requestData);
+    } 
+  
     const responseData = await response.json();
 
        
@@ -64,7 +73,8 @@ export const AddYourCustomer = (customerDetails) => async (dispatch) => {
 }
 
 export const AddYourDealer = (dealerDetails, orderDetails) => async (dispatch) => {
-       
+    
+    let response;
     let requestData = {
         method : 'POST',
         credentials: 'include',
@@ -83,7 +93,15 @@ export const AddYourDealer = (dealerDetails, orderDetails) => async (dispatch) =
         })
     }
 
-    let response = await fetch('http://localhost:5000/Dealer/AddDealer', requestData);
+    if(process.env.NODE_ENV === 'production')
+    {
+        response = await fetch('/Dealer/AddDealer', requestData);
+    }
+    else
+    {
+        response = await fetch('http://localhost:5000/Dealer/AddDealer', requestData);
+    }
+  
     let responseData = await response.json();
 
     if(responseData.Success)
@@ -114,6 +132,7 @@ export const MakeYourPayment = (paymentDetails, customerDetails, orderDetails, t
 
        
     let requestData = {};
+    var response;
     if(paymentDetails.PaymentType === "Cash")
     {
         const { GivenAmount} = paymentDetails;
@@ -142,7 +161,15 @@ export const MakeYourPayment = (paymentDetails, customerDetails, orderDetails, t
             body: JSON.stringify(requestData)
         }
 
-        const response = await fetch('http://localhost:5000/Customer/SaveCustomerOrder', request);
+        if(process.env.NODE_ENV === 'production')
+        {
+            response = await fetch('/Dealer/AddDealer', request);
+        }
+        else
+        {
+            response = await fetch('http://localhost:5000/Customer/SaveCustomerOrder', request);
+        }
+        
         const responseData = await response.json();
 
         if(responseData.Success)

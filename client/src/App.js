@@ -182,7 +182,6 @@ class App extends Component {
       placeHolderText = "Enter Customer Name"
     }
 
-    debugger;
     let isSearchRoute = (this.props.location.pathname === "/Product/Search" 
                      || this.props.location.pathname === '/Customer/Customers');
                     
@@ -242,14 +241,14 @@ class App extends Component {
                              this.state.isSideBarDisplay ? classes.ContentAreaOpened : classes.ContentArea
                             : null
                             }>
-              <div className={classes.SideBar}>               
-                {  this.props.isUserLoggedIn ?
+                {this.props.isUserLoggedIn ?
                   <SideBar clicked={this.OnSidebarClicked} 
+                  IsEligibleForMobile = {false}
                   OnRedirect = {this.OnRedirect}
                   Opened={this.state.isSideBarDisplay} 
                   closed={this.DisplaySideBar}/> : null
                 }
-              </div>  
+          
 
               <div className={classes.MainContent}>                
                   {            
@@ -273,7 +272,15 @@ class App extends Component {
                     </Switch>                     
                   }
               </div>
+              
+             
             </div>   
+            {this.props.isUserLoggedIn ?
+            <SideBar clicked={this.OnSidebarClicked} 
+                  IsEligibleForMobile = {true}
+                  OnRedirect = {this.OnRedirect}
+                  Opened={this.state.isSideBarDisplay} 
+                  closed={this.DisplaySideBar}/> : null}
           </div>    
         </Layout>
       </div>

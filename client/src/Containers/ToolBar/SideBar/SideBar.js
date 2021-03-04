@@ -10,10 +10,14 @@ import Customer from '../../../Assests/Logo/Sidebar-customer-white.png';
 
 const SideBar = (props) =>{
     
-    let classList = [classes.SideBar, classes.Close];
-    if(props.Opened)
+    let classList = [classes.SideBar,  classes.Close];
+    if(props.Opened && props.IsEligibleForMobile === false)
     {
         classList = [classes.SideBar, classes.Open];
+    }
+    else
+    {
+        classList = [classes.BottomBar, classes.Open];
     }
     return(
         <div className={classList.join(" ")} onClick={props.clicked}> 

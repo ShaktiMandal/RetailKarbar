@@ -18,6 +18,7 @@ import { json } from 'body-parser';
 
 export const GetCustomerDetails = (customer) =>async  (dispatch)=> {
 
+    var response;
     let request = {
 
         method: "GET",
@@ -47,7 +48,15 @@ export const GetCustomerDetails = (customer) =>async  (dispatch)=> {
             DisplayLoading : true
         }
     });
-    const response = await fetch("http://localhost:5000/Customer/GetCustomers?" + query, request);
+
+    if(process.env.NODE_ENV === 'production')
+    {
+        response = await fetch("Customer/GetCustomers?" + query, request);
+    }
+    else{
+        response = await fetch("http://localhost:5000/Customer/GetCustomers?" + query, request);
+    }
+  
     const responseData = await response.json();
     dispatch({
         type: LOADING,
@@ -83,6 +92,7 @@ export const DeleteCustomer = () => (dispatch) =>{
 
 export const GetProductDetails = (phoneNumber) => async(dispatch) =>{
 
+    var url;
     let request = {
         method: 'GET',
         credentials: 'include',
@@ -93,16 +103,21 @@ export const GetProductDetails = (phoneNumber) => async(dispatch) =>{
         }
     };
     
-    console.log("Request Data", request);
+    
+    if(process.env.NODE_ENV === 'production')
+    {
+        url = new URL('/Customer/GetProducts');
+    }
+    else
+    {
+        url = new URL('http://localhost:5000/Customer/GetProducts');
+    }
 
-    var url = new URL('http://localhost:5000/Customer/GetProducts');
     url.SearchParams({
         PhoneNumber: phoneNumber
     });
-    // const response = await fetch('http://localhost:5000/Customer/GetProducts/' + phoneNumber, request);
-
+    
     const response = await fetch(url);
-    //  const response = await fetch(url , request);
     const responseData = await response.json();
 
     if(responseData.Error.length === 0)
@@ -128,6 +143,7 @@ export const GetProductDetails = (phoneNumber) => async(dispatch) =>{
 
 export const GetOrderDetails = (customerId) => async dispatch =>{
 
+    var response;
     let request = {
         method: 'GET',
         credentials: 'include',
@@ -155,7 +171,17 @@ export const GetOrderDetails = (customerId) => async dispatch =>{
             DisplayLoading : true
         }
         });
-    const response = await fetch("http://localhost:5000/Customer/GetCustomerOrders?" + query, request);
+
+        if(process.env.NODE_ENV === 'production')
+        {
+            response = await fetch('Customer/GetCustomerOrders?' + query, request);
+        }
+        else
+        {
+            response = await fetch("http://localhost:5000/Customer/GetCustomerOrders?" + query, request);
+        }
+    
+   
     const responseData = await response.json();
        
     dispatch({
@@ -207,6 +233,7 @@ export const GetDueOrders = (orderList, index) => (dispatch) => {
 
 export const GetOutOfStockProducts = () => async (dispatch) => {
 
+    var response;
     let request = {
         method: "GET",
         credentials: 'include',
@@ -218,7 +245,16 @@ export const GetOutOfStockProducts = () => async (dispatch) => {
         }
     };
 
-    const response = await fetch("http://localhost:5000/Product/GetOutOfStockProducts", request);
+    if(process.env.NODE_ENV === 'production')
+    {
+        response = await fetch('/Product/GetOutOfStockProducts', request);
+    }
+    else
+    {
+        response = await fetch("http://localhost:5000/Product/GetOutOfStockProducts", request);
+    }
+
+    
     const responseData = await response.json();
 
     if(responseData.Success)

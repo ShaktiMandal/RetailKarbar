@@ -1,11 +1,19 @@
 .SideBar{
-    position: absolute;
     height: 100%;
     left: 0px;
     box-sizing: border-box;
     transition: transform 0.3 ease-out;
     z-index: 300;
-}   
+} 
+
+.BottomBar
+{
+    position: relative;       
+    box-sizing: border-box;
+    transition: transform 0.3 ease-out;
+    z-index: 300;
+    display: none;
+}
 
 .MenuBar{
     list-style:  none;
@@ -31,5 +39,14 @@
 {
     .SideBar{
         display: none;
+    }
+
+    .BottomBar{       
+        display: inline-flex;
+    } 
+
+    .RedirectContainer
+    {
+        margin: auto;
     }
 }

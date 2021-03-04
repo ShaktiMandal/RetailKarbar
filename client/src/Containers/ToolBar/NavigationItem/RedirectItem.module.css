@@ -20,3 +20,13 @@
 .RedirectContainer img:hover{
     cursor: pointer;
 }
+
+@media(max-width : 450px)
+{
+    .RedirectContainer
+    {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}

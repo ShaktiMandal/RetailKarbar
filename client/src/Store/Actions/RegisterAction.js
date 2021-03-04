@@ -9,6 +9,7 @@ import {
 export const UserRegister = (data) => async dispatch => {
 
     try{
+        var response;
         var {UserId, Passcode, ConfPasscode} = data;
         const options = 
         {
@@ -24,8 +25,16 @@ export const UserRegister = (data) => async dispatch => {
                 ConfPasscode:ConfPasscode
             })
         };
-     
-        var response = await fetch('http://localhost:5000/Authentication/RegisterUser/Register', options);
+
+        if(process.env.NODE_ENV === 'production')
+        {
+            response = await fetch('/Authentication/RegisterUser/Register', options);
+        }
+        else
+        {
+            response = await fetch('http://localhost:5000/Authentication/RegisterUser/Register', options);
+        } 
+
         var responseData = await response.json();
 
         if(responseData.Success)

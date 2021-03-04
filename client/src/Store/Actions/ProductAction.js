@@ -54,16 +54,39 @@ export const FetchProductDetails = (requestDetails) => async (dispatch) => {
         {
             case "OutOfStock":
                 {
-                    response = await fetch("http://localhost:5000/Product/GetOutOfStockProducts", fetchRequest);
+
+                    if(process.env.NODE_ENV === 'production')
+                    {
+                        response = await fetch('/Product/GetOutOfStockProducts', fetchRequest);
+                    }
+                    else
+                    {
+                        response = await fetch("http://localhost:5000/Product/GetOutOfStockProducts", fetchRequest);
+                    }                    
                     break;
                 }
             case "Favourite":
                 {
-                    response = await fetch("http://localhost:5000/Product/GetYourFavourites", fetchRequest);
+                    if(process.env.NODE_ENV === 'production')
+                    {
+                        response = await fetch('/Product/GetYourFavourites', fetchRequest);
+                    }
+                    else
+                    {
+                        response = await fetch("http://localhost:5000/Product/GetYourFavourites", fetchRequest);
+                    } 
+                    
                     break;
                 }
             default:
-                response = await fetch("http://localhost:5000/Product/FetchProduct?" + query, fetchRequest);                
+                if(process.env.NODE_ENV === 'production')
+                {
+                    response = await fetch('/Product/FetchProduct?'+ query, fetchRequest);
+                }
+                else
+                {
+                    response = await fetch("http://localhost:5000/Product/FetchProduct?" + query, fetchRequest);                
+                } 
         }
         dispatch({
             type: LOADING,
@@ -109,6 +132,8 @@ export const FetchProductDetails = (requestDetails) => async (dispatch) => {
 export const UpdateFavouriteProduct = (requestDetails) => async (dispatch) => {
 
     try{
+
+        let response;
         let fetchRequest ={
             method:'POST',
             credentials: 'include',
@@ -124,7 +149,16 @@ export const UpdateFavouriteProduct = (requestDetails) => async (dispatch) => {
                 DisplayLoading : true
             }
             });
-        let response = await fetch("http://localhost:5000/Product/AddToFavourite", fetchRequest);      
+
+        if(process.env.NODE_ENV === 'production')
+        {
+            response = await fetch('/Authentication/Product/AddToFavourite', fetchRequest);
+        }
+        else
+        {
+            response = await fetch("http://localhost:5000/Product/AddToFavourite", fetchRequest);
+        } 
+
         let responseData =  await response.json(); 
         dispatch({
             type: LOADING,

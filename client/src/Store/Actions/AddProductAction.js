@@ -12,6 +12,8 @@ export const AddYourProduct = (productDetails) => async (dispatch) => {
     try{
             if(productDetails)
             {
+                let response;
+
             let serviceData = {
                 method :"POST",
                 credentials: 'include',
@@ -23,7 +25,15 @@ export const AddYourProduct = (productDetails) => async (dispatch) => {
                 body : JSON.stringify(productDetails)
             }
 
-            let response =  await fetch("http://localhost:5000/Product/AddProduct", serviceData);
+            if(process.env.NODE_ENV === 'production')
+            {
+                response = await fetch('/Product/AddProduct', serviceData);
+            }
+            else
+            {
+                response =  await fetch("http://localhost:5000/Product/AddProduct", serviceData);
+            }
+            
             let responseData = await response.json();
 
             if(responseData.Success)
