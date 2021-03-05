@@ -100,8 +100,10 @@
 .MainContent
 {
   height: 100%;
-  white-space:nowrap;
-  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
 } 
 
 .TopbarMiddle input{

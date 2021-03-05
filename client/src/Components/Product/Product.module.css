@@ -1,20 +1,14 @@
 .containerDiv
 {
-    left: 0;
     opacity: .7;
     display: flex;
     text-align: center;
     justify-content: center;
-    margin-top: 35%;
+ 
 }
 
 @media (min-width:700px)
-{
-    .containerDiv
-    {
-        text-align: center;
-        margin-top: 25%;
-    }
+{  
     .containerDiv input{
         width: 20%
     }
@@ -24,8 +18,7 @@
 {
     .containerDiv
     {
-        display: grid;
-        grid-template-rows: 50% 50%;
+        display: inline-block;
     }
 
     .AddProductDiv
