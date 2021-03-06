@@ -65,3 +65,60 @@
     color: red;
     transform: rotate(180deg);
 }
+
+.OrderItemForMobile{
+ 
+    display: none;
+}
+
+@media (max-width: 450px)
+{
+    .OrderItemForMobile{
+        display: block;
+        height: 90%;
+        background-color: white;
+        margin: 5px;      
+        padding: 10px;
+        color: black
+    }
+
+    .OrderItemForMobile div
+    {
+        text-align: start;
+        padding: 5px;
+    }
+
+    .OrderItemDiv
+    {
+        display: none;
+    }
+
+    .OrderActionBar
+    {
+        display: grid;
+        grid-template-columns: 60% 40%;
+    }
+
+    .OrderActionBar input
+    {
+        width: 20%;
+        background: white;
+        color: black;
+        text-align: center;
+    }
+
+    .OrderActionBar div
+    {
+        display: flex;
+    }
+
+    .OrderActionBar button
+    {
+        color: black;
+        border: 1px solid black;        
+        background: white;
+        user-select: none;
+        font-size: 20px
+    }
+
+}

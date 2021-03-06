@@ -202,13 +202,35 @@ class SearchedProduct extends Component {
                                     
                                         return(
                                             <div>
-                                        <div className={classes.ProductDetails }>
+                                            <div className={classes.ProductDetails}>
                                             <section>
                                                 <div><strong>Product Name :</strong> {item.ProductName}</div>
                                                 <div><strong>Stock :</strong> {item.Stock}</div>
                                                 <div><strong> Manufacturer Name :</strong> {item.Manufacturer}</div>
                                                 <div><strong>  Expairy Date :</strong> {item.ExpairyDate}</div>
-                                            </section>                                                       
+                                            </section>    
+                                            <section className={classes.DisplayActionBarOnMobile}>
+                                            <div onClick={ (event) => this.OnAddProduct(event, index)}>
+                                                <button 
+                                                    style={{
+                                                            userSelect: "none",
+                                                            margin: "auto",
+                                                            fontSize: "20px",
+                                                            border: "none",
+                                                            background: "transparent"
+                                                        }}>&#x2764;</button>
+                                            </div>
+                                            <div>
+                                                <button onClick={this.props.OnAddProduct}
+                                                style={{
+                                                        userSelect: "none",
+                                                        margin: "auto",
+                                                        fontSize: "30px",
+                                                        border: "none",
+                                                        background: "transparent"
+                                                    }}>&#x2b;</button>
+                                            </div> 
+                                            </section>                                                   
                                         </div>
                                         <div className={classes.CustomerAction}>
                                             <div onClick={ (event) => this.OnAddProduct(event, index)}>
