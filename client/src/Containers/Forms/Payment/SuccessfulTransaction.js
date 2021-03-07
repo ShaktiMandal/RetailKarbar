@@ -14,6 +14,11 @@ const SuccessTransaction = (props) =>{
                     height: "60%"
                 }}/>
                 <h3>{props.Message}</h3>
+                <h2 
+                            onClick = {props.OnReceiptPrint}
+                            style={{textAlign: "right", 
+                            paddingRight:"10px", 
+                            cursor: "pointer"}}> Receipt Here</h2>
                 {
               
                 props.IsFromCart === "true" ?

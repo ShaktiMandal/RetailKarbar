@@ -163,8 +163,24 @@ class CustomerDetails extends Component {
         error.length === 0 ? this.props.AddYourCustomer(this.props.customerDetails) : this.props.CustomerValidationError(error);        
     }
 
+    OnCreateCustomerAndPay = (event) => {
+        event.preventDefault();  
+        Validator.ClearErrors();  
+        Validator.CustomerValidation(this.props.customerDetails, this.props.customerOrders);
+        const error = Validator.GetErrors();
+        error.length === 0 ? this.props.AddYourCustomer(this.props.customerDetails) : this.props.CustomerValidationError(error);        
+    }
+
     OnCreateDealer = (event) => {
            
+        event.preventDefault();
+        Validator.ClearErrors();  
+        Validator.DealerValidation(this.props.dealerDetails, this.props.customerOrders);
+        const error = Validator.GetErrors();
+        error.length === 0 ? this.props.AddYourDealer(this.props.dealerDetails, this.props.customerOrders) : this.props.CustomerValidationError(error);
+    }
+
+    OnCreateDealerAndPay = (event) => {
         event.preventDefault();
         Validator.ClearErrors();  
         Validator.DealerValidation(this.props.dealerDetails, this.props.customerOrders);
@@ -277,7 +293,7 @@ class CustomerDetails extends Component {
     render()
     {
     
-        var PaymentType = this.props.isPaymentSuccessful ? SuccessTransaction 
+        var PaymentType = this.props.isPaymentSuccessful ? < SuccessTransaction OnReceiptPrint={this.OnPrintRecipt}/>
                                                          : this.props.paymentDetails.PaymentType === "Cash"
                                                          ? CashFrom : CardFrom;
         var ReceiptElement = this.props.isPaymentSuccessful ? 
@@ -310,7 +326,7 @@ class CustomerDetails extends Component {
                             <CloseButton OnCloseClick ={this.OnCloseClick}/>      
                         </div>    
                        { this.props.selectedNavigationPath === 'OutOfStock' ?
-                        <div className={classes.DealerDetails}>
+                        <div>
                             {ErrorElement} 
                             <div className={classes.inputdiv}>                                   
                                 <Input type="text" 
@@ -359,7 +375,7 @@ class CustomerDetails extends Component {
                              </div>
                         </div> :
                                                       
-                        <div className={classes.DealerDetails}> 
+                        <div> 
                             {ErrorElement}                               
                                 <div className={classes.inputdiv }>                                   
                                     <Input type="text" 
@@ -370,7 +386,7 @@ class CustomerDetails extends Component {
                                     />
                                      <h5>Customer Name</h5>
                                 </div>
-                                <div className={classes.inputdiv }>
+                                <div className={classes.inputdiv}>
                                     <Input type="number"                                
                                     id = 'phoneNumber'
                                     IsRequired 
@@ -404,21 +420,130 @@ class CustomerDetails extends Component {
                        <div className={classes.PaymentHeader}>
                         <div>
                           <h2 style={{
-                              width: "auto"
+                              width: "auto",
+                              fontSize: "15px"
                           }}>Pay :  {this.props.totalAmount === 0 ? "0.00" : this.props.totalAmount}</h2>
                         </div> 
-                        {
-                            this.props.isPaymentSuccessful ?  <div>
-                            <h2 
-                            onClick={this.OnPrintRecipt}
-                            style={{textAlign: "right", 
-                            paddingRight:"10px", 
-                            cursor: "pointer"}}> Receipt Here</h2>
-                            </div> : null
-                        }
-                       
+                        <div>
+                            <h2 style={{
+                              width: "auto",
+                              fontSize: "15px"
+                          }}>Change Amt : {this.props.paymentDetails.ChangeAmount}</h2>
+                        </div>                      
                        </div>
+
+                       
                        <div className={classes.PaymentDetails}>
+                       { this.props.selectedNavigationPath === 'OutOfStock' ?
+                        <div className={classes.DealerDetails}>
+                            {ErrorElement} 
+                            <div className={classes.inputdiv}> 
+                                <Input type="number"   
+                                id = "givenCash"                         
+                                IsRequired 
+                                RequiredLength="100"
+                                OnChange={this.OnPaymentValueChange}
+                                InputValue ={this.props.paymentDetails.GivenAmount}
+                                />
+                                <h5>Given Cash</h5>
+                            </div>
+                            <div className={classes.inputdiv}>                                   
+                                <Input type="text" 
+                                id = "companyName"
+                                IsRequired                                     
+                                OnChange={this.OnDealerValueChange}
+                                InputValue ={this.props.dealerDetails.CompanyName}
+                                />
+                                <h5>Company Name</h5>
+                            </div>
+                            <div className={classes.inputdiv }>                                   
+                                <Input type="text" 
+                                id = "dealerName"
+                                IsRequired                                     
+                                OnChange={this.OnDealerValueChange}
+                                InputValue ={this.props.dealerDetails.DealerName}
+                                />
+                                    <h5>Dealer Name</h5>
+                            </div>
+                            <div className={classes.inputdiv }>
+                                <Input type="number"                                
+                                id = 'phoneNumber'
+                                IsRequired 
+                                RequiredLength=""
+                                OnChange={this.OnDealerValueChange}
+                                InputValue ={this.props.dealerDetails.PhoneNumber}
+                                />
+                                <h5>Phone Number</h5>
+                            </div>
+
+                            <div className={classes.logInBtn}>
+                                <Button 
+                                    OnClick = {this.OnCreateDealerAndPay}
+                                    ButtonStyle ={{
+                                    width: "100%",
+                                    border: "none",
+                                    outline: "none",
+                                    height: 35,
+                                    color: "white",
+                                    fontSize: 20,
+                                    backgroundColor: "lightseagreen",
+                                    textAlign: "center",
+                                    userSelect: "none"
+                                }}
+                                Value="Add Dealer & Pay"/>
+                             </div>
+                        </div> :
+                                                      
+                        <div className={classes.CustomerDetails}> 
+                            {ErrorElement}    
+                                <div className={classes.inputdiv}> 
+                                    <Input type="number"   
+                                    id = "givenCash"                         
+                                    IsRequired 
+                                    RequiredLength="100"
+                                    OnChange={this.OnPaymentValueChange}
+                                    InputValue ={this.props.paymentDetails.GivenAmount}
+                                    />
+                                    <h5>Given Cash</h5>
+                                </div>                           
+                                <div className={classes.inputdiv }>                                   
+                                    <Input type="text" 
+                                    id = "customerName"
+                                    IsRequired                                     
+                                    OnChange={this.OnCustomerValueChange}
+                                    InputValue ={this.props.customerDetails.CustomerName}
+                                    />
+                                     <h5>Customer Name</h5>
+                                </div>
+                                <div className={classes.inputdiv }>
+                                    <Input type="number"                                
+                                    id = 'phoneNumber'
+                                    IsRequired 
+                                    RequiredLength=""
+                                    OnChange={this.OnCustomerValueChange}
+                                    InputValue ={this.props.customerDetails.PhoneNumber}
+                                    />
+                                    <h5>Phone Number</h5>
+                                </div>
+
+                                <div className={classes.logInBtn}>
+                                    <Button 
+                                     OnClick = {this.OnCreateCustomerAndPay}
+                                     ButtonStyle ={{
+                                         width: "100%",
+                                        border: "none",
+                                        outline: "none",
+                                        height: 35,
+                                        color: "white",
+                                        fontSize: 20,
+                                        backgroundColor: "lightseagreen",
+                                        textAlign: "center",
+                                        userSelect: "none"
+                                    }}
+                                    Value="Create Customer & Pay"></Button>
+                                </div>
+                            </div>
+                        }
                            <PaymentType
                            OnReturnHome={this.OnCloseClick}
                            TransactionImage={TransactionImage}

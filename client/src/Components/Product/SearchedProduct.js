@@ -55,7 +55,7 @@ class SearchedProduct extends Component {
         }
     }
 
-    OnAddProduct = (event, index) =>{        
+    OnAddProduct = (index) =>{        
         if(index != -1)
         {
             let selectedItem =  this.props.productList[index]
@@ -210,7 +210,7 @@ class SearchedProduct extends Component {
                                                 <div><strong>  Expairy Date :</strong> {item.ExpairyDate}</div>
                                             </section>    
                                             <section className={classes.DisplayActionBarOnMobile}>
-                                            <div onClick={ (event) => this.OnAddProduct(event, index)}>
+                                            <div onClick={ (event) => this.OnAddFavourite(event, index)}>
                                                 <button 
                                                     style={{
                                                             userSelect: "none",
@@ -221,7 +221,7 @@ class SearchedProduct extends Component {
                                                         }}>&#x2764;</button>
                                             </div>
                                             <div>
-                                                <button onClick={this.props.OnAddProduct}
+                                                <button onClick={() => this.OnAddProduct(index)}
                                                 style={{
                                                         userSelect: "none",
                                                         margin: "auto",
@@ -232,7 +232,7 @@ class SearchedProduct extends Component {
                                             </div> 
                                             </section>                                                   
                                         </div>
-                                        <div className={classes.CustomerAction}>
+                                        {/* <div className={classes.CustomerAction}>
                                             <div onClick={ (event) => this.OnAddProduct(event, index)}>
                                                 <button 
                                                     style={{
@@ -249,7 +249,7 @@ class SearchedProduct extends Component {
                                                         fontSize: 30,
                                                     }}>&#x2b;</button>
                                             </div>                                         
-                                        </div> 
+                                        </div>  */}
                                         </div>
                                         )
                                 })

@@ -1,7 +1,8 @@
 .CustomerAndPayment
 {
     display: grid;
-    height: 90%;
+    height: 90%;   
+    width: 80%;
     margin: 10px;
     opacity: 0.7;
     background-image: linear-gradient(white, #0000d4);
@@ -20,7 +21,7 @@
 {
     background-color: white;
     display: grid;    
-    grid-template-rows: 15% 65% 25%;
+    grid-template-rows: 25% auto 25%;
 }
 
 .CustomerFrom
@@ -163,7 +164,12 @@
     z-index: 100;
 }
 
-@media (min-width: 900px)
+.DealerDetails, .CustomerDetails
+{
+    display: none;
+}
+
+@media (min-width: 650px)
 {
     .CustomerAndPayment
     {
@@ -179,5 +185,29 @@
 
     .PaymentType input{
         margin: 5px 10px;
+    }
+}
+
+@media (max-width: 450px)
+{
+    .CustomerAndPayment
+    {        
+        width: 90%;     
+    }
+
+    .CustomerArea{
+        display: none;
+    }
+
+    .DealerDetails, .CustomerDetails
+    {
+         display: block;
+         margin: auto;
+         width: 80%;
+    }
+
+    .PaymentType
+    {
+        display: none;
     }
 }
