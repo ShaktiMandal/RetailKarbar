@@ -163,7 +163,7 @@ export const MakeYourPayment = (paymentDetails, customerDetails, orderDetails, t
 
         if(process.env.NODE_ENV === 'production')
         {
-            response = await fetch('/Dealer/AddDealer', request);
+            response = await fetch('/Customer/SaveCustomerOrder', request);
         }
         else
         {
@@ -295,4 +295,124 @@ export const PrintYourReceipt = (customerDetails, paymentDetails, orderDetails) 
     const {GivenAmount, ChangeAmount} = paymentDetails;
     const {OrderId, CustomerOrders} = orderDetails;
 
+}
+
+export const AddYourCustomerAndPay = (paymentDetails, customerDetails, orderDetails, totalAmount) => async (dispatch) => {
+
+    debugger;
+    var response;
+    var requestData = {
+        method:'POST',   
+        credentials: 'include',     
+        headers: {
+        
+                'Accept' : 'application/json, text/plain',
+                'content-type': 'application/json',
+                'Authorization': null
+        },
+        body: JSON.stringify({
+            CustomerName: customerDetails.CustomerName,
+            PhoneNumber: customerDetails.PhoneNumber,
+            CustomerId: customerDetails.PhoneNumber + Date.now() + new Date().getTime()
+        })
+    }
+    
+    if(process.env.NODE_ENV === 'production')
+    {
+        response = await fetch('/Customer/AddCustomer', requestData);
+    }
+    else
+    {
+        response = await fetch("http://localhost:5000/Customer/AddCustomer", requestData);
+    }
+debugger;
+    response.json().then( async result => {
+debugger;
+        if(result.Success)
+        {
+            var response;
+            if(paymentDetails.PaymentType === "Cash")
+            {
+                const { GivenAmount} = paymentDetails;
+                paymentDetails.ChangeAmount = GivenAmount - totalAmount;
+                paymentDetails.PaymentType = "Cash"
+        
+                let requestData = {
+                    CustomerId: result.response.CustomerId,
+                    OrderId: orderDetails.OrderId,
+                    PaymentType: "Cash",
+                    DueAmount : totalAmount - GivenAmount,
+                    PaidAmount: GivenAmount,
+                    CustomerOrder: orderDetails,
+                    IsDealer : customerDetails.IsDealer
+                }
+        
+                let request =  {
+        
+                    method: 'POST',
+                    credentials: 'include',
+                    headers: {
+                        'Accept' : 'application/json, text/plain',
+                        'content-type': 'application/json',
+                        'Authorization': null
+                    },
+                    body: JSON.stringify(requestData)
+                }
+        
+                if(process.env.NODE_ENV === 'production')
+                {
+                    response = await fetch('/Customer/SaveCustomerOrder', request);
+                }
+                else
+                {
+                    response = await fetch('http://localhost:5000/Customer/SaveCustomerOrder', request);
+                }
+                
+                const responseData = await response.json();
+        
+                if(responseData.Success)
+                {
+                    paymentDetails.IsPaymentSuccessful = true;            
+                    dispatch({
+                        type: ActionTypes.PAYMENT_SUCCESSFULLY,
+                        payload: {
+                            Success: true,
+                            ErrorMsg: ""
+                        }
+                    })
+                }
+                else{
+                    paymentDetails.IsPaymentSuccessful = false;            
+                    dispatch({
+                        type: ActionTypes.PAYMENTFAILED,
+                        payload: {
+                            Success: false,
+                            ErrorMsg: responseData.error
+                        }
+                    })
+                }            
+            }
+            else{
+                    paymentDetails.PaymentType = "Card";
+        
+                    dispatch({
+                        type: ActionTypes.CARDPAYMENT,
+                        payload: {
+                            PaymentDetails: paymentDetails
+                        }
+                    })
+            }
+            
+        }
+        else{
+    
+            dispatch({
+                type: ActionTypes.ADDCUSTOMER_FAILED,
+                payload: {
+                    Success: result.Success,
+                    ErrorMsg: result.error
+                }
+            })
+        }
+    })
 }

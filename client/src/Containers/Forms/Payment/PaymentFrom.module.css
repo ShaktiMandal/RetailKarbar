@@ -79,6 +79,12 @@
     position: absolute;
 }
 
+.ActionBar
+{
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
 @media (max-width: 750px)
 {
 
@@ -93,5 +99,16 @@
     .CashPaymentForm
     {
         display: none;
+    }
+
+    .ActionBar
+    {      
+        display: grid;
+        grid-template-rows: 50% 50%;
+    }
+
+    .TransactionDiv
+    {
+        height: 50%
     }
 }
