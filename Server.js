@@ -76,6 +76,7 @@ App.use('/Customer' , Customer);
 App.use('/Dealer' , Dealer);
 App.use('/', (req, res) => {
 
+    console.log("session id printing", req.sessionID);    
     if(req.isAuthenticated())
     {
         console.log("Setting header as true");
