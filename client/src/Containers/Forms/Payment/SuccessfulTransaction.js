@@ -4,7 +4,13 @@ import Button  from '../../ToolBar/Button/button';
 import classes from './PaymentFrom.module.css';
 
 const SuccessTransaction = (props) =>{
-       
+    
+    let actionClass = [classes.ActionBar];
+    if(props.IsTransactionSuccessful === false 
+        || props.IsTransactionSuccessful === undefined)
+    {
+        actionClass = [classes.NoActionBar];
+    }
     return(
         <Aux>
             <div className={classes.TransactionDiv}>
@@ -14,7 +20,7 @@ const SuccessTransaction = (props) =>{
                     height: "60%"
                 }}/>
                 <h3>{props.Message}</h3>
-                <div className = {classes.ActionBar}>
+                <div className = {actionClass}>
                     <div>
                         <h2 
                             onClick = {props.OnReceiptPrint}

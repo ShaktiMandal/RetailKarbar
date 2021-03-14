@@ -166,14 +166,14 @@ class CustomerDetails extends Component {
 
     OnCreateCustomerAndPay = (event) => {
         event.preventDefault();  
-        Validator.ClearErrors();  
-        Validator.CustomerValidation(this.props.customerDetails, this.props.customerOrders);
+        Validator.ClearErrors();        
         const error = Validator.GetErrors();
         if(error.length === 0)
         {     
             let customerDetails;
             if(this.props.selectedNavigationPath === 'OutOfStock')
             {
+                Validator.DealerValidation(this.props.dealerDetails, this.props.customerOrders);
                 customerDetails = {
                     CompanyName: this.props.dealerDetails.CompanyName,
                     DealerName: this.props.dealerDetails.DealerName,
@@ -184,6 +184,7 @@ class CustomerDetails extends Component {
             }
             else
             {
+                Validator.CustomerValidation(this.props.customerDetails, this.props.customerOrders);
                 customerDetails = {
                     CustomerName: this.props.customerDetails.CustomerName,
                     PhoneNumber: this.props.customerDetails.PhoneNumber,
@@ -208,7 +209,7 @@ class CustomerDetails extends Component {
         }
         else
         {
-            this.props.CustomerValidationError(error);  
+          this.props.CustomerValidationError(error);
         }   
     }
 
@@ -594,6 +595,7 @@ class CustomerDetails extends Component {
                        <div className={classes.PaymentDetails}>
                         {paymentArea}
                         <PaymentType
+                        IsTransactionSuccessful = {this.props.isPaymentSuccessful}
                         OnReceiptPrint={this.OnPrintRecipt}
                         OnReturnHome={this.OnCloseClick}
                         TransactionImage={TransactionImage}

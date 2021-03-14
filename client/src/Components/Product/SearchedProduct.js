@@ -55,7 +55,8 @@ class SearchedProduct extends Component {
         }
     }
 
-    OnAddProduct = (index) =>{        
+    OnAddProduct = (event, index) =>{  
+        event.preventDefault();      
         if(index != -1)
         {
             let selectedItem =  this.props.productList[index]
@@ -210,8 +211,8 @@ class SearchedProduct extends Component {
                                                 <div><strong>  Expairy Date :</strong> {item.ExpairyDate}</div>
                                             </section>    
                                             <section className={classes.DisplayActionBarOnMobile}>
-                                            <div onClick={ (event) => this.OnAddFavourite(event, index)}>
-                                                <button 
+                                            <div>
+                                                <button onClick={ (event) => this.OnAddFavourite(event, index)}
                                                     style={{
                                                             userSelect: "none",
                                                             margin: "auto",
@@ -221,7 +222,7 @@ class SearchedProduct extends Component {
                                                         }}>&#x2764;</button>
                                             </div>
                                             <div>
-                                                <button onClick={() => this.OnAddProduct(index)}
+                                                <button onClick={(event) => this.OnAddProduct(event,index)}
                                                 style={{
                                                         userSelect: "none",
                                                         margin: "auto",
@@ -231,25 +232,7 @@ class SearchedProduct extends Component {
                                                     }}>&#x2b;</button>
                                             </div> 
                                             </section>                                                   
-                                        </div>
-                                        {/* <div className={classes.CustomerAction}>
-                                            <div onClick={ (event) => this.OnAddProduct(event, index)}>
-                                                <button 
-                                                    style={{
-                                                            userSelect: "none",
-                                                            margin: "auto",
-                                                            fontSize: 30,
-                                                        }}>&#x2b;</button>
-                                            </div>
-                                            <div>
-                                                <button onClick={this.props.OnAddProduct}
-                                                style={{
-                                                        userSelect: "none",
-                                                        margin: "auto",
-                                                        fontSize: 30,
-                                                    }}>&#x2b;</button>
-                                            </div>                                         
-                                        </div>  */}
+                                        </div>                                   
                                         </div>
                                         )
                                 })
@@ -257,7 +240,7 @@ class SearchedProduct extends Component {
                         </ul>
                                                                                            
                     </div>  : this.props.isProductSearched  ? <NotFoundMessage Message="Oops! There is not such product"/> : null
-                    }
+                }
                 </div>
                 <div className={classes.DisplayDesktopView}>
                     <div className={styleToBeDisplayed}>
@@ -280,7 +263,7 @@ class SearchedProduct extends Component {
                                 </div>  
                                 <ul className={classes.listStyle}>                    
                                 {                                
-                                    this.props.productList.map( (item, index) =>{               
+                                    this.props.productList.map( (item, index) =>{                                                   
                                     return(  
                                         <li id = {index}>
                                             <Productitem        
