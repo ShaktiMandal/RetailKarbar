@@ -62,13 +62,15 @@ App.use('*', function Authentication(req,res,next){
         console.log("this user is authorized");
         console.log("thid is param request", req.params);
         res.setHeader("Is-UserloggedIn","true");
+        console.log("printing heder at server", res);
         next();
     }
     else
     {
         console.log("this user is unauthorized");
         console.log("thid is param request", req.params);
-        res.setHeader("Is-UserloggedIn","false");       
+        res.setHeader("Is-UserloggedIn","false");   
+
         next();
     }
 });
@@ -79,17 +81,17 @@ App.use('/Authentication/RegisterUser', Registration);
 App.use('/Product' , Product);
 App.use('/Customer' , Customer);
 App.use('/Dealer' , Dealer);
-App.use('/', (req, res) => {
-    console.log("Print Session Id", req.sessionID);
-    if (process.env.NODE_ENV === "production")
-    {
-        res.status(200).sendFile(path.join(__dirname, './client/build/index.html'));
-    }
-    else
-    {
-        res.status(200).sendFile(path.join(__dirname, './client/public/index.html'));
-    }
-});
+// App.use('/', (req, res) => {
+//     console.log("Print Session Id", req.sessionID);
+//     if (process.env.NODE_ENV === "production")
+//     {
+//         res.status(200).sendFile(path.join(__dirname, './client/build/index.html'));
+//     }
+//     else
+//     {
+//         res.status(200).sendFile(path.join(__dirname, './client/public/index.html'));
+//     }
+// });
 
 App.listen(port, async function ConnectDB(){
     return await mongoose.connect(process.env.MONGO_URI).then(result =>{
