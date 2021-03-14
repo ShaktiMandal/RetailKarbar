@@ -217,19 +217,21 @@ export const OnLoadPage = () => async dispatch => {
             'Authorization': null
            }        
     }
-    
+    console.log("This is on page load");
     if(process.env.NODE_ENV === 'production')
     {
+        console.log("This is on page load - Production");
         responseData  = await fetch('/', request);
     }
     else
     {
         responseData = await fetch('http://localhost:5000/', request);
     }
-    
+    console.log("This is on page load response", responseData);
     const response = await responseData.json();
-        
+    console.log("This is on page load response", response);
     var HeaderItems = {};
+
     for(var pair of responseData.headers)
     {
         console.log("Printing Header", pair);
@@ -238,7 +240,8 @@ export const OnLoadPage = () => async dispatch => {
        
     if(HeaderItems['is-userloggedin'] !== undefined 
        && HeaderItems['is-userloggedin'] === "true")
-    {        
+    {  
+        console.log("This is on page load response - successful authentication");      
         dispatch({
             type:AUTHENTICATION_SUCCESS, 
             payload :{
