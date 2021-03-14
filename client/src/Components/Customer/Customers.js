@@ -8,8 +8,6 @@ import PropTypes from 'prop-types';
 import CustomerResult from './CustomerSearchResult';
 import OrderList from '../Order/Order';
 import Payment from '../Payment/Payment';
-import Loading from '../../Containers/ToolBar/Loading/Loading';
-import NotFoundMessage from '../../Containers/ToolBar/MessageBox/NotFoundMessage';
 import Validator from '../../Validator/Validator';
 import {
     UpdateDuePayment,
@@ -25,9 +23,7 @@ import {
     ResetOrderHistory,
     OnFilterOrderItems
 } from '../../Store/Actions/CustomersAction';
-import SearchProductImg from '../../Assests/Logo/Customer-Searching-Manager.png'
-import { resolve } from 'path';
-
+import SearchProductImg from '../../Assests/Logo/Customer-Searching-Manager.png';
 
 class Customers extends Component
 {   
@@ -51,7 +47,6 @@ class Customers extends Component
     {
         event.preventDefault();
         this.props.GetCustomerDetails(event.target.value);
-
     }
 
     OnReturnOrder = (index) =>
@@ -249,7 +244,6 @@ class Customers extends Component
                         ErrorMsg = {this.props.errorOnOrder}
                         />
                 )
-                break;
             case "DuePayment":
                 return(
                     <Payment
@@ -272,9 +266,7 @@ class Customers extends Component
                     IsPaymentSuccessful = {this.props.isPaymentSuccessful}                     
                 />
                 )
-                break;
-            case "ReturnOrder":
-                break;
+
             default:
                 return "";
         }
@@ -343,7 +335,7 @@ class Customers extends Component
         return(
             <Aux>
                 <div className={classes.Container}>  
-                    <img src={SearchProductImg} className={classes.DisplayImage}/>                      
+                    <img src={SearchProductImg} className={classes.DisplayImage} alt=""/>                      
                     <div className={this.state.IsCustomerSelectionDisplay ? 
                         classes.SearchDisplayDiv :classes.SearchDiv}>                       
                         {CustomerResultArea}

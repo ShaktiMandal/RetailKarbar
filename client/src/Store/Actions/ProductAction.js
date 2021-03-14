@@ -7,7 +7,6 @@ import {
     LOADING,
     UNAUTHORIZED
 } from './ActionTypes';
-import {SetLoading} from './CommonActions';
 
 import fetch from 'node-fetch';
 

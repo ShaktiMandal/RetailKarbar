@@ -39,7 +39,6 @@ class Layout extends Component {
     
     render()
     {
-        console.log("Hamburger clicked", this.state.isSideBarDisplay );
         var sideBar   = this.state.isSideBarDisplay ?   <SideBar clicked={this.OnSidebarClicked} Opened={this.state.isSideBarDisplay} closed={this.DisplaySideBar}/> : null;
    
         return(

@@ -13,8 +13,7 @@ import {
     FETCH_PRODUCTS,
     FETCH_PRODUCTS_FAILED,
     LOADING
-} from './ActionTypes'
-import { json } from 'body-parser';
+} from './ActionTypes';
 
 export const GetCustomerDetails = (customer) =>async  (dispatch)=> {
 

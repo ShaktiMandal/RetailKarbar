@@ -130,8 +130,6 @@ export const AddYourDealer = (dealerDetails, orderDetails) => async (dispatch) =
 
 export const MakeYourPayment = (paymentDetails, customerDetails, orderDetails, totalAmount) => async (dispatch) => {
 
-       
-    let requestData = {};
     var response;
     if(paymentDetails.PaymentType === "Cash")
     {
@@ -288,12 +286,13 @@ export const ResetTransactionDetails = () => async (dispatch) => {
     })
 }
 
+//Yet to implement the receipt functionality 
 export const PrintYourReceipt = (customerDetails, paymentDetails, orderDetails) => async dispatch => {
 
        
-    const {CustomerName, PhoneNumber} = customerDetails;
-    const {GivenAmount, ChangeAmount} = paymentDetails;
-    const {OrderId, CustomerOrders} = orderDetails;
+//     const {CustomerName, PhoneNumber} = customerDetails;
+//     const {GivenAmount, ChangeAmount} = paymentDetails;
+//     const {OrderId, CustomerOrders} = orderDetails;
 
 }
 

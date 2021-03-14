@@ -7,7 +7,6 @@ import Aux from "../../HOC/Auxiliary";
 import classes from "./CustomerDetails.module.css";
 import Input from '../../Containers/ToolBar/Input/Input';
 import Button  from '../../Containers/ToolBar/Button/button';
-import AvatarImage from '../../Assests/Logo/Avatar.png';
 import CashIcon   from '../../Assests/Logo/Cash-icon.png';
 import CreditCardIcon from '../../Assests/Logo/credit-cards.png';
 import DebitCardIcon  from '../../Assests/Logo/debit-card.png';
@@ -18,7 +17,6 @@ import TransactionImage from '../../Assests/Logo/Successful-transaction.png';
 import CloseButton from "../../Containers/ToolBar/FormCloseButton/FormCloseButton";
 import ErrorBox from '../../Containers/ToolBar/Error/Error';
 import InformationBox from '../../Containers/ToolBar/Information/Information';
-import CheckOut from "./Customers";
 import Validator from '../../Validator/Validator';
 import Receipt from '../../Containers/ToolBar/PrintForm/Receipt'
 import {
@@ -334,20 +332,20 @@ class CustomerDetails extends Component {
 
     render()
     {
-        console.log("render 1");
         var PaymentType = this.props.isPaymentSuccessful ?  SuccessTransaction
                                                          : this.props.paymentDetails.PaymentType === "Cash"
                                                          ? CashFrom : CardFrom;
-        var ReceiptElement = this.props.isPaymentSuccessful ? 
-        <Receipt 
-        id="ReceiptId"       
-        ref =  {this.fullScreenModel}
-        PaymentDetails = {this.props.paymentDetails} 
-        CustomerDetails = {this.props.customerDetails}
-        OrderDetails    = {this.props.customerOrders}
-        /> : null;
-                                                         
-        console.log("render 2");   
+
+        //As of now disabled receipt functionality
+        // var ReceiptElement = this.props.isPaymentSuccessful ? 
+        // <Receipt 
+        // id="ReceiptId"       
+        // ref =  {this.fullScreenModel}
+        // PaymentDetails = {this.props.paymentDetails} 
+        // CustomerDetails = {this.props.customerDetails}
+        // OrderDetails    = {this.props.customerOrders}
+        // /> : null;
+
         var ErrorElement = this.props.customerError.length > 0 ?  
         <div className={classes.ErrorDiv}>
             <ErrorBox 

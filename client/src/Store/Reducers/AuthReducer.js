@@ -6,7 +6,7 @@ const initialState = {
         Passcode: "",
     },
     IsUserLoggedIn: false,
-    LogInErrors: [],
+    LogInErrors: "",
     IsUserAuthenticated: false,
     IsInvalidRoute: false,
     SelectedNavigationPath : ""
@@ -63,7 +63,7 @@ const AuthReducer = (state=initialState, action) =>{
                     ...state,
                     UserData: {UserId, Passcode},
                     IsUserLoggedIn: false,
-                    LogInErrors: []
+                    LogInErrors: ""
                 };
             }
         case actionTypes.USER_LOGOUT: 
@@ -77,7 +77,7 @@ const AuthReducer = (state=initialState, action) =>{
                     IsUserLoggedIn: false,
                     IsUserAuthenticated: false,
                     IsInvalidUrl: payload.IsInvalidUrl,
-                    LogInErrors: []
+                    LogInErrors: ""
                 };
             }
         case actionTypes.NAVIGATIONITEM: 

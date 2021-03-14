@@ -155,7 +155,7 @@ class Products extends Component
                             </div>
                             <div className={classes.OrderList}>
                                 {
-                                    this.state.listOfOrders.length == 0 ? 
+                                    this.state.listOfOrders.length === 0 ? 
                                     <h3>Order Item is Empty</h3>   :
 
                                     <ul>

@@ -51,7 +51,7 @@ const LogInScreen = (props) => {
                         </div>      
                         <div className={classes.logInBtn}>
                             <input 
-                            Value="Log In"                             
+                            value="Log In"                             
                             onClick = {props.OnLogIn}
                             type="button"/>                               
                         </div>                         

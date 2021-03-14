@@ -55,12 +55,9 @@ class App extends Component {
   }
 
   componentDidMount()
-  {
-    debugger;
-    console.log("current location", this.props.history);   
+  {  
     this.props.OnLoadPage().then(()=> {
-      // this.props.history.push(window.location.pathname);
-    });
+     });
   }
 
   OnLogIn = (event) => {
