@@ -57,20 +57,13 @@ App.use('*', function Authentication(req,res,next){
   
     res.header("Access-Control-Expose-Headers", "Is-UserloggedIn");    
     if(req.isAuthenticated())
-    {   
-        console.log("Print Session Id", req.sessionID);
-        console.log("this user is authorized");
-        console.log("thid is param request", req.params);
+    { 
         res.setHeader("Is-UserloggedIn","true");
-        console.log("printing heder at server", res);
         next();
     }
     else
     {
-        console.log("this user is unauthorized");
-        console.log("thid is param request", req.params);
-        res.setHeader("Is-UserloggedIn","false");   
-
+        res.setHeader("Is-UserloggedIn","false"); 
         next();
     }
 });
@@ -82,7 +75,7 @@ App.use('/Product' , Product);
 App.use('/Customer' , Customer);
 App.use('/Dealer' , Dealer);
 App.use('/', (req, res) => {
-    
+
     if(req.isAuthenticated())
     {
         res.setHeader("Is-UserloggedIn","true"); 
