@@ -78,12 +78,15 @@ App.use('/', (req, res) => {
 
     if(req.isAuthenticated())
     {
+        console.log("Setting header as true");
         res.setHeader("Is-UserloggedIn","true"); 
     }
     else{
+        console.log("Setting header as false");
         res.setHeader("Is-UserloggedIn","false"); 
     }
 
+    console.log("header is present", res.header);
     if (process.env.NODE_ENV === "production")
     {
       
