@@ -82,10 +82,18 @@ App.use('/Product' , Product);
 App.use('/Customer' , Customer);
 App.use('/Dealer' , Dealer);
 App.use('/', (req, res) => {
-    console.log("Print Session Id", req.sessionID);
+    
+    if(req.isAuthenticated())
+    {
+        res.setHeader("Is-UserloggedIn","true"); 
+    }
+    else{
+        res.setHeader("Is-UserloggedIn","false"); 
+    }
+
     if (process.env.NODE_ENV === "production")
     {
-        console.log("This is on page load response", req.headers);
+      
         res.status(200).sendFile(path.join(__dirname, './client/build/index.html'));
     }
     else
