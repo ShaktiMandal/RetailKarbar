@@ -85,6 +85,7 @@ App.use('/', (req, res) => {
     console.log("Print Session Id", req.sessionID);
     if (process.env.NODE_ENV === "production")
     {
+        console.log("This is on page load response", req);
         res.status(200).sendFile(path.join(__dirname, './client/build/index.html'));
     }
     else
