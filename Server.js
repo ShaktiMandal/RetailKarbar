@@ -55,7 +55,7 @@ App.use(passport.session());
 
 App.use('*', function Authentication(req,res,next){
   
-    console.log("Request for 1st", req);
+  
     res.header("Access-Control-Expose-Headers", "Is-UserloggedIn");    
     if(req.isAuthenticated())
     { 
@@ -77,7 +77,8 @@ App.use('/Customer' , Customer);
 App.use('/Dealer' , Dealer);
 App.use('/', (req, res) => {
 
-    console.log("Request for 2nd", req);
+    res.header("Access-Control-Expose-Headers", "Is-UserloggedIn");
+    
     if(req.isAuthenticated())
     {
         console.log("Setting header as true");
