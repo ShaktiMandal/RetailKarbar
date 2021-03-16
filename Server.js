@@ -79,25 +79,25 @@ App.use('/', (req, res) => {
 
     res.header("Access-Control-Expose-Headers", "Is-UserloggedIn");
     
-    if(req.isAuthenticated())
-    {
-        console.log("Setting header as true");
-        res.setHeader("Is-UserloggedIn","true"); 
-    }
-    else{
-        console.log("Setting header as false");
-        res.setHeader("Is-UserloggedIn","false"); 
-    }
+    // if(req.isAuthenticated())
+    // {
+    //     console.log("Setting header as true");
+    //     res.setHeader("Is-UserloggedIn","true"); 
+    // }
+    // else{
+    //     console.log("Setting header as false");
+    //     res.setHeader("Is-UserloggedIn","false"); 
+    // }
 
     console.log("header is present", res.headersSent);
-    if (process.env.NODE_ENV === "production")
+    if (process.env.NODE_ENV === "production" && req.isAuthenticated())
     {
       
-        res.status(200).sendFile(path.join(__dirname, './client/build/index.html'));
+        res.status(200).setHeader("Is-UserloggedIn","true");
     }
     else
     {
-        res.status(200).sendFile(path.join(__dirname, './client/public/index.html'));
+        res.status(200).setHeader("Is-UserloggedIn","false");
     }
 });
 
