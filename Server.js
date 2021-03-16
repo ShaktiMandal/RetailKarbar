@@ -93,11 +93,17 @@ App.use('/', (req, res) => {
     if (process.env.NODE_ENV === "production" && req.isAuthenticated())
     {
       
-        res.status(200).setHeader("Is-UserloggedIn","true");
+        res.status(200).send({
+
+            IsUserLoggedIn: true
+        });
     }
     else
     {
-        res.status(200).setHeader("Is-UserloggedIn","false");
+         res.status(200).send({
+            
+            IsUserLoggedIn: false
+        });
     }
 });
 
