@@ -91,18 +91,14 @@ App.use('/', (req, res) => {
 
     console.log("header is present", res.headersSent);
     if (process.env.NODE_ENV === "production" && req.isAuthenticated())
-    {      
-        res.status(200).json({
-
-            IsUserLoggedIn: true
-        }).sendFile(path.join(__dirname, './client/build/index.html'));;
+    {     
+        res.setHeader("Is-UserloggedIn","true"); 
+        res.status(200).sendFile(path.join(__dirname, './client/build/index.html'));;
     }
     else
     {
-         res.status(200).json({
-            
-            IsUserLoggedIn: false
-        }).sendFile(path.join(__dirname, './client/public/index.html'));;
+        res.setHeader("Is-UserloggedIn","false");
+         res.status(200).sendFile(path.join(__dirname, './client/public/index.html'));;
     }
 });
 
