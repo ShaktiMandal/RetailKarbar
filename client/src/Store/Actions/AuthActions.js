@@ -228,11 +228,11 @@ export const OnLoadPage = () => async dispatch => {
         responseData = await fetch('http://localhost:5000/', request);
     }
     console.log("This is on page load response", responseData);
-    const response = await responseData.json().then( result => {
+    responseData.json().then( result => {
         console.log("Print out the result", result);
     })
     .catch(error => console.log("there is an error ->", error));
-    console.log("This is on page load response", response);
+    
     var HeaderItems = {};
 
     for(var pair of responseData.headers)
@@ -248,7 +248,7 @@ export const OnLoadPage = () => async dispatch => {
         dispatch({
             type:AUTHENTICATION_SUCCESS, 
             payload :{
-                IsInvalidUrl : response.IsInvalidUrl
+              //  IsInvalidUrl : response.IsInvalidUrl
             }         
         })
 
@@ -260,7 +260,7 @@ export const OnLoadPage = () => async dispatch => {
         dispatch({
             type: USER_LOGOUT,
             payload :{
-                IsInvalidUrl : response.IsInvalidUrl
+                //IsInvalidUrl : response.IsInvalidUrl
             } 
         })
     }
