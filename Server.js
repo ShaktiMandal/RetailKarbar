@@ -53,8 +53,7 @@ App.use(session({
 App.use(passport.initialize());
 App.use(passport.session());
 
-App.use('*', function Authentication(req,res,next){
-  
+App.use('*', function Authentication(req,res,next){  
   
     res.header("Access-Control-Expose-Headers", "Is-UserloggedIn");    
     if(req.isAuthenticated())
@@ -93,12 +92,16 @@ App.use('/', (req, res) => {
     if (process.env.NODE_ENV === "production" && req.isAuthenticated())
     {     
         res.setHeader("Is-UserloggedIn","true"); 
-        res.status(200).sendFile(path.join(__dirname, './client/build/index.html'));;
+        res.status(200).json({
+            Success: true
+        })
     }
     else
     {
         res.setHeader("Is-UserloggedIn","false");
-         res.status(200).sendFile(path.join(__dirname, './client/public/index.html'));;
+        res.status(200).json({
+            Success: true
+        })
     }
 });
 

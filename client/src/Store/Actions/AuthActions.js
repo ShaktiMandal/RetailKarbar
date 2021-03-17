@@ -227,11 +227,14 @@ export const OnLoadPage = () => async dispatch => {
     {
         responseData = await fetch('http://localhost:5000/', request);
     }
-    console.log("This is on page load response", responseData);
-    responseData.json().then( result => {
-        console.log("Print out the result", result);
-    })
-    .catch(error => console.log("there is an error ->", error));
+
+    var response = await responseData.json();
+    // console.log("This is on page load response", responseData);
+    // responseData.json().then( result => {
+    //     console.log("Print out the result", result);
+    // })
+    // .catch(error => console.log("there is an error ->", error));
+    console.log("Printing the response", response);
     
     var HeaderItems = {};
 
