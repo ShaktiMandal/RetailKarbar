@@ -77,16 +77,6 @@ App.use('/Dealer' , Dealer);
 App.use('/', (req, res) => {
 
     res.header("Access-Control-Expose-Headers", "Is-UserloggedIn");
-    
-    // if(req.isAuthenticated())
-    // {
-    //     console.log("Setting header as true");
-    //     res.setHeader("Is-UserloggedIn","true"); 
-    // }
-    // else{
-    //     console.log("Setting header as false");
-    //     res.setHeader("Is-UserloggedIn","false"); 
-    // }
 
     console.log("header is present", res.headersSent);
     if (process.env.NODE_ENV === "production" && req.isAuthenticated())
