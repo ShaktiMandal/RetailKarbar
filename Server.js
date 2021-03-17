@@ -82,14 +82,14 @@ App.use('/', (req, res) => {
     if (process.env.NODE_ENV === "production" && req.isAuthenticated())
     {     
         res.setHeader("Is-UserloggedIn","true"); 
-        res.status(200).json({
+        return res.status(200).json({
             Success: true
         })
     }
     else
     {
         res.setHeader("Is-UserloggedIn","false");
-        res.status(200).json({
+        return res.status(200).json({
             Success: true
         })
     }
