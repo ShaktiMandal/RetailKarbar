@@ -74,26 +74,26 @@ App.use('/Authentication/RegisterUser', Registration);
 App.use('/Product' , Product);
 App.use('/Customer' , Customer);
 App.use('/Dealer' , Dealer);
-App.use('/', (req, res) => {
+// App.use('/', (req, res) => {
 
-    res.header("Access-Control-Expose-Headers", "Is-UserloggedIn");
+//     res.header("Access-Control-Expose-Headers", "Is-UserloggedIn");
 
-    console.log("header is present", res.headersSent);
-    if (process.env.NODE_ENV === "production" && req.isAuthenticated())
-    {     
-        res.setHeader("Is-UserloggedIn","true"); 
-        return res.status(200).json({
-            Success: true
-        })
-    }
-    else
-    {
-        res.setHeader("Is-UserloggedIn","false");
-        return res.status(200).json({
-            Success: true
-        })
-    }
-});
+//     console.log("header is present", res.headersSent);
+//     if (process.env.NODE_ENV === "production" && req.isAuthenticated())
+//     {     
+//         res.setHeader("Is-UserloggedIn","true"); 
+//         return res.status(200).json({
+//             Success: true
+//         })
+//     }
+//     else
+//     {
+//         res.setHeader("Is-UserloggedIn","false");
+//         return res.status(200).json({
+//             Success: true
+//         })
+//     }
+// });
 
 App.listen(port, async function ConnectDB(){
     return await mongoose.connect(process.env.MONGO_URI).then(result =>{

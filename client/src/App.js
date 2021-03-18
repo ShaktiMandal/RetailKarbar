@@ -56,7 +56,7 @@ class App extends Component {
 
   componentDidMount()
   {  
-    this.props.OnLoadPage();
+    
   }
 
   OnLogIn = (event) => {
@@ -177,7 +177,7 @@ class App extends Component {
     {
       placeHolderText = "Enter Customer Name"
     }
-
+    debugger;
     let isSearchRoute = (this.props.location.pathname === "/Product/Search" 
                      || this.props.location.pathname === '/Customer/Customers');
                     
