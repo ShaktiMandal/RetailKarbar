@@ -82,12 +82,12 @@ App.use('/', (req, res) => {
     if (process.env.NODE_ENV === "production" && req.isAuthenticated())
     {     
         
-        return res.status(200).sendFile(path.join(__dirname , '/client/Build/index.html'))
+        return res.status(200).sendFile(path.join(__dirname , './client/build/index.html'))
     }
     else
     {
       
-        return res.status(200).sendFile(path.join(__dirname , '/client/public/index.html'))
+        return res.status(200).sendFile(path.join(__dirname , './client/public/index.html'))
     }
 });
 
