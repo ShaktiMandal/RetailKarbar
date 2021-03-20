@@ -217,6 +217,7 @@ export const OnLoadPage = () => async dispatch => {
             'Authorization': null
            }        
     }
+    debugger;
     console.log("This is on page load");
     if(process.env.NODE_ENV === 'production')
     {
@@ -228,6 +229,7 @@ export const OnLoadPage = () => async dispatch => {
         responseData = await fetch('http://localhost:5000/', request);
     }
 
+    debugger;
     var response = await responseData.json();
     // console.log("This is on page load response", responseData);
     // responseData.json().then( result => {

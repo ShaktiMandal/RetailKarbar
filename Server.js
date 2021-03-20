@@ -76,18 +76,22 @@ App.use('/Customer' , Customer);
 App.use('/Dealer' , Dealer);
 App.use('/', (req, res) => {
 
-    res.header("Access-Control-Expose-Headers", "Is-UserloggedIn");
-
-    console.log("header is present", res.headersSent);
+    let option = {
+        headers:
+        {
+            "x-timestamp": Date.now(),
+            "Is-UserloggedIn": false
+        }
+    }
+    res.header("Access-Control-Expose-Headers", "Is-UserloggedIn");    
     if (process.env.NODE_ENV === "production" && req.isAuthenticated())
     {     
-        
-        return res.status(200).sendFile(path.join(__dirname , './client/build/index.html'))
+        option.headers["Is-UserloggedIn"] = true;
+        return res.status(200).sendFile(path.join(__dirname , './client/build/index.html'),option)
     }
     else
     {
-      
-        return res.status(200).sendFile(path.join(__dirname , './client/public/index.html'))
+        return res.status(200).sendFile(path.join(__dirname , './client/public/index.html'), option)
     }
 });
 
