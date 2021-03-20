@@ -56,7 +56,7 @@ class App extends Component {
 
   componentDidMount()
   {  
-    
+    this.props.OnLoadPage();
   }
 
   OnLogIn = (event) => {
