@@ -96,10 +96,9 @@ App.use('/', (req, res) => {
 });
 
 App.listen(port, async function ConnectDB(){
-    return await mongoose.connect(process.env.MONGO_URI).then(result =>{
-        console.log("Db connection successful");        
-    })
-    .catch( error=> {
+    return await mongoose.connect(process.env.MONGO_URI)
+    .then()
+    .catch( error => {
         console.log("error", error);
     })
 });

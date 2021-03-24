@@ -84,7 +84,7 @@ class RegisterAuth extends Component{
            
         if(this.props.isRegisterCompleted)
         {
-            this.props.history.replace('/Authentication/LogIn');
+            this.props.history.replace('/');
         }
         return(
             <Aux>

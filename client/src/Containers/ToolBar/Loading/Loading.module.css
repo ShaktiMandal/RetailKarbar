@@ -34,6 +34,43 @@
     margin-top: -45px;
 }
 
+.Loader
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+    position: relative;
+    -webkit-box-reflect: below -12px linear-gardient(transparent, rgba(0,0,0,0.2));
+}
+
+.Loader span
+{
+    position:relative;
+    display: inline-block;
+    color: #FFFFFF;
+    font-size: 1em;
+    text-transform: uppercase;
+    animation: animate 1s ease-in-out infinite;
+    animation-delay: calc(0.1s * var(--i));
+}
+
+@keyframes animate
+{
+    0%
+    {
+        transform: translateY(0px);
+    }
+    20%
+    {
+        transform: translateY(-20px);
+    }
+    40%, 100%
+    {
+        transform: translateY(0px);
+    }
+}
+
     .wballwrapper {
         position: absolute;
         width: 86px;
