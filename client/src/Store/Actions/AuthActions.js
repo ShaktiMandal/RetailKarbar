@@ -53,7 +53,7 @@ export const UserLogIn = (data) => async dispatch => {
         {    
             var responseData = await response.json();         
             if(!responseData.Success)
-            {
+            {              
                 dispatch({
 
                     type: AUTHENTICATION_FAILED,
@@ -70,8 +70,7 @@ export const UserLogIn = (data) => async dispatch => {
             }
             else
             {            
-                const {token} = responseData;
-        
+                localStorage.setItem("UserId", responseData.UserId);        
                 dispatch({
                     type:AUTHENTICATION_SUCCESS,
                     payload: responseData
@@ -146,6 +145,11 @@ export const UserLogOut = () => async dispatch => {
 
     if(responseData.Success)
     {
+        if(localStorage.getItem("UserId") !== null)
+        {
+            localStorage.removeItem("UserId");
+        }
+
         dispatch({
             type: USER_LOGOUT,
             payload: {            

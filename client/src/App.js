@@ -167,6 +167,7 @@ class App extends Component {
   render() {
 
     let placeHolderText;
+    let isSessionActive; 
 
     if(this.props.location.pathname === "/Product/Search")
     {
@@ -180,6 +181,15 @@ class App extends Component {
     debugger;
     let isSearchRoute = (this.props.location.pathname === "/Product/Search" 
                      || this.props.location.pathname === '/Customer/Customers');
+
+    if(localStorage.getItem("UserId") !== null)
+    {
+      isSessionActive = true;
+    }
+    else
+    {
+      isSessionActive = false;
+    }
                     
     return (      
       <div className={classes.BackgroundDiv}>
@@ -187,7 +197,7 @@ class App extends Component {
           <div className={classes.LayoutDiv}>           
             <div className={classes.Topbar}>
               <div className={classes.TopbarRight}>
-              { this.props.isUserLoggedIn ? <Navbar hamburgerClicked = {this.hamburgerClickedHandler}/> : null }
+              { isSessionActive ? <Navbar hamburgerClicked = {this.hamburgerClickedHandler}/> : null }
                             
               </div>
               <div className={classes.TopbarMiddle}>
@@ -195,7 +205,7 @@ class App extends Component {
                   <img  src ={LogoImg} onClick = {this.OnReturnHome}/>
                 </div>
                 <div className={classes.TextSearch}>
-                  { isSearchRoute && this.props.isUserLoggedIn ? 
+                  { isSearchRoute && isSessionActive  ? 
                     <input 
                     onChange = {this.OnSearch}
                     type="text" 
@@ -205,7 +215,7 @@ class App extends Component {
               </div>
               <div className={classes.TopbarLeft}>
                 {
-                  this.props.isUserLoggedIn ? 
+                  isSessionActive  ? 
                   <div className={classes.CartItemStyle} onClick={this.OnShowCartItem}>
                     <img className={classes.CartImageStyle} src={CartImage}/>
                     <label className={classes.CartItemCountStyle} >{this.props.totalProductCount}</label>
@@ -214,8 +224,8 @@ class App extends Component {
                 
                 <div>
                   <Button
-                    OnClick = { this.props.isUserLoggedIn ? this.OnLogOut : this.OnLogIn}
-                    Value= { this.props.isUserLoggedIn ? "Log Out" : ""}
+                    OnClick = { isSessionActive  ? this.OnLogOut : this.OnLogIn}
+                    Value= { (this.props.isUserLoggedIn || isSessionActive ) ? "Log Out" : ""}
                     ButtonType= "button"
                     ButtonStyle ={{   
                       float: 'right',
@@ -233,11 +243,11 @@ class App extends Component {
                 </div>    
               </div>
             </div>
-            <div className= { this.props.isUserLoggedIn ? 
+            <div className= { isSessionActive  ? 
                              this.state.isSideBarDisplay ? classes.ContentAreaOpened : classes.ContentArea
                             : null
                             }>
-                {this.props.isUserLoggedIn ?
+                { (this.props.isUserLoggedIn || isSessionActive ) ?
                   <SideBar clicked={this.OnSidebarClicked} 
                   IsEligibleForMobile = {false}
                   OnRedirect = {this.OnRedirect}
@@ -248,7 +258,7 @@ class App extends Component {
 
               <div className={classes.MainContent}>                
                   {            
-                    this.props.isUserLoggedIn ?               
+                    isSessionActive  ?               
                     <Switch>  
                       <Route path="/Home"   exact component={Home}/>
                       <Route path="/Product/Search" exact component={Search}/>
@@ -271,7 +281,7 @@ class App extends Component {
               
              
             </div>   
-            {this.props.isUserLoggedIn ?
+            {isSessionActive  ?
             <SideBar clicked={this.OnSidebarClicked} 
                   IsEligibleForMobile = {true}
                   OnRedirect = {this.OnRedirect}
