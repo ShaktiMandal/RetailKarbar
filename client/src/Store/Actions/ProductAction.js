@@ -193,7 +193,7 @@ export const UpdateFavouriteProduct = (requestDetails) => async (dispatch) => {
     }  
 }
 
-export const ClearProductList = () => dispatch => {
+export const ClearProductList = () => async dispatch => {
     dispatch({
         type: CLEARPRODUCTLIST
     })

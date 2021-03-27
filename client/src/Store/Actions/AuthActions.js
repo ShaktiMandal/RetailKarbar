@@ -145,8 +145,10 @@ export const UserLogOut = () => async dispatch => {
 
     if(responseData.Success)
     {
+        console.log("Inside on log out from action");
         if(localStorage.getItem("UserId") !== null)
         {
+            console.log("delete log out from action");
             localStorage.removeItem("UserId");
         }
 

@@ -51,14 +51,14 @@ export const AddItemToCart = (productItem, orderList) => (dispatch) => {
     }
 }
 
-export const ShowYourCartItem = () => (dispatch) =>{
+export const ShowYourCartItem = () => async (dispatch) =>{
 
     dispatch({
         type: ActionTypes.DISPLAYORDERITEM
     });
 }
 
-export const ClearOrderList = () => (dispatch) =>{
+export const ClearOrderList = () => async (dispatch) =>{
 
     dispatch({
         type: ActionTypes.CLEARORDERLIST

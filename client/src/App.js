@@ -64,11 +64,12 @@ class App extends Component {
     this.props.history.push('/');
   }
 
-  OnLogOut = (event) =>{
+  OnLogOut = async (event) =>{
+    console.log("YOu Have clicked on log out");
     event.preventDefault();
-    this.props.ClearOrderList();
-    this.props.ClearProductList();
-    this.props.UserLogOut();
+    await this.props.ClearOrderList();
+    await this.props.ClearProductList();
+    await this.props.UserLogOut();
     this.props.history.push('/');
   }
 
@@ -79,7 +80,6 @@ class App extends Component {
 
   OnSearch = (event) => {
     event.preventDefault();
-    console.log(event.target.value);
     var routePath = this.props.location.pathname;
        
     switch(routePath)
@@ -97,53 +97,53 @@ class App extends Component {
     }
   }
 
-  OnShowCartItem = (event) => {
+  OnShowCartItem = async (event) => {
        
-    this.props.ClearProductList();
-    this.props.ShowYourCartItem();
+    await this.props.ClearProductList();
+    await this.props.ShowYourCartItem();
     this.props.history.push('/Customer/Cart'); 
   }
 
-  OnRedirect = (path) =>{
+  OnRedirect = async (path) =>{
            
     switch(path)
     {
       case '/Product/OrderProduct' :
       {       
-        this.props.ClearProductList();
+        await this.props.ClearProductList();
         this.props.history.push('/Product/Search');
         break;
       }
       case '/Product/OutOfStocks' :
       {        
-        this.props.ClearProductList();
+        await this.props.ClearProductList();        
+        await this.props.FetchProductDetails('OutOfStock');
         this.props.history.push('/Product/Search');
-        this.props.FetchProductDetails('OutOfStock');
         break;
       }
       case '/Product/Favourite' :
       {        
-        this.props.ClearProductList();
+        await this.props.ClearProductList();
+        await this.props.FetchProductDetails('Favourite');
         this.props.history.push('/Product/Search');
-        this.props.FetchProductDetails('Favourite');
         break;
       }
       case '/Product/AddProduct' :
       {
-        this.props.ClearProductList();
+        await this.props.ClearProductList();
         this.props.history.push(path);
         break;
       }
       case '/Customer/Customers' :
       {
-          this.props.ClearProductList();
+          await this.props.ClearProductList();
           this.props.history.push(path);
           break;
       }
       default:
       {
-        this.props.ClearProductList();
-        this.props.ClearOrderList();
+        await this.props.ClearProductList();
+        await this.props.ClearOrderList();
         this.props.history.push('/Authentication/LogIn');
       }
     }
@@ -158,8 +158,7 @@ class App extends Component {
   }
 
   OnReturnHome = (event) =>
-  {
-       
+  {       
     event.preventDefault();
     this.props.history.push("/");
   }
@@ -190,7 +189,8 @@ class App extends Component {
     {
       isSessionActive = false;
     }
-                    
+     
+    console.log("Status of the user", isSessionActive);
     return (      
       <div className={classes.BackgroundDiv}>
         <Layout> 
@@ -272,9 +272,7 @@ class App extends Component {
                     <Switch>  
                         <Route path = '/' exact component={LogIn}/>
                         <Route path="/Authentication/Register" exact component={Register} />
-                        <Route path="/Authentication/Password" exact component={ResetPassword}/>
-                        <Route path="/" component={NotFound} />                       
-                          
+                        <Route path="/Authentication/Password" exact component={ResetPassword}/>                          
                     </Switch>                     
                   }
               </div>
