@@ -12,23 +12,19 @@ import ExpandIcon  from '../../Assests/Logo/expand-Icon.png';
 import CloseButton from "../../Containers/ToolBar/FormCloseButton/FormCloseButton";
 import ProductNotFound from '../../Assests/Logo/Page_not_found_404.jpg';
 import NotFoundMessage from '../../Containers/ToolBar/MessageBox/NotFoundMessage';
+import Loading from '../../Containers/ToolBar/Loading/Loading';
 
 
 const CustomerOrderList = (props) => {
 
+    console.log("Order list from order", props.listOfOrders);
     var ErrorContainer = props.ErrorMsg.length === 0 ? null :
                         <div className={classes.ErrorDiv}>
                             <ErrorBox CloseErrorPanel = {props.OnCloseErrorPanel}  ErrorMsg={props.ErrorMsg}/>      
-                        </div>
-    return(
+                       </div>
+    var orderSection =  props.listOfOrders.length === 0 ?  <Loading LoadingMessage="Fetching order history..."/> :
         <Aux>
-            <div className={classes.rightDiv}> 
-                {ErrorContainer}                    
-                <div className={classes.CloseBtnDiv}>
-                    <CloseButton OnCloseClick ={props.OnCloseClick}/>      
-                </div>                          
-                <div className={classes.OrderList}> 
-                    <div className= {classes.OrderSearchArea}>
+             <div className= {classes.OrderSearchArea}>
                         <input 
                         onChange = {props.OnOrderSearch}
                         type="text" 
@@ -100,7 +96,17 @@ const CustomerOrderList = (props) => {
                             })
                         }
                     </ul> : <NotFoundMessage Message="Oops! There is not such order"/>                  
-                    }                                       
+                    }    
+        </Aux>
+    return(
+        <Aux>
+            <div className={classes.rightDiv}> 
+                {ErrorContainer}                    
+                <div className={classes.CloseBtnDiv}>
+                    <CloseButton OnCloseClick ={props.OnCloseClick}/>      
+                </div>                          
+                <div className={classes.OrderList}> 
+                    {orderSection}
                 </div>
             </div>
         </Aux>

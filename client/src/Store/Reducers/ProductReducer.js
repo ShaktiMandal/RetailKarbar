@@ -49,7 +49,8 @@ const ProductReducer = (state = initialState, action) =>{
                    
                 return {
                     ...state,
-                    IsFavouriteAdded: payload.Success
+                    IsFavouriteAdded: payload.Success,
+                    // ProductList: payload.ProductList
                 }
                 break;
             }

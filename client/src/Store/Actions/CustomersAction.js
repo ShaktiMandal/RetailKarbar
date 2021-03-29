@@ -214,7 +214,7 @@ export const GetOrderDetails = (customerId) => async dispatch =>{
     }
 }
 
-export const GetDueOrders = (orderList, index) => (dispatch) => {
+export const GetDueOrders = (orderList, index) => async (dispatch) => {
 
        
     dispatch({

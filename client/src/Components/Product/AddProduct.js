@@ -28,7 +28,9 @@ class AddProduct extends Component{
         event.preventDefault();
         Validator.ProductValidation(this.props.productDetails);
         const errors = Validator.GetErrors();
-        errors.length === 0 ? this.props.AddYourProduct(this.props.productDetails) : this.props.AddProductOnError(errors);        
+        errors.length === 0 ? 
+        this.props.AddYourProduct(this.props.productDetails)
+        : this.props.AddProductOnError(errors);        
     }
     
     OnCloseClick = (event) =>{

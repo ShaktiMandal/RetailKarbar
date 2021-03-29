@@ -24,7 +24,6 @@ import {
             RemoveItemFromCart,
             ReduceProductCount           
         } from '../../Store/Actions/OrderAction';
-import SearchProductImg from '../../../src/Assests/Logo/Searching-Product-Image.png';
 
 class SearchedProduct extends Component {
 
@@ -291,8 +290,7 @@ class SearchedProduct extends Component {
         return(
          <Aux>
           
-            <div className={classes.SearchResultContainer}>   
-                <img src={SearchProductImg} className={classes.DisplayImage}/>             
+            <div className={classes.SearchResultContainer}>                           
                 {
                     this.CreateProductElement()
                 }

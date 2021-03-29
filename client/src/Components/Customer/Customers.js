@@ -23,7 +23,6 @@ import {
     ResetOrderHistory,
     OnFilterOrderItems
 } from '../../Store/Actions/CustomersAction';
-import SearchProductImg from '../../Assests/Logo/Customer-Searching-Manager.png';
 
 class Customers extends Component
 {   
@@ -85,14 +84,14 @@ class Customers extends Component
         });
     }
 
-    OnDuePayment = (event, index) =>{
+    OnDuePayment = async (event, index) =>{
         event.preventDefault();
         this.setState({IsCustomerSelectionDisplay: false});
         this.setState({ChosenOption: "DuePayment"});
-        this.props.GetOrderDetails(this.props.customerDetails[index].CustomerId);        
+        await this.props.GetOrderDetails(this.props.customerDetails[index].CustomerId);        
     }
 
-    OnShowPurchaseHistory = (event, index) =>{
+    OnShowPurchaseHistory = async (event, index) =>{
 
         event.preventDefault();
         this.setState({
@@ -102,16 +101,16 @@ class Customers extends Component
             FilteredOrderItems : [],
             SelectedPayableItem: []
         });
-        this.props.GetOrderDetails(this.props.customerDetails[index].CustomerId);        
+        await this.props.GetOrderDetails(this.props.customerDetails[index].CustomerId);        
     }
 
-    OnDueOrderDetails = (event, index) => {
+    OnDueOrderDetails = async (event, index) => {
         event.preventDefault();
         this.setState({ChosenOption: "OrderHistory"});
         if(this.props.listOfOrders !== undefined 
             && this.props.listOfOrders.length > 0)
         {
-            this.props.GetDueOrders(this.props.listOfOrders, index)
+            await this.props.GetDueOrders(this.props.listOfOrders, index)
         }
     }
 
@@ -318,8 +317,7 @@ class Customers extends Component
 
     render()
     { 
-           
-      
+
         let CustomerResultArea = 
         <CustomerResult        
         customerDetails       = {this.props.customerDetails}
@@ -329,13 +327,13 @@ class Customers extends Component
         IsShowLoading         = {this.props.isShowLoading}
         IsCustomerSearched    = {this.props.isCustomerSearched}
         />;
-        
+       
         let elementToBeDisplayed = this.ChooseYourAction();
+        
 
         return(
             <Aux>
-                <div className={classes.Container}>  
-                    <img src={SearchProductImg} className={classes.DisplayImage} alt=""/>                      
+                <div className={classes.Container}>                      
                     <div className={this.state.IsCustomerSelectionDisplay ? 
                         classes.SearchDisplayDiv :classes.SearchDiv}>                       
                         {CustomerResultArea}

@@ -1,10 +1,11 @@
+const { request } = require('express');
 const express = require('express');
 const router  = express.Router();
 const Product = require('../../Model/ProductModel/ProductModel');
 
 router.post('/AddProduct', (req, res, next) => {
     
-    console.log("Add Product", req.body)
+    
     let requestData = new Product({
         ProductName: req.body.ProductName,
         Price      : req.body.Price,
@@ -14,7 +15,39 @@ router.post('/AddProduct', (req, res, next) => {
         IsFavourite: req.body.IsFavourite
     });
    
-    requestData.save()
+    Product.find({ProductName: requestData.ProductName})
+    .then(result => {
+        if(result)
+        {
+            console.log("Add Product", result);
+            Product.updateOne(
+                {ProductName: requestData.ProductName},
+                {$set : {
+                Price: requestData.Price, 
+                Stock : requestData.Stock,
+                Manufacturer : requestData.Manufacturer,
+                ExpairyDate: requestData.ExpairyDate,
+                IsFavourite : requestData.IsFavourite
+                }})
+                .then( result => {
+                    if(result)
+                    {
+                        res.status(200).send({
+                            Success: true
+                        })
+                    }
+                })
+                .catch(error => {
+                    console.log("Add Product error", error);
+                    res.status(400).send({
+                        Success: false,
+                        error: "Unable to save product details. Please try again"
+                    })
+                })
+        }
+        else
+        {
+            requestData.save()
                .then( result => {
                    if(result)
                    {
@@ -28,7 +61,10 @@ router.post('/AddProduct', (req, res, next) => {
                        Success: false,
                        error: "Unable to save product details. Please try again"
                    })
-               })
+               });
+        }
+    })
+    
 });
 
 router.post('/RemoveProduct', (req, res, next) => {
@@ -163,11 +199,13 @@ router.post('/AddToFavourite', (req, res, next) =>{
                 .then( result => {                    
                     if(result)
                     {
-                           
-                        console.log("out of stocks", result);
-                        res.status(200).send({
-                            Success: true
-                        })
+                        Product.find({IsFavourite : true})
+                        .then(favouriteProducts => {
+                            res.status(200).send({
+                                Success: true,
+                                ProductList: favouriteProducts
+                            })
+                        }) 
                     }
                     else
                     {
