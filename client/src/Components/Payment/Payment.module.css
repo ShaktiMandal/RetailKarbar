@@ -1,3 +1,11 @@
+
+.CustomerDetails
+ {
+      display: none;
+      margin: auto;
+      width: 80%;
+ }
+
 .PaymentContainer
 {
     width: 100%;
@@ -239,5 +247,10 @@
 
     .CashPaymentDiv{   
         width: 100%;       
+    }
+
+    .CustomerDetails
+    {
+        display: block;
     }
 }

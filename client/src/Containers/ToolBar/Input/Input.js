@@ -6,6 +6,7 @@ const Input = (props) =>{
     
     return (
         <input type={props.type} 
+        readOnly = {props.IsReadOnly}
         list= {props.listName}
         autoComplete = "off"
         style = {props.CustomizeStyle}

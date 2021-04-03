@@ -9,6 +9,7 @@ import {
 } from './ActionTypes';
 
 import fetch from 'node-fetch';
+import { CallApI, FormServiceRequest } from './Action';
 
 export const ChooseAddProduct = (props) => (dispatch) =>
 {
@@ -131,17 +132,7 @@ export const FetchProductDetails = (requestDetails) => async (dispatch) => {
 export const UpdateFavouriteProduct = (requestDetails) => async (dispatch) => {
 
     try{
-
-        let response;
-        let fetchRequest ={
-            method:'POST',
-            credentials: 'include',
-            headers: { 
-                'Accept' : 'application/json, text/plain',
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(requestDetails)
-        }        
+             
         dispatch({
             type: LOADING,
             payload: {
@@ -149,36 +140,66 @@ export const UpdateFavouriteProduct = (requestDetails) => async (dispatch) => {
             }
             });
 
-        if(process.env.NODE_ENV === 'production')
-        {
-            response = await fetch('/Authentication/Product/AddToFavourite', fetchRequest);
-        }
-        else
-        {
-            response = await fetch("http://localhost:5000/Product/AddToFavourite", fetchRequest);
-        } 
+        CallApI('/Product/AddToFavourite', FormServiceRequest('POST', requestDetails))
+        .then(response => response.json())
+        .then(result => {
+            if(result.Success)
+            {
+                dispatch({
+                    type: ADD_FAVOURITE_DONE,
+                    payload: result
+                });
 
-        let responseData =  await response.json(); 
+                CallApI('/Product/GetYourFavourites', FormServiceRequest('GET', {}))
+                .then(response => response.json())
+                .then(result => {
+                    if(result.Success)
+                    {
+                        dispatch({
+                            type: FETCH_PRODUCTS,
+                            payload: result
+                        })
+                    }
+                    else
+                    {
+                        dispatch({
+                            type: FETCH_PRODUCTS_FAILED,
+                            payload: {
+                                Success: false,
+                                ErrorMsg: "Unable to fetch product details, Please try again."           
+                            }
+                        })
+                    }
+                })
+                .catch( error => {
+                    dispatch({
+                        type: FETCH_PRODUCTS_FAILED,
+                        payload: {
+                            Success: false,
+                            ErrorMsg: "Unable to fetch product details, Please try again."           
+                        }
+                    })
+                })
+            }
+        })
+        .catch(error => {
+            dispatch({
+                type: FETCH_PRODUCTS_FAILED,
+                payload: {
+                    Success: false,
+                    ErrorMsg: error
+                    
+                }
+            })
+        })
+
+       
         dispatch({
             type: LOADING,
             payload: {
                 DisplayLoading : false
             }
             });
-        if(responseData.Success)
-        {
-            dispatch({
-                type: ADD_FAVOURITE_DONE,
-                payload: responseData
-            })
-        }
-        else
-        {
-            dispatch({
-                type: FETCH_PRODUCTS_FAILED,
-                payload: responseData
-            })
-        }
     }
     catch(error)
     {

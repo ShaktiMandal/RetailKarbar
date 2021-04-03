@@ -11,7 +11,7 @@ import AddProductImage from '../../Assests/Logo/Add-product.png';
 import CloseButton from "../../Containers/ToolBar/FormCloseButton/FormCloseButton";
 import ErrorBox from '../../Containers/ToolBar/Error/Error';
 import InformationBox from '../../Containers/ToolBar/Information/Information';
-import {AddYourProduct, AddProductOnError, WindowClosed, ClearError} from '../../Store/Actions/AddProductAction';
+import {AddYourProduct, AddYourProductAsync, AddProductOnError, WindowClosed, ClearError} from '../../Store/Actions/AddProductAction';
 import {FetchProductDetails} from '../../Store/Actions/ProductAction';
 import Validator from '../../Validator/Validator';
 import classes from './AddProduct.module.css';
@@ -19,8 +19,7 @@ import classes from './AddProduct.module.css';
 class AddProduct extends Component{
 
     componentDidMount()
-    {
-           
+    {           
         this.props.FetchProductDetails("");
     }
 
@@ -29,7 +28,7 @@ class AddProduct extends Component{
         Validator.ProductValidation(this.props.productDetails);
         const errors = Validator.GetErrors();
         errors.length === 0 ? 
-        this.props.AddYourProduct(this.props.productDetails)
+        this.props.AddYourProductAsync(this.props.productDetails)
         : this.props.AddProductOnError(errors);        
     }
     
@@ -37,7 +36,8 @@ class AddProduct extends Component{
 
         Validator.ClearErrors();
         this.props.WindowClosed();
-        this.props.history.replace("/");
+        this.props.history.replace("/Home");
+
     }
 
     CloseErrorPanel = (event) => {                
@@ -46,11 +46,8 @@ class AddProduct extends Component{
     }
 
     OnValueChange = (event) =>{
-
            
         event.preventDefault();
-          
-
         let data = this.props.productDetails;
         if(data)
         {        
@@ -252,6 +249,7 @@ const mapStateToProps = (state) =>{
 
 const mapDispatchToProps = {
     AddYourProduct,
+    AddYourProductAsync,
     AddProductOnError,
     WindowClosed,
     FetchProductDetails,
@@ -262,6 +260,7 @@ AddProduct.propTypes = {
     FetchProductDetails: PropTypes.func.isRequired,
     AddYourProduct: PropTypes.func.isRequired,
     AddProductOnError: PropTypes.func.isRequired,
+    AddYourProductAsync: PropTypes.func.isRequired,
     WindowClosed: PropTypes.func.isRequired,
     ClearError: PropTypes.func.isRequired,
     productDetails: PropTypes.object.isRequired,

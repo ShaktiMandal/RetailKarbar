@@ -1,6 +1,8 @@
 import React from 'react';
 import Aux from '../../HOC/Auxiliary';
 import classes from './Payment.module.css';
+import Input from '../../Containers/ToolBar/Input/Input';
+import ErrorBox from '../../Containers/ToolBar/Error/Error';
 import TransactionImage from '../../Assests/Logo/Successful-transaction.png';
 import Button  from '../../Containers/ToolBar/Button/button';
 import CashIcon   from '../../Assests/Logo/Cash-icon.png';
@@ -13,11 +15,73 @@ import CloseButton from "../../Containers/ToolBar/FormCloseButton/FormCloseButto
 
 const PaymentDetails = (props) => {
 
+    console.log("Customer Details", props.customerDetails);
+    console.log("payment Details", props.paymentDetails);
        
     let totalDebitAmount = 0.00;
     var PaymentType = props.IsPaymentSuccessful ? SuccessTransaction 
         : props.PaymentType === "Cash"
         ? CashFrom : CardFrom; 
+
+    var ErrorElement =  props.ErrorMsg.length > 0 ?               
+        <div className={classes.ErrorDiv}>
+           <ErrorBox ErrorMsg={props.ErrorMsg}
+           CloseErrorPanel = {props.CloseErrorPanel}
+           />      
+       </div> : null
+
+    var PaymetArea = props.IsPaymentSuccessful === false ?
+
+    <div className={classes.CustomerDetails}> 
+        {ErrorElement}    
+        <div className={classes.inputdiv}> 
+            <Input type="number"   
+            id = "givenCash"                         
+            IsRequired 
+            RequiredLength="100"
+            OnChange={props.OnPaymentValueChange}
+            InputValue ={props.GivenAmount}
+            />
+            <h5>Given Cash</h5>
+        </div>                           
+        <div className={classes.inputdiv }>                                   
+            <Input type="text" 
+            IsReadOnly = "true"
+            id = "customerName"
+            IsRequired  
+            InputValue ={props.customerDetails.CustomerName}
+            />
+            <h5>Customer Name</h5>
+        </div>
+        <div className={classes.inputdiv }>
+            <Input type="number"                                
+            id = 'phoneNumber'
+            IsReadOnly = "true"
+            IsRequired 
+            RequiredLength=""
+            InputValue ={props.customerDetails.PhoneNumber}
+            />
+            <h5>Phone Number</h5>
+        </div>
+
+        <div className={classes.logInBtn}>
+            <Button 
+            OnClick = {props.OnPayment}
+            ButtonStyle ={{
+                width: "100%",
+                border: "none",
+                outline: "none",
+                height: 35,
+                color: "white",
+                fontSize: 20,
+                backgroundColor: "lightseagreen",
+                textAlign: "center",
+                userSelect: "none"
+            }}
+            Value="Make Payment"></Button>
+        </div>
+    </div> : null;
+
 
     return(
         <Aux>
@@ -48,10 +112,7 @@ const PaymentDetails = (props) => {
                                         </div>
                                         <div>
                                             {item.DueAmount.toFixed(2)}
-                                        </div>
-                                        {/* <div onClick = {(event) => {props.OnDueOrderDetails(event,index)}}>
-                                            <img src={OrderImg}  className={classes.OrderIcon}/>
-                                        </div> */}
+                                        </div>                             
                                     </li>
                                 )
                             })
@@ -63,6 +124,7 @@ const PaymentDetails = (props) => {
                         <h2>Pay :  {totalDebitAmount === 0 ? "0.00" : totalDebitAmount.toFixed(2)}</h2>
                     </div> 
                     <div className={classes.PaymentDetails}>
+                        {PaymetArea}
                         <PaymentType
                         TransactionImage={TransactionImage}
                         OnValueChange ={ props.OnPaymentValueChange}

@@ -57,6 +57,15 @@ const AddProductReducer = (state = initialState, action) =>{
             {
                 return{
                     ...state,
+                    ProductDetails: {
+                        ProductName:"",
+                        Price: "",
+                        Stock: "",
+                        Manufacturer: "",
+                        ExpairyDate: new Date("<YYYY-mm-dd>")
+                    },
+                    IsProdAddedSuccessfully: false,
+                    InformationMessage: "",
                     AddOnError: ""
                 }
             }

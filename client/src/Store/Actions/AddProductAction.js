@@ -3,9 +3,11 @@ import {
     ADDPRODUCT_FAILED,
     ADD_PRODUCTWINDOW_CLOSED,
     ADDPRODUCT_CLEARERROR,
-    ADDPRODUCT_CLEARMSG    
+    ADDPRODUCT_CLEARMSG ,
+    FETCH_PRODUCTS  
 } from './ActionTypes'
 import fetch from 'node-fetch';
+import { CallApI, DispatchAction, FormSearchParam, FormServiceRequest } from './Action';
 
 export const AddYourProduct = (productDetails) => async (dispatch) => {
 
@@ -66,6 +68,50 @@ export const AddYourProduct = (productDetails) => async (dispatch) => {
     }    
 };
 
+export const AddYourProductAsync = (productDetails) => async (dispatch) => {
+
+            CallApI('/Product/AddProduct', FormServiceRequest('POST', productDetails))
+            .then( response => response.json())
+            .then( result => {
+                if(result.Success)
+                {
+                    CallApI('/Product/FetchProduct?' + FormSearchParam(""), FormServiceRequest('GET', {}))
+                    .then(response => response.json())
+                    .then(productList => {
+                        if(productList)
+                        {
+                            dispatch({
+                                type: FETCH_PRODUCTS,
+                                payload: productList
+                            });
+
+                            dispatch({
+                                type: ADDPRODUCT_SUCCESSFULLY,
+                                payload: result,
+                                ErrorMsg: ""
+                            });
+                        }
+                    })
+                    
+                }
+                else
+                {
+                    dispatch({
+                        type: ADDPRODUCT_FAILED,
+                        payload: result,
+                        ErrorMsg: ""
+                    })
+                }
+            })
+            .catch(error => {
+                dispatch({
+                    type: ADDPRODUCT_FAILED,
+                    payload: {Success : false},
+                    ErrorMsg: error
+                })
+            })
+}
+
 export const AddProductOnError = (error) => (dispatch) => {
 
     dispatch({
@@ -96,4 +142,3 @@ export const ClearError = (isError, customerData) => (dispatch) =>{
         type: ADDPRODUCT_CLEARMSG
     })
 }
-

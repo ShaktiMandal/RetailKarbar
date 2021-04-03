@@ -38,7 +38,8 @@ class Customers extends Component
             ChangeAmount: 0.00,
             TotalDueAmtToPay: 0.00,
             FilteredOrderItems: [],
-            SelectedPayableItem: []
+            SelectedPayableItem: [],
+            CustomerDetials : {}
         }
     }
     
@@ -88,6 +89,7 @@ class Customers extends Component
         event.preventDefault();
         this.setState({IsCustomerSelectionDisplay: false});
         this.setState({ChosenOption: "DuePayment"});
+        this.state.CustomerDetials = this.props.customerDetails[index];
         await this.props.GetOrderDetails(this.props.customerDetails[index].CustomerId);        
     }
 
@@ -246,6 +248,7 @@ class Customers extends Component
             case "DuePayment":
                 return(
                     <Payment
+                    customerDetails = {this.state.CustomerDetials}
                     paymentDetails = {this.state.SelectedPayableItem.length > 0 ?
                          this.state.SelectedPayableItem : this.props.listOfOrders}
                     OnCashPayment= {this.OnCashPayment}
