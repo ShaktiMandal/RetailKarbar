@@ -12,9 +12,9 @@ import AnimatedText from '../../Containers/ToolBar/SearchText/SearchText';
 const CustomerResult = (props) => {
     
        
-    if(props.IsShowLoading === true)
+    if(props.LoadingMessage.length !== 0)
     {
-        return( <Loading LoadingMessage="Fetching cutomers..."/> );
+        return( <Loading LoadingMessage = {props.LoadingMessage}/> );
     };
 
     return(

@@ -1,3 +1,7 @@
+import { rejects } from 'assert'
+import { resolve } from 'path'
+import {LOADING} from './ActionTypes'
+
 export const FormServiceRequest = (methodName, requestData) => {
 
     if(methodName === 'POST')
@@ -59,4 +63,25 @@ export const FormSearchParam = (paramDetails) => {
                                                 ' = ' + encodeURIComponent(searchParams[param])
                                         )
                                         .join('&');
+}
+
+export const SetInProgressMsg = async (loadingMessage) => (dispatch) => {
+
+    return new Promise((resolve, rejects) => {
+        return resolve( dispatch({
+            type: LOADING,
+            payload: {
+                LoadingMessage : loadingMessage
+            }
+        }));
+    })
+}
+
+export const RemoveInProgressMsg = () => (dispatch) => {
+    dispatch({
+        type: LOADING,
+        payload: {
+            LoadingMessage : ""
+        }
+    })
 }

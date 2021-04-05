@@ -6,7 +6,7 @@ const initialState = {
     IsProductSearched: false,
     IsFavouriteAdded: false,
     IsUserAuthenticated: false,
-    IsShowLoading: false,
+    LoadingMessage: "",
     IsUserUnAuthorized : false,
     ErrorMsg: ""
 }
@@ -61,7 +61,7 @@ const ProductReducer = (state = initialState, action) =>{
                     IsProductSearched: false,
                     IsFavouriteAdded: false,
                     IsUserAuthenticated: false,
-                    IsShowLoading: false,
+                    LoadingMessage: "",
                     ProductList: [],
                     ErrorMessage: ""
                 }
@@ -76,16 +76,15 @@ const ProductReducer = (state = initialState, action) =>{
                 }
                 break;
             }
-        case ActionTypes.LOADING:
-            {    
-                           
-                    return {
-                        ...state,
-                        IsShowLoading : payload.DisplayLoading,
-                        ErrorMsg: ""
-                    }
-                    break;
-            }
+            case ActionTypes.LOADING:
+                {    
+                               
+                        return {
+                            ...state,
+                            LoadingMessage : payload.LoadingMessage                           
+                        }
+                        break;
+                }
 
             case ActionTypes.UNAUTHORIZED:
             {    

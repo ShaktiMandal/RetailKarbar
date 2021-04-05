@@ -44,7 +44,7 @@ export const GetCustomerDetails = (customer) =>async  (dispatch)=> {
     dispatch({
         type: LOADING,
         payload: {
-            DisplayLoading : true
+            LoadingMessage : "Fetching Customer Details..."
         }
     });
 
@@ -61,7 +61,7 @@ export const GetCustomerDetails = (customer) =>async  (dispatch)=> {
     dispatch({
         type: LOADING,
         payload: {
-            DisplayLoading : false
+            LoadingMessage : ""
         }
     });
     if(responseData.Error.length === 0)
@@ -165,13 +165,12 @@ export const GetOrderDetails = (customerId) => async dispatch =>{
     
                                         .join('&');
         
-    dispatch({
-        type: LOADING,
-        payload: {
-            DisplayLoading : true
-        }
+        dispatch({
+            type: LOADING,
+            payload: {
+                LoadingMessage : "Fetching Order Details..."
+            }
         });
-
         if(process.env.NODE_ENV === 'production')
         {
             response = await fetch('/Customer/GetCustomerOrders?' + query, request);
@@ -187,9 +186,9 @@ export const GetOrderDetails = (customerId) => async dispatch =>{
     dispatch({
         type: LOADING,
         payload: {
-            DisplayLoading : false
+            LoadingMessage : ""
         }
-        });
+    });
 
     if(responseData.Error.length === 0)
     {

@@ -9,7 +9,7 @@ import {
 } from './ActionTypes';
 
 import fetch from 'node-fetch';
-import { CallApI, FormServiceRequest } from './Action';
+import { CallApI, FormServiceRequest, RemoveInProgressMsg, SetInProgressMsg } from './Action';
 
 export const ChooseAddProduct = (props) => (dispatch) =>
 {
@@ -44,11 +44,11 @@ export const FetchProductDetails = (requestDetails) => async (dispatch) => {
             type: CLEARPRODUCTLIST
         });
         
-       dispatch({
-        type: LOADING,
-        payload: {
-            DisplayLoading : true
-        }
+        dispatch({
+            type: LOADING,
+            payload: {
+                LoadingMessage : "Fetching Product Details..."
+            }
         });
         switch(requestDetails)
         {
@@ -91,9 +91,9 @@ export const FetchProductDetails = (requestDetails) => async (dispatch) => {
         dispatch({
             type: LOADING,
             payload: {
-                DisplayLoading : false
+                LoadingMessage : ""
             }
-        }); 
+        });
            
         if(response.status === 401)
         {
@@ -133,16 +133,18 @@ export const UpdateFavouriteProduct = (requestDetails) => async (dispatch) => {
 
     try{
              
-        dispatch({
-            type: LOADING,
-            payload: {
-                DisplayLoading : true
-            }
-            });
+        // dispatch({
+        //     type: LOADING,
+        //     payload: {
+        //         DisplayLoading : true
+        //     }
+        //     });
 
-        CallApI('/Product/AddToFavourite', FormServiceRequest('POST', requestDetails))
+        SetInProgressMsg("Setting Your Favourite....")
+        .then (() =>  CallApI('/Product/AddToFavourite', FormServiceRequest('POST', requestDetails)))       
         .then(response => response.json())
         .then(result => {
+            RemoveInProgressMsg();
             if(result.Success)
             {
                 dispatch({
@@ -150,9 +152,11 @@ export const UpdateFavouriteProduct = (requestDetails) => async (dispatch) => {
                     payload: result
                 });
 
-                CallApI('/Product/GetYourFavourites', FormServiceRequest('GET', {}))
+                SetInProgressMsg("Fetching Your Favourit....")
+                .then(() => CallApI('/Product/GetYourFavourites', FormServiceRequest('GET', {})))                
                 .then(response => response.json())
                 .then(result => {
+                    RemoveInProgressMsg();
                     if(result.Success)
                     {
                         dispatch({
@@ -172,6 +176,7 @@ export const UpdateFavouriteProduct = (requestDetails) => async (dispatch) => {
                     }
                 })
                 .catch( error => {
+                    RemoveInProgressMsg();
                     dispatch({
                         type: FETCH_PRODUCTS_FAILED,
                         payload: {
@@ -183,6 +188,7 @@ export const UpdateFavouriteProduct = (requestDetails) => async (dispatch) => {
             }
         })
         .catch(error => {
+            RemoveInProgressMsg();
             dispatch({
                 type: FETCH_PRODUCTS_FAILED,
                 payload: {
@@ -194,12 +200,12 @@ export const UpdateFavouriteProduct = (requestDetails) => async (dispatch) => {
         })
 
        
-        dispatch({
-            type: LOADING,
-            payload: {
-                DisplayLoading : false
-            }
-            });
+        // dispatch({
+        //     type: LOADING,
+        //     payload: {
+        //         DisplayLoading : false
+        //     }
+        //     });
     }
     catch(error)
     {

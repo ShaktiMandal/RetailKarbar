@@ -10,7 +10,7 @@ let initialState = {
     IsEditCustomer: false,
     IsDisplayHistory: false,
     IsCustomerSearched : false,
-    IsShowLoading: false,
+    LoadingMessage: "",
     Error: ""
 }
 
@@ -111,8 +111,7 @@ const CustomerReducer = (state = initialState, action) => {
                                
                         return {
                             ...state,
-                            IsShowLoading : payload.DisplayLoading,
-                            ErrorMsg: ""
+                            LoadingMessage : payload.LoadingMessage                           
                         }
                         break;
                 }

@@ -50,8 +50,9 @@
 
 .TopbarLeft{
   display:grid;
-  grid-template-columns: repeat(2, 1fr);   
+  grid-template-columns: 30% 80%;   
   column-gap: 5px; 
+  margin:auto;
 }
 
 .TopbarLeft div{
@@ -61,8 +62,7 @@
 
 .TopbarMiddle
 {
-  display: grid;
-  grid-template-columns: 10% 90%;
+ margin: auto 5px;
 }
 
 .TopbarMiddle div
@@ -78,6 +78,16 @@
 .Logo :hover
 {
   cursor: pointer;
+}
+
+.Logo
+{
+  margin-left: -30%;
+}
+
+.Logo img
+{
+  width: 150%
 }
 
 .TopbarRight
@@ -269,12 +279,21 @@
 }
 
 
+.TopMobVersionLogo
+{
+  display: none;
+}
+
+.TopbarMiddle
+{
+  display: block;
+}
 @media(min-width: 450px)
 {
   .ContentAreaOpened
   {  
     display: grid;
-    grid-template-columns: 10% 90%;
+    grid-template-columns: 10% 85% 5%;
     overflow: hidden;
   }
 
@@ -289,23 +308,29 @@
 
   .Topbar
   {    
-    grid-template-columns: 10%  50% 20%;
+    grid-template-columns: 60% 40%;
+  }
+
+  .TopbarMiddle
+  {
+    display: none;
+  }
+
+  .TopMobVersionLogo
+  {
+    display: block;
+    margin: auto
   }
 
   .LayoutDiv
   {
     height: 100vh;
     display: grid;
-    grid-template-rows: 15% 75% 10%;
+    grid-template-rows: 5% 10% 75% 10%;
   }
-}
 
-@media (max-width: 650px)
-{
-  .TopbarMiddle
+  .Logo img
   {
-    display: block;
-    margin: auto 0;
-    padding-left: 15px;
+    width: 100%
   }
 }

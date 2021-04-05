@@ -40,7 +40,7 @@ import {
 import SideBar from './Containers/ToolBar/SideBar/SideBar';
 import Navbar from './Containers/ToolBar/Navbar/Navbar';
 import CartImage from '../src/Assests/Logo/shopping-cart-white.png';
-import LogoImg from '../src/Assests/Logo/MyLogo.png';
+import LogoImg from '../src/Assests/Logo/BrandName.png';
 import { resolve } from 'path';
 
 
@@ -194,16 +194,18 @@ class App extends Component {
     return (      
       <div className={classes.BackgroundDiv}>
         <Layout> 
-          <div className={classes.LayoutDiv}>           
+          <div className={classes.LayoutDiv}>    
+
+             
             <div className={classes.Topbar}>
               <div className={classes.TopbarRight}>
-              { isSessionActive ? <Navbar hamburgerClicked = {this.hamburgerClickedHandler}/> : null }
-                            
-              </div>
-              <div className={classes.TopbarMiddle}>
-                <div className={classes.Logo}>
+             
+               <div className={classes.Logo}>
                   <img  src ={LogoImg} onClick = {this.OnReturnHome}/>
                 </div>
+                            
+              </div>
+              <div className={classes.TopbarMiddle}>               
                 <div className={classes.TextSearch}>
                   { isSearchRoute && isSessionActive  ? 
                     <input 
@@ -243,6 +245,17 @@ class App extends Component {
                 </div>    
               </div>
             </div>
+            <div className={classes.TopMobVersionLogo}>   
+              <div className={classes.TextSearch}>
+                  { isSearchRoute && isSessionActive  ? 
+                    <input 
+                    onChange = {this.OnSearch}
+                    type="text" 
+                    placeholder={placeHolderText}/> : null
+                  }
+                </div>    
+            </div>   
+           
             <div className= { isSessionActive  ? 
                              this.state.isSideBarDisplay ? classes.ContentAreaOpened : classes.ContentArea
                             : null

@@ -4,6 +4,7 @@
     box-sizing: border-box;
     transition: transform 0.3 ease-out;
     z-index: 300;
+    padding: 20%;
 } 
 
 .BottomBar

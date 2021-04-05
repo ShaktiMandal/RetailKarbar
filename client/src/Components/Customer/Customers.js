@@ -327,7 +327,7 @@ class Customers extends Component
         OnShowPurchaseHistory = {this.OnShowPurchaseHistory}
         OnDuePayment          = {this.OnDuePayment}
         OnReturnOrder         = {this.OnReturnOrder}
-        IsShowLoading         = {this.props.isShowLoading}
+        LoadingMessage         = {this.props.loadingMessage}
         IsCustomerSearched    = {this.props.isCustomerSearched}
         />;
        
@@ -363,7 +363,7 @@ const mapStateToProps = (state) => {
         isDisplayHistory: state.CustomersReducer.IsDisplayHistory,
         errorOnOrder  : state.CustomersReducer.Error,
         isCustomerSearched : state.CustomersReducer.IsCustomerSearched,
-        isShowLoading : state.CustomersReducer.IsShowLoading,
+        loadingMessage : state.CustomersReducer.LoadingMessage,
         paymentError : state.PaymentReducer.ErrorOnPayment
     }
 };
@@ -399,7 +399,7 @@ Customers.propTypes = {
     isDisplayHistory : PropTypes.bool.isRequired,
     isEditCustomer : PropTypes.bool.isRequired,
     isCustomerSearched: PropTypes.bool.isRequired,
-    isShowLoading: PropTypes.bool.isRequired,
+    loadingMessage : PropTypes.string,
     errorOnOrder   : PropTypes.string,
     paymentError   : PropTypes.string
 };
