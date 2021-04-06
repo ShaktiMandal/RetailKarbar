@@ -1,0 +1,15 @@
+.NotFound
+{
+    width: 70%
+}
+
+.NotFound span
+{
+    color:white;
+    font-size: 2rem;
+}
+
+.NotFound span a{
+    color : white;
+    padding: 10px
+}

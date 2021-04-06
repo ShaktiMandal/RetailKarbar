@@ -67,7 +67,7 @@
 
 .TopbarMiddle div
 {
-  margin: auto;
+  margin: auto 30%;
 }
 
 .TopbarMiddle img :hover
@@ -275,7 +275,7 @@
 
 .TextSearch
 {
-  width: 60%;
+  width: 70%;
 }
 
 .TopMobVersionLogo
@@ -306,7 +306,7 @@
   }
 
   .TextSearch input{
-    
+
     outline: none;
     border: none;    
     height: 30px;

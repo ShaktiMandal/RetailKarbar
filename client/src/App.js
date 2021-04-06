@@ -160,7 +160,7 @@ class App extends Component {
   OnReturnHome = (event) =>
   {       
     event.preventDefault();
-    this.props.history.push("/");
+    this.props.history.replace("/");
   }
   
   render() {
@@ -285,7 +285,8 @@ class App extends Component {
                     <Switch>  
                         <Route path = '/' exact component={LogIn}/>
                         <Route path="/Authentication/Register" exact component={Register} />
-                        <Route path="/Authentication/Password" exact component={ResetPassword}/>                          
+                        <Route path="/Authentication/Password" exact component={ResetPassword}/> 
+                        <Route path="/" component={NotFound} />                          
                     </Switch>                     
                   }
               </div>
