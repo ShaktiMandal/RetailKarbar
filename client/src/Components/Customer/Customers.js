@@ -23,6 +23,7 @@ import {
     ResetOrderHistory,
     OnFilterOrderItems
 } from '../../Store/Actions/CustomersAction';
+import Loading from '../../Containers/ToolBar/Loading/Loading';
 
 class Customers extends Component
 {   
@@ -320,6 +321,10 @@ class Customers extends Component
 
     render()
     { 
+        if(this.props.loadingMessage.length !== 0 )
+        {
+            return <Loading LoadingMessage={this.props.loadingMessage}/>
+        }
 
         let CustomerResultArea = 
         <CustomerResult        

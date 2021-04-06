@@ -132,13 +132,6 @@ export const FetchProductDetails = (requestDetails) => async (dispatch) => {
 export const UpdateFavouriteProduct = (requestDetails) => async (dispatch) => {
 
     try{
-             
-        // dispatch({
-        //     type: LOADING,
-        //     payload: {
-        //         DisplayLoading : true
-        //     }
-        //     });
 
         SetInProgressMsg("Setting Your Favourite....")
         .then (() =>  CallApI('/Product/AddToFavourite', FormServiceRequest('POST', requestDetails)))       
@@ -152,6 +145,7 @@ export const UpdateFavouriteProduct = (requestDetails) => async (dispatch) => {
                     payload: result
                 });
 
+                
                 SetInProgressMsg("Fetching Your Favourit....")
                 .then(() => CallApI('/Product/GetYourFavourites', FormServiceRequest('GET', {})))                
                 .then(response => response.json())

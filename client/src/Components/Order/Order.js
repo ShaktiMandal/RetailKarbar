@@ -22,7 +22,8 @@ const CustomerOrderList = (props) => {
                         <div className={classes.ErrorDiv}>
                             <ErrorBox CloseErrorPanel = {props.OnCloseErrorPanel}  ErrorMsg={props.ErrorMsg}/>      
                        </div>
-    var orderSection =  props.listOfOrders.length === 0 ?  <Loading LoadingMessage="Fetching order history..."/> :
+
+    var orderSection =  
         <Aux>
              <div className= {classes.OrderSearchArea}>
                         <input 

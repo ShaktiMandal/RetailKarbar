@@ -3,6 +3,7 @@ import * as ActionTypes from '../Actions/ActionTypes';
 const initialState = {
 
     ProductList: [],
+    FavouritProductList : [],
     IsProductSearched: false,
     IsFavouriteAdded: false,
     IsUserAuthenticated: false,
@@ -49,8 +50,7 @@ const ProductReducer = (state = initialState, action) =>{
                    
                 return {
                     ...state,
-                    IsFavouriteAdded: payload.Success,
-                    // ProductList: payload.ProductList
+                    IsFavouriteAdded: payload.Success          
                 }
                 break;
             }
