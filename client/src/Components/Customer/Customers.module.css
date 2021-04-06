@@ -266,11 +266,18 @@
 
 .DisplayImage
 {
-    position: absolute;
+    display: none;
     z-index: -1;
     left:-100px;
     bottom: 10px;    
     height: 500px;
+}
+
+@media (max-width: 450px)
+{
+    .SearchResultDiv  ul{
+       height: 700px;
+    } 
 }
 
 

@@ -213,6 +213,11 @@
     margin: auto;
 }
 
+.PaymentType
+{
+    display: none
+}
+
 @media (max-width: 750px)
 {
     .PaymentContainer

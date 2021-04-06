@@ -80,6 +80,8 @@ class Customers extends Component
         this.setState({
             IsCustomerSelectionDisplay: true,
             ChosenOption: "",
+            GivenAmount: 0.00,
+            ChangeAmount: 0.00,
             TotalDueAmtToPay: 0.00,
             FilteredOrderItems : [],
             SelectedPayableItem: []
@@ -298,7 +300,7 @@ class Customers extends Component
             {
                 var givenCash = event.target.value.length > 0 ? parseInt(event.target.value) : 0;
                 this.setState({
-                    GivenAmount: givenCash,
+                    GivenAmount: givenCash === 0 ? null : givenCash,
                     ChangeAmount: this.props.listOfOrders.reduce((accumulator, currentvalue) => {
                         return accumulator + currentvalue.DueAmount
                     }, 0.00).toFixed(2) - givenCash

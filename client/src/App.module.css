@@ -278,7 +278,6 @@
   width: 60%;
 }
 
-
 .TopMobVersionLogo
 {
   display: none;
@@ -306,6 +305,16 @@
     width: 90%;
   }
 
+  .TextSearch input{
+    
+    outline: none;
+    border: none;    
+    height: 30px;
+    border-radius: 25px;
+    padding: 10px;
+    color: white;
+  }
+
   .Topbar
   {    
     grid-template-columns: 60% 40%;
@@ -326,7 +335,7 @@
   {
     height: 100vh;
     display: grid;
-    grid-template-rows: 5% 10% 75% 10%;
+    grid-template-rows: 10% 15% 65% 10%;
   }
 
   .Logo img

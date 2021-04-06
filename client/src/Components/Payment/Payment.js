@@ -19,9 +19,7 @@ const PaymentDetails = (props) => {
     console.log("payment Details", props.paymentDetails);
        
     let totalDebitAmount = 0.00;
-    var PaymentType = props.IsPaymentSuccessful ? SuccessTransaction 
-        : props.PaymentType === "Cash"
-        ? CashFrom : CardFrom; 
+    var PaymentType = props.IsPaymentSuccessful ? SuccessTransaction : CashFrom; 
 
     var ErrorElement =  props.ErrorMsg.length > 0 ?               
         <div className={classes.ErrorDiv}>

@@ -26,7 +26,7 @@ const CashForm = (props) =>{
                         IsRequired 
                         RequiredLength="100"
                         OnChange={props.OnValueChange}
-                        InputValue ={props.GivenCashAmount}
+                        InputValue ={props.GivenCash}
                         />
                         <h5>Given Cash</h5>
                     </div>
