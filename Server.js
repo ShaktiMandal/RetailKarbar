@@ -23,7 +23,7 @@ const port =  process.env.PORT || 5000;
 App.use(bodyParser.urlencoded({extended: false}));
 App.use(bodyParser.json());
 if (process.env.NODE_ENV === "production") {
-    App.use(express.static("client/build"));
+    App.use(express.static(path.join(__dirname, "client/build")));
     App.enable("trust proxy", 1);   
   }
   else {
