@@ -236,13 +236,13 @@ export const OnLoadPage = () => async dispatch => {
     }
 
     debugger;
-    var response = await responseData.json();
+    //var response = await responseData.json();
     // console.log("This is on page load response", responseData);
     // responseData.json().then( result => {
     //     console.log("Print out the result", result);
     // })
     // .catch(error => console.log("there is an error ->", error));
-    console.log("Printing the response", response);
+   // console.log("Printing the response", response);
     
     var HeaderItems = {};
 
