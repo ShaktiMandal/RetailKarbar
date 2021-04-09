@@ -273,6 +273,7 @@ class App extends Component {
                   {            
                     isSessionActive  ?               
                     <Switch>  
+                      <Route path="/" exact/> 
                       <Route path="/Home"   exact component={Home}/>
                       <Route path="/Product/Search" exact component={Search}/>
                       <Route path="/Customer/CustomerDetails" exact component={CustomerDetails}/>
