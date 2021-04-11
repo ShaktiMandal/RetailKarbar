@@ -130,7 +130,7 @@ class Customers extends Component
         this.props.OnFilterOrderItems(this.state.FilteredOrderItems, event.target.value);            
     }
 
-    OnPayment = (event) =>
+    OnPayment = async (event) =>
     {
         event.preventDefault();
         let saveOrderDetails = {
@@ -191,7 +191,7 @@ class Customers extends Component
         debugger
         Validator.DuePaymentValidation(saveOrderDetails);
         var error = Validator.GetErrors();
-        error.length === 0 ? this.props.UpdateDuePayment(saveOrderDetails.DueOrders) : this.props.AddPaymentValidation(error);
+        error.length === 0 ? await this.props.UpdateDuePayment(saveOrderDetails.DueOrders) : this.props.AddPaymentValidation(error);
     }
 
     OnOrderItemSelection = (event) => {
@@ -308,7 +308,7 @@ class Customers extends Component
                 break; 
             }            
             default:
-                break;
+                break;                
         }
     }
 

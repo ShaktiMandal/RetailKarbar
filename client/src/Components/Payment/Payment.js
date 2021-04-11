@@ -64,6 +64,7 @@ const PaymentDetails = (props) => {
 
         <div className={classes.logInBtn}>
             <Button 
+            ButtonType = "button"
             OnClick = {props.OnPayment}
             ButtonStyle ={{
                 width: "100%",
