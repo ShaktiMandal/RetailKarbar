@@ -56,16 +56,15 @@ class App extends Component {
 
   componentDidMount()
   {  
-    //this.props.OnLoadPage();
+  
   }
-
+  
   OnLogIn = (event) => {
     event.preventDefault();
-    this.props.history.push('/');
+    this.props.history.push('/Home');
   }
 
   OnLogOut = async (event) =>{
-    console.log("YOu Have clicked on log out");
     event.preventDefault();
     await this.props.ClearOrderList();
     await this.props.ClearProductList();
