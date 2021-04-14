@@ -11,7 +11,7 @@ import AddProductImage from '../../Assests/Logo/Add-product.png';
 import CloseButton from "../../Containers/ToolBar/FormCloseButton/FormCloseButton";
 import ErrorBox from '../../Containers/ToolBar/Error/Error';
 import InformationBox from '../../Containers/ToolBar/Information/Information';
-import {AddYourProduct, AddYourProductAsync, AddProductOnError, WindowClosed, ClearError} from '../../Store/Actions/AddProductAction';
+import {AddYourProductAsync, AddProductOnError, WindowClosed, ClearError} from '../../Store/Actions/AddProductAction';
 import {FetchProductDetails} from '../../Store/Actions/ProductAction';
 import Validator from '../../Validator/Validator';
 import classes from './AddProduct.module.css';
@@ -247,8 +247,7 @@ const mapStateToProps = (state) =>{
     };
 }
 
-const mapDispatchToProps = {
-    AddYourProduct,
+const mapDispatchToProps = {    
     AddYourProductAsync,
     AddProductOnError,
     WindowClosed,
