@@ -1,136 +1,123 @@
 import * as ActionTypes from './ActionTypes';
 import fetch from 'node-fetch';
+import { CallApI, FormServiceRequest, RemoveInProgressMsg, SetInProgressMsg } from './Action';
 
 export const AddYourCustomer = (customerDetails) => async (dispatch) => {
-    
-    var response;
+
     var requestData = {
-        method:'POST',   
-        credentials: 'include',     
-        headers: {
-        
-                'Accept' : 'application/json, text/plain',
-                'content-type': 'application/json',
-                'Authorization': null
-        },
-        body: JSON.stringify({
             CustomerName: customerDetails.CustomerName,
             PhoneNumber: customerDetails.PhoneNumber,
             CustomerId: customerDetails.PhoneNumber + Date.now() + new Date().getTime()
-        })
-    }
+        }
     
-    if(process.env.NODE_ENV === 'production')
-    {
-        response = await fetch('/Customer/AddCustomer', requestData);
-    }
-    else
-    {
-        response = await fetch("http://localhost:5000/Customer/AddCustomer", requestData);
-    } 
-  
-    const responseData = await response.json();
-
-       
-    if(responseData.Success)
-    {
-        if(responseData.error.length === 0)
+        SetInProgressMsg("Adding new Customer.....")
+        .then(() => CallApI('/Customer/AddCustomer', FormServiceRequest('POST', requestData)))
+        .then(response => response.json())
+        .then(responseData => {
+        RemoveInProgressMsg();
+        if(responseData.Success)
         {
-            console.log("ResponseDate", responseData);
-            dispatch({
-                type: ActionTypes.ADDCUSTOMER_SUCCESSFULLY,
-                payload: {
-                    Success: responseData.Success,
-                    CustomerDetails: responseData.response,
-                    ErrorMsg: ""
-                }
-            })
+            if(responseData.error.length === 0)
+            {
+                dispatch({
+                    type: ActionTypes.ADDCUSTOMER_SUCCESSFULLY,
+                    payload: {
+                        Success: responseData.Success,
+                        CustomerDetails: responseData.response,
+                        ErrorMsg: ""
+                    }
+                })
+            }
+            else
+            {
+
+                dispatch({
+                    type: ActionTypes.EXISTINGCUSTOMER,
+                    payload:{
+                        Success: responseData.Success,
+                        CustomerDetails: responseData.response,
+                        ErrorMsg: responseData.error
+                    }
+                })
+            }
         }
         else{
 
             dispatch({
-                type: ActionTypes.EXISTINGCUSTOMER,
-                payload:{
+                type: ActionTypes.ADDCUSTOMER_FAILED,
+                payload: {
                     Success: responseData.Success,
-                    CustomerDetails: responseData.response,
                     ErrorMsg: responseData.error
                 }
             })
         }
-        
-    }
-    else{
-
+    })
+    .catch(error => {
+        RemoveInProgressMsg();
         dispatch({
             type: ActionTypes.ADDCUSTOMER_FAILED,
             payload: {
-                Success: responseData.Success,
-                ErrorMsg: responseData.error
+                Success: false,
+                ErrorMsg: error
             }
         })
-    }
-
+    })
 }
 
 export const AddYourDealer = (dealerDetails, orderDetails) => async (dispatch) => {
+
+    var requestData = {
+        CompanyName: dealerDetails.CompanyName,
+        DealerName : dealerDetails.DealerName,
+        PhoneNumber: dealerDetails.PhoneNumber,
+        OrderId : orderDetails.OrderId,
+        DealerId   : dealerDetails.PhoneNumber + Date.now() + new Date().getTime()
+        }
     
-    let response;
-    let requestData = {
-        method : 'POST',
-        credentials: 'include',
-        headers :  
+        SetInProgressMsg("Adding new dealer.....")
+        .then(() => CallApI('/Dealer/AddDealer', FormServiceRequest('POST', requestData)))
+        .then(response => response.json())
+        .then(responseData => {
+        RemoveInProgressMsg();
+        if(responseData.Success)
         {
-            'Accept' : 'application/json, text/plain',
-            'content-type': 'application/json',
-            'Authorization': null
-        },                
-        body: JSON.stringify({   
-            CompanyName: dealerDetails.CompanyName,
-            DealerName : dealerDetails.DealerName,
-            PhoneNumber: dealerDetails.PhoneNumber,
-            OrderId : orderDetails.OrderId,
-            DealerId   : dealerDetails.PhoneNumber + Date.now() + new Date().getTime()
-        })
-    }
+            dispatch({
+                type: ActionTypes.ADDDEALER,
+                payload: 
+                {
+                    DealerDetails: responseData.response,
+                    ErrorMsg: responseData.Error
+                }
+            });
 
-    if(process.env.NODE_ENV === 'production')
-    {
-        response = await fetch('/Dealer/AddDealer', requestData);
-    }
-    else
-    {
-        response = await fetch('http://localhost:5000/Dealer/AddDealer', requestData);
-    }
-  
-    let responseData = await response.json();
-
-    if(responseData.Success)
-    {
-        dispatch({
-            type: ActionTypes.ADDDEALER,
-            payload: 
-            {
-                DealerDetails: responseData.response,
-                ErrorMsg: responseData.Error
-            }
-        })
-    }
-    else
-    {
+          
+        }
+        else
+        { 
+            dispatch({
+                type: ActionTypes.ADDDEALERFAILED,
+                payload: 
+                {
+                    DealerDetails: responseData.response,
+                    ErrorMsg: responseData.Error
+                }
+            })
+        }
+    })
+    .catch(error => {
+        RemoveInProgressMsg();
         dispatch({
             type: ActionTypes.ADDDEALERFAILED,
-            payload: 
-            {
-                DealerDetails: responseData.response,
-                ErrorMsg: responseData.Error
+            payload: {
+                Success: false,
+                ErrorMsg: error
             }
         })
-    }
+    })
 }
 
 export const MakeYourPayment = (paymentDetails, customerDetails, orderDetails, totalAmount) => async (dispatch) => {
 
-    var response;
     if(paymentDetails.PaymentType === "Cash")
     {
         const { GivenAmount} = paymentDetails;
@@ -147,52 +134,47 @@ export const MakeYourPayment = (paymentDetails, customerDetails, orderDetails, t
             IsDealer : customerDetails.IsDealer
         }
 
-        let request =  {
-
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Accept' : 'application/json, text/plain',
-                'content-type': 'application/json',
-                'Authorization': null
-            },
-            body: JSON.stringify(requestData)
-        }
-
-        if(process.env.NODE_ENV === 'production')
-        {
-            response = await fetch('/Customer/SaveCustomerOrder', request);
-        }
-        else
-        {
-            response = await fetch('http://localhost:5000/Customer/SaveCustomerOrder', request);
-        }
-        
-        const responseData = await response.json();
-
-        if(responseData.Success)
-        {
-            paymentDetails.IsPaymentSuccessful = true;            
-            dispatch({
-                type: ActionTypes.PAYMENT_SUCCESSFULLY,
-                payload: {
-                    Success: true,
-                    ErrorMsg: ""
-                }
-            })
-        }
-        else{
+        SetInProgressMsg("Adding new dealer.....")
+        .then(() => CallApI('/Customer/SaveCustomerOrder', FormServiceRequest('POST', requestData)))
+        .then(response => response.json())
+        .then(responseData => {
+        RemoveInProgressMsg();
+            if(responseData.Success)
+            {
+                paymentDetails.IsPaymentSuccessful = responseData.Success;            
+                dispatch({
+                    type: ActionTypes.PAYMENT_SUCCESSFULLY,
+                    payload: {
+                        Success: responseData.Success,
+                        ErrorMsg: ""
+                    }
+                });
+            }
+            else
+            {
+                paymentDetails.IsPaymentSuccessful = responseData.Success;            
+                dispatch({
+                    type: ActionTypes.PAYMENTFAILED,
+                    payload: {
+                        Success: responseData.Success,
+                        ErrorMsg: responseData.error
+                    }
+                });
+            }
+        })
+        .catch(error => {
             paymentDetails.IsPaymentSuccessful = false;            
             dispatch({
                 type: ActionTypes.PAYMENTFAILED,
                 payload: {
                     Success: false,
-                    ErrorMsg: responseData.error
+                    ErrorMsg: error
                 }
             })
-        }            
+        })     
     }
-    else{
+    else
+    {
             paymentDetails.PaymentType = "Card";
 
             dispatch({
@@ -296,122 +278,213 @@ export const PrintYourReceipt = (customerDetails, paymentDetails, orderDetails) 
 
 }
 
+// export const AddYourCustomerAndPay = (paymentDetails, customerDetails, orderDetails, totalAmount) => async (dispatch) => {
+
+//     var requestData = {
+//         method:'POST',   
+//         credentials: 'include',     
+//         headers: {
+        
+//                 'Accept' : 'application/json, text/plain',
+//                 'content-type': 'application/json',
+//                 'Authorization': null
+//         },
+//         body: JSON.stringify({
+//             CustomerName: customerDetails.CustomerName,
+//             PhoneNumber: customerDetails.PhoneNumber,
+//             CustomerId: customerDetails.PhoneNumber + Date.now() + new Date().getTime()
+//         })
+//     }
+    
+//     if(process.env.NODE_ENV === 'production')
+//     {
+//         response = await fetch('/Customer/AddCustomer', requestData);
+//     }
+//     else
+//     {
+//         response = await fetch("http://localhost:5000/Customer/AddCustomer", requestData);
+//     }
+// debugger;
+//     response.json().then( async result => {
+// debugger;
+//         if(result.Success)
+//         {
+//             var response;
+//             if(paymentDetails.PaymentType === "Cash")
+//             {
+//                 const { GivenAmount} = paymentDetails;
+//                 paymentDetails.ChangeAmount = GivenAmount - totalAmount;
+//                 paymentDetails.PaymentType = "Cash"
+        
+//                 let requestData = {
+//                     CustomerId: result.response.CustomerId,
+//                     OrderId: orderDetails.OrderId,
+//                     PaymentType: "Cash",
+//                     DueAmount : totalAmount - GivenAmount,
+//                     PaidAmount: GivenAmount,
+//                     CustomerOrder: orderDetails,
+//                     IsDealer : customerDetails.IsDealer
+//                 }
+        
+//                 let request =  {
+        
+//                     method: 'POST',
+//                     credentials: 'include',
+//                     headers: {
+//                         'Accept' : 'application/json, text/plain',
+//                         'content-type': 'application/json',
+//                         'Authorization': null
+//                     },
+//                     body: JSON.stringify(requestData)
+//                 }
+        
+//                 if(process.env.NODE_ENV === 'production')
+//                 {
+//                     response = await fetch('/Customer/SaveCustomerOrder', request);
+//                 }
+//                 else
+//                 {
+//                     response = await fetch('http://localhost:5000/Customer/SaveCustomerOrder', request);
+//                 }
+                
+//                 const responseData = await response.json();
+        
+//                 if(responseData.Success)
+//                 {
+//                     paymentDetails.IsPaymentSuccessful = true;            
+//                     dispatch({
+//                         type: ActionTypes.PAYMENT_SUCCESSFULLY,
+//                         payload: {
+//                             Success: true,
+//                             ErrorMsg: ""
+//                         }
+//                     })
+//                 }
+//                 else{
+//                     paymentDetails.IsPaymentSuccessful = false;            
+//                     dispatch({
+//                         type: ActionTypes.PAYMENTFAILED,
+//                         payload: {
+//                             Success: false,
+//                             ErrorMsg: responseData.error
+//                         }
+//                     })
+//                 }            
+//             }
+//             else{
+//                     paymentDetails.PaymentType = "Card";
+        
+//                     dispatch({
+//                         type: ActionTypes.CARDPAYMENT,
+//                         payload: {
+//                             PaymentDetails: paymentDetails
+//                         }
+//                     })
+//             }
+            
+//         }
+//         else{
+    
+//             dispatch({
+//                 type: ActionTypes.ADDCUSTOMER_FAILED,
+//                 payload: {
+//                     Success: result.Success,
+//                     ErrorMsg: result.error
+//                 }
+//             })
+//         }
+//     })
+// }
+
 export const AddYourCustomerAndPay = (paymentDetails, customerDetails, orderDetails, totalAmount) => async (dispatch) => {
 
-    debugger;
-    var response;
     var requestData = {
-        method:'POST',   
-        credentials: 'include',     
-        headers: {
-        
-                'Accept' : 'application/json, text/plain',
-                'content-type': 'application/json',
-                'Authorization': null
-        },
-        body: JSON.stringify({
             CustomerName: customerDetails.CustomerName,
             PhoneNumber: customerDetails.PhoneNumber,
             CustomerId: customerDetails.PhoneNumber + Date.now() + new Date().getTime()
-        })
-    }
-    
-    if(process.env.NODE_ENV === 'production')
-    {
-        response = await fetch('/Customer/AddCustomer', requestData);
-    }
-    else
-    {
-        response = await fetch("http://localhost:5000/Customer/AddCustomer", requestData);
-    }
-debugger;
-    response.json().then( async result => {
-debugger;
-        if(result.Success)
-        {
-            var response;
-            if(paymentDetails.PaymentType === "Cash")
+         }
+
+        SetInProgressMsg("Adding new dealer.....")
+        .then(() => CallApI('/Customer/AddCustomer', FormServiceRequest('POST', requestData)))
+        .then(response => response.json())
+        .then(responseData => {
+        RemoveInProgressMsg();
+            if(responseData.Success)
             {
-                const { GivenAmount} = paymentDetails;
-                paymentDetails.ChangeAmount = GivenAmount - totalAmount;
-                paymentDetails.PaymentType = "Cash"
-        
-                let requestData = {
-                    CustomerId: result.response.CustomerId,
-                    OrderId: orderDetails.OrderId,
-                    PaymentType: "Cash",
-                    DueAmount : totalAmount - GivenAmount,
-                    PaidAmount: GivenAmount,
-                    CustomerOrder: orderDetails,
-                    IsDealer : customerDetails.IsDealer
-                }
-        
-                let request =  {
-        
-                    method: 'POST',
-                    credentials: 'include',
-                    headers: {
-                        'Accept' : 'application/json, text/plain',
-                        'content-type': 'application/json',
-                        'Authorization': null
-                    },
-                    body: JSON.stringify(requestData)
-                }
-        
-                if(process.env.NODE_ENV === 'production')
+                if(paymentDetails.PaymentType === "Cash")
                 {
-                    response = await fetch('/Customer/SaveCustomerOrder', request);
+                    const { GivenAmount} = paymentDetails;
+                    paymentDetails.ChangeAmount = GivenAmount - totalAmount;
+                    paymentDetails.PaymentType = "Cash"
+            
+                    let requestData = {
+                        CustomerId: responseData.response.CustomerId,
+                        OrderId: orderDetails.OrderId,
+                        PaymentType: "Cash",
+                        DueAmount : totalAmount - GivenAmount,
+                        PaidAmount: GivenAmount,
+                        CustomerOrder: orderDetails,
+                        IsDealer : customerDetails.IsDealer
+                    }
+
+                    SetInProgressMsg("Adding new dealer.....")
+                    .then(() => CallApI('/Customer/SaveCustomerOrder', FormServiceRequest('POST', requestData)))
+                    .then(response => response.json())
+                    .then(responseData => {
+                        RemoveInProgressMsg();
+                        if(responseData.Success)
+                        {
+                            paymentDetails.IsPaymentSuccessful = true;            
+                            dispatch({
+                                type: ActionTypes.PAYMENT_SUCCESSFULLY,
+                                payload: {
+                                    Success: true,
+                                    ErrorMsg: ""
+                                }
+                            });
+                        }
+                        else
+                        {
+                            paymentDetails.IsPaymentSuccessful = false;            
+                            dispatch({
+                                type: ActionTypes.PAYMENTFAILED,
+                                payload: {
+                                    Success: false,
+                                    ErrorMsg: responseData.error
+                                }
+                            })
+                        }
+                    })
                 }
                 else
                 {
-                    response = await fetch('http://localhost:5000/Customer/SaveCustomerOrder', request);
-                }
-                
-                const responseData = await response.json();
-        
-                if(responseData.Success)
-                {
-                    paymentDetails.IsPaymentSuccessful = true;            
-                    dispatch({
-                        type: ActionTypes.PAYMENT_SUCCESSFULLY,
-                        payload: {
-                            Success: true,
-                            ErrorMsg: ""
-                        }
-                    })
-                }
-                else{
-                    paymentDetails.IsPaymentSuccessful = false;            
-                    dispatch({
-                        type: ActionTypes.PAYMENTFAILED,
-                        payload: {
-                            Success: false,
-                            ErrorMsg: responseData.error
-                        }
-                    })
-                }            
-            }
-            else{
-                    paymentDetails.PaymentType = "Card";
-        
+                    paymentDetails.PaymentType = "Card";        
                     dispatch({
                         type: ActionTypes.CARDPAYMENT,
                         payload: {
                             PaymentDetails: paymentDetails
                         }
                     })
+                }
             }
-            
-        }
-        else{
-    
+            else
+            {
+                dispatch({
+                    type: ActionTypes.ADDCUSTOMER_FAILED,
+                    payload: {
+                        Success: responseData.Success,
+                        ErrorMsg: responseData.error
+                    }
+                });
+            }
+        })
+        .catch (error => {
             dispatch({
                 type: ActionTypes.ADDCUSTOMER_FAILED,
                 payload: {
-                    Success: result.Success,
-                    ErrorMsg: result.error
+                    Success: false,
+                    ErrorMsg: error
                 }
-            })
-        }
-    })
+            });
+        })
 }

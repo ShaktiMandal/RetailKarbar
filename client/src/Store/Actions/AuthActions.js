@@ -10,90 +10,46 @@ import {
         ONLOADPAGE
     } from './ActionTypes';
 
+import { CallApI, FormServiceRequest, RemoveInProgressMsg, SetInProgressMsg } from './Action';
 import fetch from 'node-fetch';
 
-export const UserLogIn = (data) => async dispatch => {
-    
-    try{
+export const UserLogIn = (requestDetails) => async dispatch => {
         
-        var response ;  
-        var {UserId, Passcode} = data; 
-        var headerOptions = {
-
-            method: 'POST',
-            credentials: 'include',
-            headers: { 
-                'Accept' : 'application/json, text/plain',
-                'content-type': 'application/json',
-                'Authorization': null
-               },
-            body: JSON.stringify({ UserId:UserId, Passcode: Passcode })
-        }
-        
-        if(process.env.NODE_ENV === 'production')
-        {
-            response = await fetch('/Authentication/User/LogIn', headerOptions);
-        }
-        else
-        {
-            response = await fetch('http://localhost:5000/Authentication/User/LogIn', headerOptions);
-        }
-        
-        if(response === undefined)
-        {
-            dispatch({
-                type: LOGIN_ERROR,
-                payload: 
-                {
-                    ErrorMsg :  "Unable to load due to Internet/Server connection."                    
-                } 
-            });   
-        }
-        else
-        {    
-            var responseData = await response.json();         
-            if(!responseData.Success)
-            {              
-                dispatch({
-
-                    type: AUTHENTICATION_FAILED,
-                    payload : responseData
-                });
-
-                dispatch({
-                    type: LOGIN_ERROR,
-                    payload: 
-                    {
-                        ErrorMsg : responseData.error
-                    } 
-                });
-            }
-            else
-            {            
-                localStorage.setItem("UserId", responseData.UserId);        
-                dispatch({
-                    type:AUTHENTICATION_SUCCESS,
-                    payload: responseData
-                })
-
-                dispatch({
-                    type: USER_LOGIN,
-                    payload: {UserId, Passcode}
-                }); 
-            }
-        }
-              
-    }
-    catch(error)
+    SetInProgressMsg("Logging in....")
+    .then(() =>  CallApI('/Authentication/User/LogIn', FormServiceRequest('POST', requestDetails)))       
+    .then(response => response.json())
+    .then(result => {
+    RemoveInProgressMsg();
+    if(result.Success)
     {
-        var errorMsg = error;
-        return dispatch({
-            type: LOGIN_ERROR,
-            payload: { 
-                ErrorMsg : "Unexpected Error Occured. Please try again."                
-            }
+        const {UserId, Passcode} = requestDetails;
+        localStorage.setItem("UserId", result.UserId);        
+        dispatch({
+            type:AUTHENTICATION_SUCCESS,
+            payload: result
         })
-    }   
+
+        dispatch({
+            type: USER_LOGIN,
+            payload: {UserId, Passcode}
+        }); 
+    }
+    else
+    {
+        dispatch({
+
+            type: AUTHENTICATION_FAILED,
+            payload : result
+        });
+
+        dispatch({
+            type: LOGIN_ERROR,
+            payload: 
+            {
+                ErrorMsg : result.error
+            } 
+        });
+    }});
 }
 
 export const LogInError = (errors) =>  dispatch => {
@@ -119,36 +75,16 @@ export const LogInWindowClose = () => dispatch => {
 }
 
 export const UserLogOut = () => async dispatch => {
-
-    var response;
-    var headerOptions = {
-
-        method: 'POST',
-        credentials: 'include',
-        headers: { 
-            'Accept' : 'application/json, text/plain',
-            'content-type': 'application/json',
-            'Authorization': null
-           }
-    }
-
-    if(process.env.NODE_ENV === 'production')
+        
+    SetInProgressMsg("Logging out....")
+    .then(() =>  CallApI('/Authentication/User/LogOut', FormServiceRequest('POST', {})))       
+    .then(response => response.json())
+    .then(result => {
+    RemoveInProgressMsg();
+    if(result.Success)
     {
-        response = await fetch('/Authentication/User/LogOut', headerOptions);
-    }
-    else
-    {
-        response = await fetch('http://localhost:5000/Authentication/User/LogOut', headerOptions);
-    }
-    
-    var responseData = await response.json();
-
-    if(responseData.Success)
-    {
-        console.log("Inside on log out from action");
         if(localStorage.getItem("UserId") !== null)
         {
-            console.log("delete log out from action");
             localStorage.removeItem("UserId");
         }
 
@@ -158,9 +94,8 @@ export const UserLogOut = () => async dispatch => {
                 UserId: "",
                 Passcode: "",
                 ErrorMsg: ""
-            }
-        });
-    }
+            }})       
+    }});
 }
 
 export const NavigationMenuSelection = (navigationPath) => dispatch => {
