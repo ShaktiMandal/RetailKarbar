@@ -14,26 +14,11 @@ const SuccessTransaction = (props) =>{
     return(
         <Aux>
             <div className={classes.TransactionDiv}>
-                <img src={props.TransactionImage}  
-                style={{
-                    width: "30%",
-                    height: "60%"
-                }}/>
+                <img src={props.TransactionImage}  className={classes.TransactionImg}/>
                 <h3>{props.Message}</h3>
-                <div className = {actionClass}>
-                    <div>
-                        <h2 
-                            onClick = {props.OnReceiptPrint}
-                            style={{
-                            cursor: "pointer"}}> Receipt Here
-                        </h2>
-                    </div>
-
-                    <div style={{margin : "auto"}}>
-                    {
-              
+                <div className = {actionClass}>  
+                    {              
                         props.IsFromCart === "true" ?
-                                        
                         <Button 
                         OnClick = {props.OnPlaceOrder}
                                     Value="Place Order" 
@@ -50,25 +35,29 @@ const SuccessTransaction = (props) =>{
                                         fontWeight: "bold"
                                         
                                     }}></Button> : 
+                                    props.IsTransactionSuccessful === true ?
 
                                     <Button 
                                     OnClick = {props.OnReturnHome}
                                                 Value="Back To Home" 
                                                 ButtonType="button"
                                                 ButtonStyle ={{     
+                                                    
                                                     margin : "auto",   
                                                     border: "none",
                                                     outline: "none",
                                                     height: "35px",                                                   
                                                     fontSize: "20px",
-                                                    backgroundColor: "transparent",
+                                                    backgroundColor: "forestgreen",
                                                     textAlign: "center",
                                                     userSelect: "none",
-                                                    fontWeight: "bold"
-                                                }}></Button>
+                                                    fontWeight: "bold",
+                                                    width: "100%",
+                                                    padding: "5px",
+                                                    color: "white"
+                                                }}></Button> : null
               
                         }
-                    </div>
 
                 </div>  
             </div>

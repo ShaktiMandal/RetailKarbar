@@ -198,7 +198,7 @@
 .PayAmount
 {
     color:black;
-    padding-left: 10px;
+    margin: auto;
 }
 
 .CloseBtnDiv
@@ -208,7 +208,6 @@
 
 .PaymentDetails
 {
-    height: 90%;
     width: 90%;
     margin: auto;
 }

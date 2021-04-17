@@ -322,6 +322,7 @@ class Customers extends Component
 
     render()
     { 
+        console.log("rendering customer js");
         if(this.props.loadingMessage.length !== 0 )
         {
             return <Loading LoadingMessage={this.props.loadingMessage}/>

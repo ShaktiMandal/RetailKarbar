@@ -64,6 +64,9 @@
 {
     width: 100%;
     text-align: center;
+    display: flex;
+    align-items: center;
+    display: block;
 }
 
 .TransactionDiv h3{
@@ -80,15 +83,20 @@
 }
 
 .ActionBar
-{
-    display: grid;
-    grid-template-columns: 50% 50%;
+{      
+  width: 90%;  
+  margin: auto;
 }
 
-.NoActionBar
+.TransactionImg
 {
-    display: none;
+    width: 40%;
+    height: 30%;
+    border: 2px solid black;
+    padding: 5px;
+    border-radius: 50%;
 }
+
 
 @media (max-width: 750px)
 {
@@ -99,6 +107,7 @@
     }
 }
 
+
 @media (max-width: 450px)
 {
     .CashPaymentForm
@@ -108,12 +117,6 @@
 
     .ActionBar
     {      
-        display: grid;
-        grid-template-rows: 50% 50%;
-    }
-
-    .TransactionDiv
-    {
-        height: 50%
+      width: 100%;
     }
 }

@@ -125,6 +125,7 @@ const PaymentDetails = (props) => {
                     <div className={classes.PaymentDetails}>
                         {PaymetArea}
                         <PaymentType
+                        IsTransactionSuccessful = {props.IsPaymentSuccessful}
                         TransactionImage={TransactionImage}
                         OnValueChange ={ props.OnPaymentValueChange}
                         GivenCash ={props.GivenAmount}
