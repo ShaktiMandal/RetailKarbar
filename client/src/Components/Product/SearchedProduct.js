@@ -185,10 +185,11 @@ class SearchedProduct extends Component {
 
     CreateProductElement()
     {
-        if(this.props.isShowLoading === true)
+        if(this.props.loadingMessage.length !== 0)
         {
-            return( <Loading LoadingMessage="Fetching products..."/> );
+            return <Loading LoadingMessage = {this.props.loadingMessage}/>;
         };
+
        let styleToBeDisplayed = this.props.isProductSearched ? classes.DisplayProductArea : classes.DisplayProductAreaWithoutBg
         return (
             <div className={classes.ProductListContainer}>
@@ -310,7 +311,7 @@ const mapStateToProps = (state) => {
         totalProductCount: state.OrderReducer.NoOfProducts,
         isAuthenticatedUser: state.ProductReducer.IsUserAuthenticated,
         isUserUnAuthorized : state.ProductReducer.IsUserUnAuthorized,
-        isShowLoading : state.ProductReducer.IsShowLoading,
+        loadingMessage : state.ProductReducer.LoadingMessage,
         isProductSearched : state.ProductReducer.IsProductSearched,
         isDisplayCartItem: state.OrderReducer.IsCartItemDispayed,        
         selectedNavigationPath : state.AuthReducer.SelectedNavigationPath,
@@ -347,7 +348,7 @@ SearchedProduct.propsTypes = {
     isUserUnAuthorized: PropTypes.bool.isRequired,
     isProductSearched : PropTypes.bool.isRequired,
     isDisplayCartItem: PropTypes.bool.isRequired,
-    isShowLoading: PropTypes.bool.isRequired,
+    loadingMessage: PropTypes.message,
     selectedNavigationPath: PropTypes.string.isRequired,    
     errorMsg: PropTypes.string
 }

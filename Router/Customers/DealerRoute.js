@@ -5,8 +5,6 @@ const DealerDetails = require('../../Model/CustomersModel/DealerDetails');
 
 router.post('/AddDealer', (req,res,next) => {
 
-  console.log("In service", req.body);
-
     let Dealer = new DealerDetails ({
         CompanyName : req.body.CompanyName,
         DealerName : req.body.DealerName,

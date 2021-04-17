@@ -1,75 +1,56 @@
 import {
-    USER_PASSWORD_RESET, 
-    PASSWORD_RESET_FAILED, 
+    USER_PASSWORD_RESET,     
     PASSWORD_RESET_ERROR, 
     PASSWORDRESET_WINDOW_CLOSED
     
 } from './ActionTypes';
 
+import { CallApI, FormServiceRequest, RemoveInProgressMsg, SetInProgressMsg } from './Action';
+
 export const UserPasswordReset = (data) => async dispatch => {
 
-    try{
+    var {UserId, NewPasscode, ConfPasscode} = data;
+    let requestDetails = { 
+        UserId:UserId, 
+        Passcode: NewPasscode, 
+        ConfPasscode:ConfPasscode
+    };
 
-            var response;
-            var {UserId, NewPasscode, ConfPasscode} = data;
-            const options = 
-            {
-                method:'POST',
-                credentials: 'include',
-                headers: { 
-                    'Accept' : 'application/json, text/plain',
-                    'content-type': 'application/json'
-                },
-                body: JSON.stringify({ 
-                    UserId:UserId, 
-                    Passcode: NewPasscode, 
-                    ConfPasscode:ConfPasscode
-                })
-            }
-
-            if(process.env.NODE_ENV === 'production')
-            {
-                response = await fetch('/PasswordReset/ResetPassword', options);
-            }
-            else
-            {
-                response = await fetch('http://localhost:5000/Authentication/PasswordReset/ResetPassword', options);
-            }
-          
-            var responseData = await response.json();
-
-            if(responseData.Success)
-            {
-                dispatch({
-                    type: USER_PASSWORD_RESET,
-                    payload: {UserId, NewPasscode, ConfPasscode}
-                });         
-            }
-            else{
-                dispatch({
-                    type: PASSWORD_RESET_ERROR,
-                    payload: {      
-                        ErrorMsg: responseData.error
-                        
-                    }
-                }) 
-            }
-    }
-    catch(error)
-    {
+    SetInProgressMsg("Updating password....", dispatch)
+    .then (() =>  CallApI('/PasswordReset/ResetPassword', FormServiceRequest('POST', requestDetails)))       
+    .then(response => response.json())
+    .then(result => {
+        RemoveInProgressMsg(dispatch);
+        if(result.Success)
+        {
+            dispatch({
+                type: USER_PASSWORD_RESET,
+                payload: {UserId, NewPasscode, ConfPasscode}
+            });  
+        }
+        else
+        {
+            dispatch({
+                type: PASSWORD_RESET_ERROR,
+                payload: {      
+                    ErrorMsg: result.error
+                    
+                }
+            });
+        }
+    })
+    .catch(error => {
         dispatch({
             type: PASSWORD_RESET_ERROR,
             payload: {      
                 ErrorMsg: "Something went wrong, Please try again after sometime."
                 
             }
-        }) 
-    }
+        });
+    });
 }
 
 export const PasswordResetError = (errors) =>  async dispatch => {
-
-       
     
     return dispatch({
         type: PASSWORD_RESET_ERROR,

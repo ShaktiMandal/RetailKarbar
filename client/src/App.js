@@ -180,7 +180,7 @@ class App extends Component {
     let isSearchRoute = (this.props.location.pathname === "/Product/Search" 
                      || this.props.location.pathname === '/Customer/Customers');
 
-    if(localStorage.getItem("UserId") !== null)
+    if(sessionStorage.getItem("UserId") !== null)
     {
       isSessionActive = true;
     }

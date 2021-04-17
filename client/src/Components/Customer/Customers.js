@@ -16,7 +16,6 @@ import {
 } from '../../Store/Actions/PaymentAction';
 import {
     GetCustomerDetails, 
-    DeleteCustomer, 
     GetProductDetails,
     GetOrderDetails,
     GetDueOrders,
@@ -378,7 +377,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = {
     GetCustomerDetails,
     GetProductDetails,
-    DeleteCustomer,
     GetOrderDetails,
     GetDueOrders,
     UpdateDuePayment,
@@ -391,7 +389,6 @@ const mapDispatchToProps = {
 Customers.propTypes = {
     GetCustomerDetails: PropTypes.func.isRequired,
     GetProductDetails : PropTypes.func.isRequired,
-    DeleteCustomer : PropTypes.func.isRequired,
     GetOrderDetails: PropTypes.func.isRequired,
     GetDueOrders : PropTypes.func.isRequired,
     UpdateDuePayment: PropTypes.func.isRequired,

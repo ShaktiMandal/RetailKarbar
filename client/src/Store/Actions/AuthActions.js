@@ -7,7 +7,6 @@ import {
         AUTHENTICATION_SUCCESS,
         LOGIN_WINDOW_CLOSED,
         NAVIGATIONITEM,
-        ONLOADPAGE
     } from './ActionTypes';
 
 import { CallApI, FormServiceRequest, RemoveInProgressMsg, SetInProgressMsg } from './Action';
@@ -15,15 +14,15 @@ import fetch from 'node-fetch';
 
 export const UserLogIn = (requestDetails) => async dispatch => {
         
-    SetInProgressMsg("Logging in....")
+    SetInProgressMsg("Logging in....", dispatch)
     .then(() =>  CallApI('/Authentication/User/LogIn', FormServiceRequest('POST', requestDetails)))       
     .then(response => response.json())
     .then(result => {
-    RemoveInProgressMsg();
+    RemoveInProgressMsg(dispatch);
     if(result.Success)
     {
         const {UserId, Passcode} = requestDetails;
-        localStorage.setItem("UserId", result.UserId);        
+        sessionStorage.setItem("UserId", result.UserId);        
         dispatch({
             type:AUTHENTICATION_SUCCESS,
             payload: result
@@ -76,16 +75,16 @@ export const LogInWindowClose = () => dispatch => {
 
 export const UserLogOut = () => async dispatch => {
         
-    SetInProgressMsg("Logging out....")
+    SetInProgressMsg("Logging out....", dispatch)
     .then(() =>  CallApI('/Authentication/User/LogOut', FormServiceRequest('POST', {})))       
     .then(response => response.json())
     .then(result => {
-    RemoveInProgressMsg();
+    RemoveInProgressMsg(dispatch);
     if(result.Success)
     {
-        if(localStorage.getItem("UserId") !== null)
+        if(sessionStorage.getItem("UserId") !== null)
         {
-            localStorage.removeItem("UserId");
+            sessionStorage.removeItem("UserId");
         }
 
         dispatch({

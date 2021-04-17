@@ -3,7 +3,7 @@ import classes from './NotFound.module.css'
 
 const NotFound = () => {
 
-    var isUserLoggedIn = localStorage.getItem("UserId") !== null ? true : false;
+    var isUserLoggedIn = sessionStorage.getItem("UserId") !== null ? true : false;
     return (
         <div className={classes.NotFound}>
            

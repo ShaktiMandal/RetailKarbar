@@ -48,9 +48,6 @@ const AuthReducer = (state=initialState, action) =>{
             }
         case actionTypes.AUTHENTICATION_FAILED:
             {
-                localStorage.removeItem('token');
-                localStorage.removeItem('exparitionTime');
-
                 return {
                     ...state,
                     IsUserAuthenticated: false

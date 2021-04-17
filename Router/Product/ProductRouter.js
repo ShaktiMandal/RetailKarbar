@@ -19,7 +19,6 @@ router.post('/AddProduct', (req, res, next) => {
     .then(result => {
         if(result)
         {
-            console.log("Add Product", result);
             Product.updateOne(
                 {ProductName: requestData.ProductName},
                 {$set : {
@@ -38,7 +37,7 @@ router.post('/AddProduct', (req, res, next) => {
                     }
                 })
                 .catch(error => {
-                    console.log("Add Product error", error);
+                    
                     res.status(400).send({
                         Success: false,
                         error: "Unable to save product details. Please try again"
@@ -131,7 +130,7 @@ router.get('/FetchProduct', (req, res, next) =>{
                 }
                 else{
                         res.status(200).send({
-                            Success: true,
+                            Success: false,
                             IsProductFound : false,
                             ProductList: []
                         })
@@ -160,7 +159,7 @@ router.get('/GetOutOfStockProducts', (req, res, next) =>{
          else
          {
                  res.status(200).send({
-                     Success: true,
+                     Success: false,
                      ProductList: [],
                      error: "There is no out of stock product"
                  })
@@ -247,7 +246,6 @@ router.post('/AddToFavourite', (req, res, next) =>{
 
 router.get('/GetYourFavourites', (req, res, next) =>{
 
-    console.log("Getting fav product", req.session.tokenId)
     Product.find({IsFavourite: true})
         .then(result => {           
             if(result)

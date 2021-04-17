@@ -3,12 +3,9 @@ import {
     ADD_FAVOURITE_DONE,
     FETCH_PRODUCTS,
     FETCH_PRODUCTS_FAILED,
-    CLEARPRODUCTLIST,
-    LOADING,
-    UNAUTHORIZED
+    CLEARPRODUCTLIST
 } from './ActionTypes';
 
-import fetch from 'node-fetch';
 import { CallApI, FormServiceRequest, RemoveInProgressMsg, SetInProgressMsg } from './Action';
 
 export const ChooseAddProduct = (props) => (dispatch) =>
@@ -19,106 +16,32 @@ export const ChooseAddProduct = (props) => (dispatch) =>
 }
 
 export const FetchProductDetails = (requestDetails) => async (dispatch) => {
-       
-    let response;
-    try{
-        let fetchRequest = {
-            method:'GET',
-            credentials: 'include',
-            headers: { 
-                'Accept' : 'application/json, text/plain',
-                'content-type': 'application/json'
-            }
-        }
+      
+   
+    let fetchUrl = GetUrl(requestDetails);
 
-        let searchParams = {
-            "Product": requestDetails
-        }
-        
-        let query = Object.keys(searchParams).map(
-                                                    param => encodeURIComponent(param) + 
-                                                    ' = ' + encodeURIComponent(searchParams[param])
-                                            )
-                                            .join('&');
-        dispatch({
-            type: CLEARPRODUCTLIST
-        });
-        
-        dispatch({
-            type: LOADING,
-            payload: {
-                LoadingMessage : "Fetching Product Details..."
-            }
-        });
-        switch(requestDetails)
-        {
-            case "OutOfStock":
-                {
-
-                    if(process.env.NODE_ENV === 'production')
-                    {
-                        response = await fetch('/Product/GetOutOfStockProducts', fetchRequest);
-                    }
-                    else
-                    {
-                        response = await fetch("http://localhost:5000/Product/GetOutOfStockProducts", fetchRequest);
-                    }                    
-                    break;
-                }
-            case "Favourite":
-                {
-                    if(process.env.NODE_ENV === 'production')
-                    {
-                        response = await fetch('/Product/GetYourFavourites', fetchRequest);
-                    }
-                    else
-                    {
-                        response = await fetch("http://localhost:5000/Product/GetYourFavourites", fetchRequest);
-                    } 
-                    
-                    break;
-                }
-            default:
-                if(process.env.NODE_ENV === 'production')
-                {
-                    response = await fetch('/Product/FetchProduct?'+ query, fetchRequest);
-                }
-                else
-                {
-                    response = await fetch("http://localhost:5000/Product/FetchProduct?" + query, fetchRequest);                
-                } 
-        }
-        dispatch({
-            type: LOADING,
-            payload: {
-                LoadingMessage : ""
-            }
-        });
-           
-        if(response.status === 401)
-        {
-            dispatch({
-                type: UNAUTHORIZED
-            })
-        }
-        let responseData =  await response.json();    
-        if(responseData.Success)
+    SetInProgressMsg("Fetching Products....", dispatch)    
+    .then (() =>  CallApI(fetchUrl, FormServiceRequest('GET', {})))       
+    .then(response => response.json())
+    .then(result => {
+        RemoveInProgressMsg(dispatch);
+        if(result.Success)
         {
             dispatch({
                 type: FETCH_PRODUCTS,
-                payload: responseData
-            })
+                payload: result
+            });
         }
         else
         {
             dispatch({
                 type: FETCH_PRODUCTS_FAILED,
-                payload: responseData
+                payload: result
             })
         }
-    }
-    catch(error)
-    {
+    })
+    .catch( error => {
+        RemoveInProgressMsg(dispatch);
         dispatch({
             type: FETCH_PRODUCTS_FAILED,
             payload: {
@@ -126,18 +49,18 @@ export const FetchProductDetails = (requestDetails) => async (dispatch) => {
                 ErrorMsg: "Unable to fetch product details, Please try again."           
             }
         })
-    }    
+    });
 }
 
 export const UpdateFavouriteProduct = (requestDetails) => async (dispatch) => {
 
     try{
 
-        SetInProgressMsg("Setting Your Favourite....")
+        SetInProgressMsg("Setting Your Favourite....", dispatch)
         .then (() =>  CallApI('/Product/AddToFavourite', FormServiceRequest('POST', requestDetails)))       
         .then(response => response.json())
         .then(result => {
-            RemoveInProgressMsg();
+            RemoveInProgressMsg(dispatch);
             if(result.Success)
             {
                 dispatch({
@@ -146,11 +69,11 @@ export const UpdateFavouriteProduct = (requestDetails) => async (dispatch) => {
                 });
 
                 
-                SetInProgressMsg("Fetching Your Favourit....")
+                SetInProgressMsg("Fetching Your Favourit....", dispatch)
                 .then(() => CallApI('/Product/GetYourFavourites', FormServiceRequest('GET', {})))                
                 .then(response => response.json())
                 .then(result => {
-                    RemoveInProgressMsg();
+                    RemoveInProgressMsg(dispatch);
                     if(result.Success)
                     {
                         dispatch({
@@ -170,7 +93,7 @@ export const UpdateFavouriteProduct = (requestDetails) => async (dispatch) => {
                     }
                 })
                 .catch( error => {
-                    RemoveInProgressMsg();
+                    RemoveInProgressMsg(dispatch);
                     dispatch({
                         type: FETCH_PRODUCTS_FAILED,
                         payload: {
@@ -182,7 +105,7 @@ export const UpdateFavouriteProduct = (requestDetails) => async (dispatch) => {
             }
         })
         .catch(error => {
-            RemoveInProgressMsg();
+            RemoveInProgressMsg(dispatch);
             dispatch({
                 type: FETCH_PRODUCTS_FAILED,
                 payload: {
@@ -192,14 +115,6 @@ export const UpdateFavouriteProduct = (requestDetails) => async (dispatch) => {
                 }
             })
         })
-
-       
-        // dispatch({
-        //     type: LOADING,
-        //     payload: {
-        //         DisplayLoading : false
-        //     }
-        //     });
     }
     catch(error)
     {
@@ -218,4 +133,38 @@ export const ClearProductList = () => async dispatch => {
     dispatch({
         type: CLEARPRODUCTLIST
     })
+}
+
+
+const GetUrl = (details) => {
+
+    let fetchUrl;
+    let searchParams = {
+        "Product": details
+    }
+    
+    let query = Object.keys(searchParams).map(
+                                                param => encodeURIComponent(param) + 
+                                                ' = ' + encodeURIComponent(searchParams[param])
+                                        )
+                                        .join('&');
+    switch(details)
+    {
+        case "OutOfStock":
+            {
+                fetchUrl = '/Product/GetOutOfStockProducts';
+                break;
+            }
+        case "Favourite":
+            {
+                fetchUrl = '/Product/GetYourFavourites';
+                break;
+            }
+        default:
+            {
+                fetchUrl = '/Product/FetchProduct?' + query;
+                break;
+            }
+    }
+    return fetchUrl;
 }

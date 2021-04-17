@@ -257,7 +257,6 @@ const mapDispatchToProps = {
 
 AddProduct.propTypes = {
     FetchProductDetails: PropTypes.func.isRequired,
-    AddYourProduct: PropTypes.func.isRequired,
     AddProductOnError: PropTypes.func.isRequired,
     AddYourProductAsync: PropTypes.func.isRequired,
     WindowClosed: PropTypes.func.isRequired,

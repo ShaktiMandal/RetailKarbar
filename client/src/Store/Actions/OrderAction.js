@@ -1,5 +1,4 @@
 import * as ActionTypes from './ActionTypes';
-import ProductItem from '../../Containers/ToolBar/ProductList/ProductItem';
 
 export const AddItemToCart = (productItem, orderList) => (dispatch) => {
 

@@ -10,11 +10,11 @@ export const AddYourCustomer = (customerDetails) => async (dispatch) => {
             CustomerId: customerDetails.PhoneNumber + Date.now() + new Date().getTime()
         }
     
-        SetInProgressMsg("Adding new Customer.....")
+        SetInProgressMsg("Adding new Customer.....", dispatch)
         .then(() => CallApI('/Customer/AddCustomer', FormServiceRequest('POST', requestData)))
         .then(response => response.json())
         .then(responseData => {
-        RemoveInProgressMsg();
+        RemoveInProgressMsg(dispatch);
         if(responseData.Success)
         {
             if(responseData.error.length === 0)
@@ -53,7 +53,7 @@ export const AddYourCustomer = (customerDetails) => async (dispatch) => {
         }
     })
     .catch(error => {
-        RemoveInProgressMsg();
+        RemoveInProgressMsg(dispatch);
         dispatch({
             type: ActionTypes.ADDCUSTOMER_FAILED,
             payload: {
@@ -74,11 +74,11 @@ export const AddYourDealer = (dealerDetails, orderDetails) => async (dispatch) =
         DealerId   : dealerDetails.PhoneNumber + Date.now() + new Date().getTime()
         }
     
-        SetInProgressMsg("Adding new dealer.....")
+        SetInProgressMsg("Adding new dealer.....", dispatch)
         .then(() => CallApI('/Dealer/AddDealer', FormServiceRequest('POST', requestData)))
         .then(response => response.json())
         .then(responseData => {
-        RemoveInProgressMsg();
+            RemoveInProgressMsg(dispatch);
         if(responseData.Success)
         {
             dispatch({
@@ -105,7 +105,7 @@ export const AddYourDealer = (dealerDetails, orderDetails) => async (dispatch) =
         }
     })
     .catch(error => {
-        RemoveInProgressMsg();
+        RemoveInProgressMsg(dispatch);
         dispatch({
             type: ActionTypes.ADDDEALERFAILED,
             payload: {
@@ -134,11 +134,11 @@ export const MakeYourPayment = (paymentDetails, customerDetails, orderDetails, t
             IsDealer : customerDetails.IsDealer
         }
 
-        SetInProgressMsg("Adding new dealer.....")
+        SetInProgressMsg("Saving customer order.....", dispatch)
         .then(() => CallApI('/Customer/SaveCustomerOrder', FormServiceRequest('POST', requestData)))
         .then(response => response.json())
         .then(responseData => {
-        RemoveInProgressMsg();
+        RemoveInProgressMsg(dispatch);
             if(responseData.Success)
             {
                 paymentDetails.IsPaymentSuccessful = responseData.Success;            
@@ -404,11 +404,11 @@ export const AddYourCustomerAndPay = (paymentDetails, customerDetails, orderDeta
             CustomerId: customerDetails.PhoneNumber + Date.now() + new Date().getTime()
          }
 
-        SetInProgressMsg("Adding new dealer.....")
+        SetInProgressMsg("Making payment.....", dispatch)
         .then(() => CallApI('/Customer/AddCustomer', FormServiceRequest('POST', requestData)))
         .then(response => response.json())
         .then(responseData => {
-        RemoveInProgressMsg();
+        RemoveInProgressMsg(dispatch);
             if(responseData.Success)
             {
                 if(paymentDetails.PaymentType === "Cash")
@@ -427,11 +427,11 @@ export const AddYourCustomerAndPay = (paymentDetails, customerDetails, orderDeta
                         IsDealer : customerDetails.IsDealer
                     }
 
-                    SetInProgressMsg("Adding new dealer.....")
+                    SetInProgressMsg("Making payment.....", dispatch)
                     .then(() => CallApI('/Customer/SaveCustomerOrder', FormServiceRequest('POST', requestData)))
                     .then(response => response.json())
                     .then(responseData => {
-                        RemoveInProgressMsg();
+                    RemoveInProgressMsg(dispatch);
                         if(responseData.Success)
                         {
                             paymentDetails.IsPaymentSuccessful = true;            

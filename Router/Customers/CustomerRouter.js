@@ -86,8 +86,7 @@ router.post('/SaveCustomerOrder', (req,res,next) =>{
     SaveCustomerOrder.save()
                  .then(result => {
                      if(result)
-                     {
-                        console.log("Customer Saved1", CustomerOrder.CustomerOrders);                      
+                     {                                         
                         let Order = new OrderDetails({
                             OrderId: OrderId,
                             DueAmount: DueAmount,
@@ -95,11 +94,8 @@ router.post('/SaveCustomerOrder', (req,res,next) =>{
                             Orders : CustomerOrder.CustomerOrders
                         });
 
-                        console.log("Customer Saved");
-
                         Order.save()
-                            .then(result => {
-                                console.log("Order Saved");
+                            .then(result => {                              
                                 if(result)
                                 {
                                     res.status(200).send({
@@ -120,9 +116,7 @@ router.post('/SaveCustomerOrder', (req,res,next) =>{
                                     Success: false,
                                     error: error
                                 })
-                            })
-                    
-                                              
+                            })               
                      }
                      else{
                         res.status(200).send({
@@ -131,8 +125,7 @@ router.post('/SaveCustomerOrder', (req,res,next) =>{
                         })
                      }
                  })
-                 .catch( error => {
-                    console.log("Customer Saved6");
+                 .catch( error => {                  
                     res.status(404).send({
                         Success: false,
                         error: error
@@ -151,20 +144,23 @@ router.get('/GetCustomers', (req,res,next) => {
             .then(result => {
                 if(result)
                 {
-                    res.status(200).send({                        
+                    res.status(200).send({  
+                        Success: true,                      
                         CustomerDetails: result,  
                         Error: ""                      
                     });
                 }
                 else{
-                    res.status(200).send({                        
+                    res.status(200).send({ 
+                        Success: false,                       
                         CustomerDetails: [], 
                         Error: 'There is no customer found. Please add the customer'                       
                     });
                 }
             })
             .catch(error => {
-                res.status(200).send({                        
+                res.status(200).send({       
+                    Success: false,                 
                     CustomerDetails: [],  
                     Error: 'Unable to retrieve customer details'                      
                 });
@@ -206,14 +202,16 @@ router.get('/GetCustomerOrders', (req,res,next) => {
                                 
                                 OrderDetails.find({OrderId: {$in: orderIds}})
                                             .then( result => {
-                                                console.log("result published", result);
+                                                
                                                 res.status(200).send({
+                                                    Success: true,
                                                     OrderDetails: result,
                                                     Error: ""
                                                 })
                                             })
                                             .catch(error => {
                                                 res.status(200).send({
+                                                    Success: false,
                                                     OrderDetails: [],
                                                     Error: error
                                                 })
@@ -222,15 +220,16 @@ router.get('/GetCustomerOrders', (req,res,next) => {
                             }
                             else
                             {
-                            res.status(200).send({                        
-                                CustomerDetails: [], 
-                                Error: 'There is no order placed fot this customer.'                       
-                            });
+                                res.status(200).send({   
+                                    Success: false,                     
+                                    CustomerDetails: [], 
+                                    Error: 'There is no order placed fot this customer.'                       
+                                });
                         }
                     })                   
                     .catch( error => {
-                        console.log("error ", error);
                         res.status(404).send({
+                            Success: false,
                             CustomerDetails: [], 
                             Error: 'There is something wrong, please try after sometimes.' 
                         })
@@ -242,10 +241,8 @@ router.get('/GetCustomerOrders', (req,res,next) => {
 router.put('/UpdateDuePayment', (req,res,next) => {
 
     let paymentOrderDetails = req.body;
-    console.log("Server ", paymentOrderDetails);
     let result = paymentOrderDetails.map( item=> {
 
-        console.log("Server Update", item);
         return OrderDetails.updateOne(
                                 {OrderId: {$in: item.OrderId}},
                                 {$set: {
@@ -255,10 +252,8 @@ router.put('/UpdateDuePayment', (req,res,next) => {
                            )
     });
 
-    console.log("result :", result);
     Promise.all(result)
-           .then(result => {
-               console.log("published result", result);
+           .then(result => {             
                if(result.length > 0)
                {
                    res.status(200).send({

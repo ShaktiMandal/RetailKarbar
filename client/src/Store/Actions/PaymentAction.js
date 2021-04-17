@@ -1,52 +1,45 @@
 import * as ActionTypes from './ActionTypes';
-import fetch from 'node-fetch';
+import { CallApI, FormServiceRequest, RemoveInProgressMsg, SetInProgressMsg } from './Action';
 
-export const UpdateDuePayment = (paymentDetails) => async(dispatch) =>{
+export const UpdateDuePayment = (requestDetails) => async(dispatch) =>{
 
-    var response;
-    let requestData = {
-        method: 'PUT',
-        credentials: 'include',
-        headers: {
-            'Accept' : 'application/json, text/plain',
-            'content-type': 'application/json',
-            'Authorization': null
-        },
-        body: JSON.stringify(paymentDetails)
-    }
-
-    if(process.env.NODE_ENV === 'production')
-    {
-        response = await fetch('Customer/UpdateDuePayment', requestData);
-    }
-    else
-    {
-        response = await fetch("http://localhost:5000/Customer/UpdateDuePayment", requestData);
-    }
-    const responseData = await response.json();
-
-       
-    if(responseData.Success)
-    {
+    SetInProgressMsg("Updating due payment....", dispatch)
+    .then (() =>  CallApI('/Customer/UpdateDuePayment', FormServiceRequest('PUT', requestDetails)))       
+    .then(response => response.json())
+    .then(result => {
+        RemoveInProgressMsg(dispatch);
         ResetPaymentDetails();
-        dispatch({
-            type:ActionTypes.PAYMENT_SUCCESSFULLY,
-            payload :{
-                Success: true,
-                Error:""
-            }
-        })
-    }
-    else{
+        if(result.Success)
+        {
+            dispatch({
+                type:ActionTypes.PAYMENT_SUCCESSFULLY,
+                payload :{
+                    Success: result.Success,
+                    Error:""
+                }
+            })
+        }
+        else
+        {
+            dispatch({
+                type:ActionTypes.PAYMENTFAILED,
+                payload :{
+                    Success: result.Success,
+                    Error: result.Error
+                }
+            })
+        }
+    })
+    .catch( error => {
+        RemoveInProgressMsg(dispatch);
         dispatch({
             type:ActionTypes.PAYMENTFAILED,
-            Payload :{
+            payload :{
                 Success: false,
-                Error: responseData.Error
+                Error: "Unable to update due payment, something went wrong. Please try again."
             }
         })
-    }
-
+    });
 }
 
 export const ResetPaymentDetails =  () => async disptach =>{
@@ -58,7 +51,6 @@ export const ResetPaymentDetails =  () => async disptach =>{
 
 export const AddPaymentValidation =  (error) => async disptach => {
 
-       
     disptach({
         type: ActionTypes.VALIDATION_ERROR,
         payload: {

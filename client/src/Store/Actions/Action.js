@@ -4,7 +4,7 @@ import {LOADING} from './ActionTypes'
 
 export const FormServiceRequest = (methodName, requestData) => {
 
-    if(methodName === 'POST')
+    if(methodName === 'POST' || methodName === 'PUT')
     {
         return {
 
@@ -65,19 +65,18 @@ export const FormSearchParam = (paramDetails) => {
                                         .join('&');
 }
 
-export const SetInProgressMsg = async (loadingMessage) => (dispatch) => {
-
+export const SetInProgressMsg = async (loadingMessage, dispatch) =>  {
+   
     return new Promise((resolve, rejects) => {
         return resolve( dispatch({
             type: LOADING,
             payload: {
                 LoadingMessage : loadingMessage
-            }
-        }));
-    })
+            }}));
+    });
 }
 
-export const RemoveInProgressMsg = () => (dispatch) => {
+export const RemoveInProgressMsg = (dispatch) => {
     dispatch({
         type: LOADING,
         payload: {
