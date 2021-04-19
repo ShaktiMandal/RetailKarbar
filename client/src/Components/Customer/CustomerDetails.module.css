@@ -21,7 +21,8 @@
 {
     background-color: white;
     display: grid;    
-    grid-template-rows: 25% auto 25%;
+    grid-template-rows: 15% auto;
+    position: relative;
 }
 
 .CustomerFrom
@@ -169,6 +170,11 @@
     display: none;
 }
 
+.PaymentType
+{
+    display: none;
+}
+
 @media (min-width: 650px)
 {
     .CustomerAndPayment
@@ -204,10 +210,5 @@
          display: block;
          margin: auto;
          width: 80%;
-    }
-
-    .PaymentType
-    {
-        display: none;
     }
 }

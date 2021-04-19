@@ -336,16 +336,6 @@ class CustomerDetails extends Component {
                                                          : this.props.paymentDetails.PaymentType === "Cash"
                                                          ? CashFrom : CardFrom;
 
-        //As of now disabled receipt functionality
-        // var ReceiptElement = this.props.isPaymentSuccessful ? 
-        // <Receipt 
-        // id="ReceiptId"       
-        // ref =  {this.fullScreenModel}
-        // PaymentDetails = {this.props.paymentDetails} 
-        // CustomerDetails = {this.props.customerDetails}
-        // OrderDetails    = {this.props.customerOrders}
-        // /> : null;
-
         var ErrorElement = this.props.customerError.length > 0 ?  
         <div className={classes.ErrorDiv}>
             <ErrorBox 
@@ -361,8 +351,7 @@ class CustomerDetails extends Component {
         var paymentArea = 
             this.props.isPaymentSuccessful === false ?        
                 this.props.selectedNavigationPath === 'OutOfStock' ?
-                <div className={classes.DealerDetails}>
-                    {ErrorElement} 
+                <div className={classes.DealerDetails}>                   
                     <div className={classes.inputdiv}> 
                         <Input type="number"   
                         id = "givenCash"                         
@@ -420,8 +409,7 @@ class CustomerDetails extends Component {
                     </div>
                 </div> :
                                             
-                <div className={classes.CustomerDetails}> 
-                    {ErrorElement}    
+                <div className={classes.CustomerDetails}>                 
                         <div className={classes.inputdiv}> 
                             <Input type="number"   
                             id = "givenCash"                         
@@ -468,6 +456,7 @@ class CustomerDetails extends Component {
                             }}
                             Value="Create Customer & Pay"></Button>
                         </div>
+            
                     </div>
             
                 : null;
@@ -573,7 +562,8 @@ class CustomerDetails extends Component {
                         </div>  
                         }
                     </div>                   
-                    <div className={classes.PaymentArea}>                      
+                    <div className={classes.PaymentArea}> 
+                        {ErrorElement}                     
                        <div className={classes.PaymentHeader}>
                         <div>
                           <h2 style={{
@@ -590,7 +580,7 @@ class CustomerDetails extends Component {
                        </div>
 
                        
-                       <div className={classes.PaymentDetails}>
+                       <div className={classes.PaymentDetails}>      
                         {paymentArea}
                         <PaymentType
                         IsTransactionSuccessful = {this.props.isPaymentSuccessful}

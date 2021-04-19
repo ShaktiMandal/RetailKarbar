@@ -17,8 +17,7 @@ const CashForm = (props) =>{
    
     return(
         <Aux>
-            <form noValidate className={classes.CashPaymentForm}>               
-                {ErrorElement}
+            <form noValidate className={classes.CashPaymentForm}> 
                 <div className={classes.CashPaymentDiv}>                
                     <div className={classes.inputdiv }>
                         <Input type="number"   

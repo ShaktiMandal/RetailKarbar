@@ -68,6 +68,15 @@ const CustomerDetailsReducer = (state = initialState, action) =>{
                 }
                 break;
             }
+        case ActionTypes.PAYMENTFAILED:
+            {
+                return{
+                    ...state,
+                    ErrorOnAddCustomer: "",
+                    ErrorOnPayment : payload.ErrorMsg
+                }
+                break;
+            }
         case ActionTypes.EXISTINGCUSTOMER:
             {
                    

@@ -8,7 +8,6 @@ const LogInUser = require('../../Model/AuthenticationModel/UserModel');
 
 router.post('/LogIn', (req, res, next)=>{
 
-    console.log("I am here in log In with session", req.session);
     LogInUser.findOne({UserId: req.body.UserId})
                 .then( user => {
                         if(!user)
