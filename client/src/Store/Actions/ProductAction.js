@@ -7,6 +7,7 @@ import {
 } from './ActionTypes';
 
 import { CallApI, FormServiceRequest, RemoveInProgressMsg, SetInProgressMsg } from './Action';
+import { debounce } from '../../shared/utils';
 
 export const ChooseAddProduct = (props) => (dispatch) =>
 {
@@ -17,11 +18,10 @@ export const ChooseAddProduct = (props) => (dispatch) =>
 
 export const FetchProductDetails = (requestDetails) => async (dispatch) => {
       
-   
     let fetchUrl = GetUrl(requestDetails);
 
     SetInProgressMsg("Fetching Products....", dispatch)    
-    .then (() =>  CallApI(fetchUrl, FormServiceRequest('GET', {})))       
+    .then (() =>  CallApI(fetchUrl, FormServiceRequest('GET', {})))     
     .then(response => response.json())
     .then(result => {
         RemoveInProgressMsg(dispatch);

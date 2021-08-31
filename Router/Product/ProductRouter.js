@@ -15,7 +15,7 @@ router.post('/AddProduct', (req, res, next) => {
         IsFavourite: req.body.IsFavourite
     });
    
-    Product.find({ProductName: requestData.ProductName})
+    Product.findOne({ProductName: requestData.ProductName})
     .then(result => {
         if(result)
         {
