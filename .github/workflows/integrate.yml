@@ -1,0 +1,51 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: CI
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x, 16.x, 18.x]
+        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
+    - run: npm ci
+    - run: npm run build --if-present
+    - run: npm test
+    - name: install cypress and dependencies
+      env:
+        CI: 1
+      run: |
+        npm ci
+        npx cypress verify
+        npx cypress info
+        npx cypress version
+    - name: cypress.io
+      uses: cypress-io/github-action@v5.0.4
+      with:
+        working-directory: client
+        headed: true
+        record: true
+        start: npm run start
+      env:
+        CYPRESS_username: 77777777
+        CYPRESS_password: ${{ secrets.CY_PASS_CODE }}
+      
+      
