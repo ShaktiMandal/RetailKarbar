@@ -199,7 +199,7 @@ class App extends Component {
             <div className={classes.Topbar}>
               <div className={classes.TopbarRight}>
              
-               <div className={classes.Logo}>
+               <div className={classes.Logo} data-logo-cy="login-logo">
                   <img  src ={LogoImg} onClick = {this.OnReturnHome}/>
                 </div>
                             
