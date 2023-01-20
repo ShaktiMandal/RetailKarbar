@@ -24,7 +24,7 @@ jobs:
 
     - name: Start server
       run: |
-        cd myserver
+        cd client
         npm install
         npm start
       env:
