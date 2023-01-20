@@ -1,5 +1,7 @@
 {
   "name": "retailkarbar",
+  "module": "ESNext",
+  "type": "module",
   "version": "1.0.0",
   "description": "retail store ecommerce",
   "main": "index.js",
@@ -13,6 +15,7 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "express-session": "^1.17.1",
+    "firebase": "^9.9.4",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.9.25",
     "node-fetch": "^2.6.0",
@@ -20,12 +23,11 @@
     "passport": "^0.4.1",
     "path": "^0.12.7"
   },
-  "devDependencies": {},
   "scripts": {
     "start": "node Server.js",
     "server": "nodemon Server.js",
     "client": "npm start --prefix client",
-    "dev": "set NODE_ENV=development&&concurrently \"npm run server\" \"npm run client \"",   
+    "dev": "set NODE_ENV=development&&concurrently \"npm run server\" \"npm run client \"",
     "heroku-postbuild": "set NODE_ENV=production&&cd client && npm install && npm run build"
   },
   "author": "Shakti Mandal",
