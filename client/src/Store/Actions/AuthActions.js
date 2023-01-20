@@ -10,7 +10,6 @@ import {
     } from './ActionTypes';
 
 import { CallApI, FormServiceRequest, RemoveInProgressMsg, SetInProgressMsg } from './Action';
-import fetch from 'node-fetch';
 
 export const UserLogIn = (requestDetails) => async dispatch => {
         
