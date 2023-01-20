@@ -8,43 +8,30 @@ on:
     branches: [ "master" ]
   pull_request:
     branches: [ "master" ]
-
+    
 jobs:
-  build:
-
+  test:
     runs-on: ubuntu-latest
 
-    strategy:
-      matrix:
-        node-version: [16.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
-    - uses: actions/checkout@v3
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v3
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v2
       with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
-    - run: npm ci
-    - run: npm run build --if-present
-    - name: install cypress and dependencies
-      env:
-        CI: 1
+        node-version: 16
+
+    - name: Start server
       run: |
-        npm ci
-        npx cypress verify
-        npx cypress info
-        npx cypress version
-    - name: cypress.io
-      uses: cypress-io/github-action@v5.0.4
-      with:
-        working-directory: client
-        headed: true
-        record: true
-        start: npm run start
+        cd client
+        npm install
+        npm start
       env:
-        CYPRESS_username: 77777777
-        CYPRESS_password: ${{ secrets.CY_PASS_CODE }}
-      
-      
+        PORT: 3000
+
+    - name: Run Cypress tests
+      run: npx cypress run
+      env:
+        CYPRESS_baseUrl: http://localhost:3000
+        DEBUG: cypress:*
