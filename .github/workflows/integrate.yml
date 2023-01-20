@@ -31,7 +31,9 @@ jobs:
         PORT: 3000
 
     - name: Run Cypress tests
-      run: npx cypress run
+      run: |
+        cd client
+        npx cypress run
       env:
         CYPRESS_baseUrl: http://localhost:3000
         DEBUG: cypress:*
