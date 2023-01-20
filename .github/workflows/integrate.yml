@@ -28,9 +28,10 @@ jobs:
         npm install
         npm start
       env:
-        PORT: 8000
+        PORT: 3000
 
     - name: Run Cypress tests
       run: npx cypress run
       env:
-        CYPRESS_baseUrl: http://localhost:8000
+        CYPRESS_baseUrl: http://localhost:3000
+        DEBUG: cypress:*
