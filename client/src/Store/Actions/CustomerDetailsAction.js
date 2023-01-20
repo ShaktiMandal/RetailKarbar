@@ -1,5 +1,4 @@
 import * as ActionTypes from './ActionTypes';
-import fetch from 'node-fetch';
 import { CallApI, FormServiceRequest, RemoveInProgressMsg, SetInProgressMsg } from './Action';
 
 export const AddYourCustomer = (customerDetails) => async (dispatch) => {
