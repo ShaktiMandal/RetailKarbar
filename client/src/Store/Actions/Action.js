@@ -3,7 +3,7 @@ import { resolve } from 'path'
 import {LOADING} from './ActionTypes'
 
 export const FormServiceRequest = (methodName, requestData) => {
-
+    // form api details before its call
     if(methodName === 'POST' || methodName === 'PUT')
     {
         return {
