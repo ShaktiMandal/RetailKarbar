@@ -40,7 +40,7 @@ export const UserRegister = (data) => async dispatch => {
         }
     })
     .catch(error => {
-        RemoveInProgressMsg();
+        RemoveInProgressMsg(dispatch);
         dispatch({
             type: REGISTER_ERROR,
             payload: {      
