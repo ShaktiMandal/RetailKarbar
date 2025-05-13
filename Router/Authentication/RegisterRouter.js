@@ -1,10 +1,11 @@
-const express = require("express");
-const cors    = require("cors");
-const bcrypt  = require("bcrypt");
-const jwt     = require("jsonwebtoken");
-const passport = require("passport");
+import express from "express";
+import cors from "cors";
+import bcrypt from "bcrypt";
+import jwt from "jsonwebtoken";
+import passport from "passport";
+import registerUser from "../../Model/AuthenticationModel/UserModel.js";
+
 const router = express.Router();
-const registerUser = require('../../Model/AuthenticationModel/UserModel');
 
 router.post('/Register', function PasswordSet(req, res, next){
     registerUser.findOne({UserId: req.body.UserId})
@@ -60,4 +61,4 @@ router.post('/Register', function PasswordSet(req, res, next){
                 }))
 });
 
-module.exports = router;
+export default router;

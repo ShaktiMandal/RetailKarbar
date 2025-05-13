@@ -1,15 +1,16 @@
-const express = require("express");
+import express from "express";
+import cors from "cors";
+import bcrypt from "bcrypt";
+import passport from "passport";
+import jwt from "jsonwebtoken";
+
 const router = express.Router();
-const cors   = require("cors");
-const bcrypt = require("bcrypt");
-const passport = require("passport");
-const jwt    = require("jsonwebtoken");
 
 router.get('/', (req, res, next) => {
-        console.log("Calling Server");
-        res.status(200).send({
-            Success: true
-        });
+    console.log("Calling Server");
+    res.status(200).send({
+        Success: true
     });
+});
 
-module.exports = router;
+export default router;

@@ -25,11 +25,11 @@
     "path": "^0.12.7"
   },
   "scripts": {
-    "start": "node Server.js",
+    "start": "NODE_OPTIONS=--openssl-legacy-provider node Server.js",
     "server": "nodemon Server.js",
     "client": "npm start --prefix client",
-    "dev": "set NODE_ENV=development&&concurrently \"npm run server\" \"npm run client \"",
-    "heroku-postbuild": "set NODE_ENV=production&&cd client && npm install && npm run build"
+    "dev": "NODE_OPTIONS=--openssl-legacy-provider set NODE_ENV=development&&concurrently \"npm run server\" \"npm run client \"",
+    "heroku-postbuild": "NODE_OPTIONS=--openssl-legacy-providerset NODE_ENV=production&&cd client && npm install && npm run build"
   },
   "author": "Shakti Mandal",
   "license": "ISC"

@@ -1,24 +1,54 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const bodyParser = require("body-parser");
-const path       = require("path");
-const LogIn = require('./Router/Authentication/LogInRouter');
-const PasswordReset = require('./Router/Authentication/PasswordResetRouter');
-const Registration = require('./Router/Authentication/RegisterRouter');
-const Product      = require('./Router/Product/ProductRouter');
-const Customer     = require('./Router/Customers/CustomerRouter');
-const Dealer     = require('./Router/Customers/DealerRoute');
-const PageLoad   = require('./Router/Authentication/LoadingRouter');
-const session = require('express-session');
-const Passport = require('passport');
-const passport = require("passport");
-const MongoStore = require('connect-mongo')(session);
-const Cors = require('cors');
-const { SlowBuffer } = require("buffer");
-require('dotenv').config();
+import express from "express";
+import mongoose from "mongoose";
+import bodyParser from "body-parser";
+import path from "path";
+import LogIn from './Router/Authentication/LogInRouter.js';
+import PasswordReset from './Router/Authentication/PasswordResetRouter.js';
+import Registration from './Router/Authentication/RegisterRouter.js';
+import Product from './Router/Product/ProductRouter.js';
+import Customer from './Router/Customers/CustomerRouter.js';
+import Dealer from './Router/Customers/DealerRoute.js';
+import PageLoad from './Router/Authentication/LoadingRouter.js';
+import session from 'express-session';
+import Passport from 'passport';
+import passport from "passport";
+import connectMongo from 'connect-mongo';
+import Cors from 'cors';
+import { SlowBuffer } from "buffer";
+import dotenv from 'dotenv';
+// import MongoStore from 'connect-mongo';
+
+dotenv.config({ path: '.env.local' });
+
+const MongoStore = connectMongo(session);
+// const mongoose = require("mongoose");
+// const bodyParser = require("body-parser");
+// const path       = require("path");
+// const LogIn = require('./Router/Authentication/LogInRouter');
+// const PasswordReset = require('./Router/Authentication/PasswordResetRouter');
+// const Registration = require('./Router/Authentication/RegisterRouter');
+// const Product      = require('./Router/Product/ProductRouter');
+// const Customer     = require('./Router/Customers/CustomerRouter');
+// const Dealer     = require('./Router/Customers/DealerRoute');
+// const PageLoad   = require('./Router/Authentication/LoadingRouter');
+// const session = require('express-session');
+// const Passport = require('passport');
+// const passport = require("passport");
+// const MongoStore = require('connect-mongo')(session);
+// const Cors = require('cors');
+// const { SlowBuffer } = require("buffer");
+// require('dotenv').config();
+
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const App   = express();
 const port =  process.env.PORT || 5000;
+
+// const port = 3000;
 
 App.use(bodyParser.urlencoded({extended: false}));
 App.use(bodyParser.json());
@@ -100,6 +130,7 @@ App.listen(port, async function ConnectDB(){
     return await mongoose.connect(process.env.MONGO_URI)
     .then()
     .catch( error => {
+        console.log(`Server is running on port ${port}`);
         console.log("error", error);
     })
 });

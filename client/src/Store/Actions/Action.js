@@ -43,7 +43,7 @@ export const CallApI = async (apiUrl, request) => {
     }
     else
     {
-        return await fetch('http://localhost:5000' + apiUrl, request);
+        return await fetch('http://localhost:8000' + apiUrl, request);
     }
 }
 

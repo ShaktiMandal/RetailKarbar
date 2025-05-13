@@ -1,29 +1,25 @@
-const mongoose = require('mongoose');
-const schema   = mongoose.Schema;
+import mongoose from 'mongoose';
 
-const OrderDetails = new schema({
+const schema = mongoose.Schema;
 
-    OrderId:
-    {
+const OrderSchema = new schema({
+    OrderId: {
         type: String,
         required: true
     },
-
-    DueAmount:
-    {
-        type:Number
+    DueAmount: {
+        type: Number,
+        required: true
     },
-
-    PaidAmount:
-    {
-        type: Number
+    PaidAmount: {
+        type: Number,
+        required: true
     },
-
-    Orders:
-    {
-        type: Object,
+    Orders: {
+        type: Array,
         required: true
     }
-})
+});
 
-module.exports = OrderDetailsModel = mongoose.model('OrderDetails', OrderDetails);
+const OrderModel = mongoose.model('Orders', OrderSchema);
+export default OrderModel;

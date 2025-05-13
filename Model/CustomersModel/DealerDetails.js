@@ -1,4 +1,5 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
+
 const schema = mongoose.Schema;
 
 const DealerSchema = new schema({
@@ -30,4 +31,6 @@ const DealerSchema = new schema({
     }
 })
 
-module.exports = DealersModel = mongoose.model('Dealers', DealerSchema);
+const DealersModel = mongoose.model('Dealers', DealerSchema);
+
+export default DealersModel;

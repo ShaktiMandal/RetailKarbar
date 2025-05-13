@@ -1,7 +1,7 @@
-const { request } = require('express');
-const express = require('express');
-const router  = express.Router();
-const Product = require('../../Model/ProductModel/ProductModel');
+import express from 'express';
+import Product from '../../Model/ProductModel/ProductModel.js';
+
+const router = express.Router();
 
 router.post('/AddProduct', (req, res, next) => {
     
@@ -276,4 +276,4 @@ router.get('/GetYourFavourites', (req, res, next) =>{
 })
 
 
-module.exports = router;
+export default router;

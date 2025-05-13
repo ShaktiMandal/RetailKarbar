@@ -1,9 +1,10 @@
-const express = require('express');
-const router  = express.Router();
-const cors   = require("cors");
-const Customer = require('../../Model/CustomersModel/CustomerDeatils');
-const CustomerPurchase = require('../../Model/CustomersModel/CustomerPurchase');
-const OrderDetails = require('../../Model/OrderModel/OrderModel');
+import express from 'express';
+import cors from "cors";
+import Customer from "../../Model/CustomersModel/CustomerDeatils.js";
+import CustomerPurchase from "../../Model/CustomersModel/CustomerPurchase.js";
+import OrderDetails from "../../Model/OrderModel/OrderModel.js";
+
+const router = express.Router();
 
 router.post('/AddCustomer', (req, res, next) => {
 
@@ -278,4 +279,4 @@ router.put('/UpdateDuePayment', (req,res,next) => {
 
 })
 
-module.exports = router;
+export default router;

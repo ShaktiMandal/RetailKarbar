@@ -1,10 +1,11 @@
-const express = require("express");
+import express from "express";
+import cors from "cors";
+import bcrypt from "bcrypt";
+import passport from "passport";
+import jwt from "jsonwebtoken";
+import LogInUser from "../../Model/AuthenticationModel/UserModel.js";
+
 const router = express.Router();
-const cors   = require("cors");
-const bcrypt = require("bcrypt");
-const passport = require("passport");
-const jwt    = require("jsonwebtoken");
-const LogInUser = require('../../Model/AuthenticationModel/UserModel');
 
 router.post('/LogIn', (req, res, next)=>{
 
@@ -70,5 +71,4 @@ passport.deserializeUser(function(userId, done)
 {
     done(null, userId);
 });
-
-module.exports = router;
+export default router;

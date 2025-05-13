@@ -1,5 +1,6 @@
-const mongoose = require('mongoose');
-const schema  = mongoose.Schema;
+import mongoose from 'mongoose';
+
+const schema = mongoose.Schema;
 
 const ProductSchema = new schema({
 
@@ -37,4 +38,5 @@ const ProductSchema = new schema({
 
 ProductSchema.index({ProductName: 'text'});
 
-module.exports = ProductModel = mongoose.model("Products", ProductSchema);
+const ProductModel = mongoose.model("Products", ProductSchema);
+export default ProductModel;
